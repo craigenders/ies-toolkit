@@ -1,0 +1,20 @@
+TITLE: Bayes Regression With Categorical Predictors;
+DATA: 
+file = ./imps/implist.dat;
+! read in imputation data;
+type = imputation;
+VARIABLE: 
+names = id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost;
+usevariables = mathpost condition frlunch efficacy mathpre;
+MODEL:
+! focal model;
+mathpost on condition frlunch efficacy mathpre (beta1-beta4);
+MODEL TEST:
+! wald test that each slope equals 0;
+0 = beta1; 0 = beta2; 0 = beta3; 0 = beta4;
+OUTPUT:
+! output for standardized coefficients and confidence intervals;
+stdyx cinterval;
+
+
+

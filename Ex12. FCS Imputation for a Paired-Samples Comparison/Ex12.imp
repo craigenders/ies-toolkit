@@ -1,0 +1,17 @@
+# fcs imputation for paired t-test
+DATA: mathachievement.dat;
+VARIABLES: id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost;
+ORDINAL: frlunch efficacy;
+MISSING: 999;
+FIXED: mathpre; # complete variables
+FCS: mathpost mathpre frlunch stanread efficacy; # list all variables included in the imputation phase
+SEED: 90291;
+BURN: 5000; # set iteration number for warm up period
+ITERATIONS: 10000; # set iteration number for analysis period
+NIMPS: 20; # set number of imputed data sets
+CHAINS: 20; # set number of MCMC chains
+SAVE: 
+stacked = ./imps/imps.dat; # R, SAS, SPSS format
+stacked0 = ./imps/imps0.dat; # Stata format
+separate = ./imps/imp*.dat; # Mplus format
+

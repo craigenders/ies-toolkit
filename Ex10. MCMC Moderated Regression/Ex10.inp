@@ -1,0 +1,30 @@
+TITLE: Bayes Moderated Regression;
+DATA: 
+file = ./imps/implist.dat;
+! read in imputation data;
+type = imputation;
+VARIABLE:
+names = id male hispanic riskgrp atrisk behsymp1 lrnprob1 
+   read1 read2 read3 read9 read9grp stanread7 
+   math1 math2 math3 math9 math9grp stanmath7;
+! include product variable from the "DEFINE:" command below;
+usevariables = read9 read1 lrnprob1 atrisk product;
+DEFINE:
+! center lower order variables read1 and lrnprob1 at their grandmean;
+center read1 lrnprob1 atrisk (grandmean);
+! create product term for centered read1 and lrnprob1 variables;
+product = read1 * lrnprob1;
+MODEL:  
+! focal model;
+read9 on read1 lrnprob1 product atrisk (beta1-beta4);
+MODEL CONSTRAINT:
+! define new variables for variance of moderator and three simple slopes;
+new(lrnprobvar slp_low slp_mean slp_high);
+! fix variance of the moderator;
+lrnprobvar = 114.354;
+slp_high = beta1 + beta3*1*sqrt(lrnprobvar);
+slp_mean = beta1 + beta3*0*sqrt(lrnprobvar);
+slp_low =  beta1 - beta3*1*sqrt(lrnprobvar);
+OUTPUT:
+! output for standardized coefficients and confidence intervals;
+stdyx cinterval;

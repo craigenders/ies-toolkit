@@ -1,0 +1,38 @@
+TITLE: Selection Model for Regression;
+DATA: 
+file = behaviorachievement.dat;
+VARIABLE:
+names = id male hispanic riskgrp atrisk behsymp1 lrnprob1 
+   read1 read2 read3 read9 read9grp stanread7 
+   math1 math2 math3 math9 math9grp stanmath7;
+usevariables = read9 read1 lrnprob1 behsymp1 read2 stanread7 m;
+categorical = m;
+missing = all(999);
+DATA MISSING:
+! create missing data indicator;
+names = read9;
+! recode it as a binary variable called m; 
+binary = m;
+! specify it is for missing data;
+type = missing;
+ANALYSIS:
+! set estimator to maximum likelihood;
+estimator = ml;
+! set link function to probit;
+link = probit;
+! set integration method to montecarlo;
+integration = montecarlo;
+MODEL: 
+! invoke multivariate normal distribution for read1, lrnprob1, and behsymp1;
+read1 lrnprob1 behsymp1; 
+! focal model;
+read9 on read1 lrnprob1 behsymp1;
+! missingness model for missing data indicator m;
+m on read9 lrnprob1;
+! auxiliary variable model for read2;
+read2 on read9 read1 lrnprob1 behsymp1;
+! auxiliary variable model for stanread;
+stanread7 on read2 read9 read1 lrnprob1 behsymp1;
+OUTPUT:
+! output for missing data patterns, sample statistics, standardized coefficients, and confidence intervals;
+patterns sampstat stdyx cinterval;

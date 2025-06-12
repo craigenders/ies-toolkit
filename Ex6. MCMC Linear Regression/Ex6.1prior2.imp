@@ -1,0 +1,19 @@
+# mcmc linear regression
+DATA: behaviorachievement.dat;
+VARIABLES: id male hispanic riskgrp atrisk behsymp1 lrnprob1 
+   read1 read2 read3 read9 read9grp stanread7 
+   math1 math2 math3 math9 math9grp stanmath7;
+MISSING: 999;
+MODEL:  
+focal.model:
+read9 ~ read1@beta1 lrnprob1@beta2 behsymp1@beta3;
+auxiliary.models:
+stanread7 read2  ~ read9 read1 lrnprob1 behsymp1;
+TEST:
+beta1:beta3 = 0; # Bayesian Wald test that each slope equals 0
+SEED: 
+90291;
+BURN: 1000;  # set iteration number for warm up period
+ITERATIONS: 10000; # set iteartion number for analysis period
+OPTIONS: prior2;
+

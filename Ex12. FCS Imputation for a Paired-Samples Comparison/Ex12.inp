@@ -1,0 +1,18 @@
+TITLE: FCS for Paired-Samples Test;
+DATA: 
+file = ./imps/implist.dat;
+! read in imputation data;
+type = imputation;
+VARIABLE: 
+names = id condition male frlunch lowach stanread efficacy anxiety mathpre mathpost;
+! list change variable from "DEFINE:" command below;
+usevariables =  change;
+DEFINE:
+! define change variable of the difference of mathpost and mathpre;
+change = mathpost - mathpre; 
+MODEL:
+! estimate mean and variance of the change variables;
+change;
+OUTPUT:
+! output for confidence intervals;
+cinterval;

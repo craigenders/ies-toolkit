@@ -1,0 +1,23 @@
+# mcmc 3-level mlm
+DATA: problemsolving3level.dat;
+VARIABLES: school student wave condition teachexp eslpct ethnic male frlunch 
+     lowach stanmath month0 month7 probsolve efficacy;
+CLUSTERID:  school student; # second and third level grouping variables
+ORDINAL: male frlunch condition;
+MISSING: 999;
+FIXED: month7 male condition; # complete variables
+CENTER: grandmean = male frlunch teachexp; # center covariates at their grand means
+MODEL: 
+# focal model with random slope for month7
+probsolve ~ month7 male frlunch teachexp condition month7*condition | month7;
+SIMPLE: 
+month7 | condition; # estimate simple slopes for month7 in each experimental group
+SEED: 90291;
+BURN: 20000; # set iteration number for warm up period
+ITERATIONS: 50000; # set iteration number for analysis period
+NIMPS: 20; # set number of imputed data sets
+CHAINS: 20; # set number of MCMC chains
+SAVE: 
+stacked = ./imps/imps.dat; # R, SAS, SPSS format
+stacked0 = ./imps/imps0.dat; # Stata format
+separate = ./imps/imp*.dat; # Mplus format

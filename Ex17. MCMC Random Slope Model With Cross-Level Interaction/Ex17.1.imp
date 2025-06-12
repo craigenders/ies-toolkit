@@ -1,0 +1,18 @@
+# mcmc mlm with cross-level interaction
+DATA: problemsolving3level.dat;
+VARIABLES: school student wave condition teachexp eslpct hispanic male frlunch 
+     lowach stanmath month month7 probsolve efficacy;
+CLUSTERID:  student; # clustering variable
+ORDINAL: hispanic frlunch condition; # binary variables
+MISSING: 999;
+FIXED: month condition; #complete variables
+CENTER: grandmean = frlunch; # center covariates at their grandmeans
+MODEL: 
+# focal model with random slope for month and cross-level interactions
+probsolve ~ month hispanic frlunch condition month*condition month*hispanic | month;
+SIMPLE: 
+month | condition; # estimate simple slopes for month in each experimental group
+month | hispanic; # estimate simple slopes for month in each ethnic group
+SEED: 90291;
+BURN: 5000; # set iteration number for warm up period
+ITERATIONS: 10000; # set iteration number for analysis period

@@ -1,0 +1,26 @@
+TITLE: FCS for Regression With Categorical Predictors;
+DATA: 
+file = ./imps/implist.dat;
+! read in imputation data;
+type = imputation;
+VARIABLE:
+names = id male hispanic riskgrp atrisk behsymp1 lrnprob1 
+   read1 read2 read3 read9 read9grp stanread7 
+   math1 math2 math3 math9 math9grp stanmath7;
+   ! include the dummy coded riskgrp2 and riskgrp3 variables from the "DEFINE:" command below;
+usevariables = read9 read1 lrnprob1 behsymp1 riskgrp2 riskgrp3;
+DEFINE:
+! creating dummy coded variables;
+riskgrp2 = 0;
+riskgrp3 = 0;
+if(riskgrp eq 2) then riskgrp2 = 1;
+if(riskgrp eq 3) then riskgrp3 = 1;
+MODEL:  
+! focal model;
+read9 on read1 lrnprob1 behsymp1 riskgrp2 riskgrp3 (beta1-beta5);
+MODEL TEST:
+! wald test that each slope equals 0;
+0 = beta1; 0 = beta2; 0 = beta3; 0 = beta4; 0 = beta5;
+OUTPUT:
+! output for standardized coefficients and confidence intervals;
+stdyx cinterval;

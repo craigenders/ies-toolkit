@@ -1,0 +1,46 @@
+TITLE: Three-Level Regression with a Cross-Level Interaction;
+DATA: 
+file = ./imps/implist.dat;
+! read in imputation data;
+type = imputation;
+VARIABLE:  
+names = school student wave condition teachexp eslpct ethnic male frlunch 
+     lowach stanmath month0 month7 probsolve efficacy;
+usevariables = probsolve month7 male frlunch teachexp condition;
+! define second level grouping variable;
+cluster = school student;
+! define first level vairables;
+within = month7;
+! define second level and third level variables;
+between = (student) male frlunch (school) teachexp condition;
+DEFINE:
+! center covariates at their grandmeans;
+center male frlunch teachexp (grandmean);
+ANALYSIS:
+! specify a three level multilevel model;
+type = threelevel random;
+MODEL:
+! first level model;
+%within%
+! create second level latent variable for random slope;
+ranslope | probsolve on month7;
+! second level model;
+%between student%
+probsolve on male frlunch;
+probsolve with ranslope;
+! third level model;
+%between school%
+! estimate random slope;
+[ranslope] (beta1);
+probsolve on teachexp condition;
+! cross level interaction;
+ranslope on condition (beta6);
+ranslope with probsolve;
+MODEL CONSTRAINT:
+! compute simple slopes of month7 in each experimental group;
+new(slp_cond0 slp_cond1);
+slp_cond0 = beta1;
+slp_cond1 = beta1 + beta6;
+OUTPUT:
+! output for confidence intervals;
+cinterval;

@@ -1,0 +1,20 @@
+# mcmc regression w mnar selection model
+DATA: behaviorachievement.dat;
+VARIABLES: id male hispanic riskgrp atrisk behsymp1 lrnprob1 
+   read1 read2 read3 read9 read9grp stanread7 
+   math1 math2 math3 math9 math9grp stanmath7;
+MISSING: 999;
+TRANSFORM:
+# create missing data binary indicator variable m
+m = ismissing(read9);
+ORDINAL: m;
+MODEL:  
+focal.model:
+read9 ~ read1 lrnprob1 behsymp1;
+missingness.model:
+m ~ read9 lrnprob1;
+auxiliary.model:
+stanread7 read2  ~ read9 read1 lrnprob1 behsymp1;
+SEED: 90291;
+BURN: 1000; # set iteration number for warm up period
+ITERATIONS: 10000; # set iteration number for analysis period

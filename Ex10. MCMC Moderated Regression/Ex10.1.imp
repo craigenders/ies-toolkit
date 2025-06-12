@@ -1,0 +1,18 @@
+# mcmc moderated regression
+DATA: behaviorachievement.dat;
+VARIABLES: id male hispanic riskgrp atrisk behsymp1 lrnprob1 
+   read1 read2 read3 read9 read9grp stanread7 
+   math1 math2 math3 math9 math9grp stanmath7;
+ORDINAL: atrisk;
+MISSING: 999;
+CENTER: read1 lrnprob1 atrisk; # center read1 and lrnprob1 at their grandmean
+MODEL:  
+focal.model:
+read9 ~ read1 lrnprob1 read1*lrnprob1 atrisk ;
+auxiliary.models:
+stanread7 read2  ~ read9 read1 lrnprob1 atrisk;
+SIMPLE:
+read1 | lrnprob1; # simple slopes for read1 at different values of lrnprob1
+SEED: 90291;
+BURN: 5000; # set iteration number for warm up period
+ITERATIONS: 10000; # set iteration number for analysis period

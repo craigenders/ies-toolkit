@@ -1,0 +1,16 @@
+# mcmc mlm with random intercepts
+DATA: problemsolving2level.dat;
+VARIABLES: school student condition teachexp eslpct hispanic male frlunch 
+	lowach stanmath efficacypre efficacypst psolvepre psolvepst; 
+CLUSTERID: school; # level-2 cluster variable
+ORDINAL: condition hispanic frlunch; # binary variables
+MISSING: 999;
+FIXED: condition psolvepre; # complete variables
+CENTER: 
+groupmean = psolvepre hispanic frlunch; # center student covariates at their school means 
+grandmean = psolvepre.mean hispanic.mean frlunch.mean; # center school means at their grandmeans 
+MODEL: 
+psolvepst ~ psolvepre hispanic frlunch psolvepre.mean hispanic.mean frlunch.mean condition;
+SEED: 90291;
+BURN: 5000; # set iteration number for warm up period
+ITERATIONS: 10000; # set iteration number for analysis period

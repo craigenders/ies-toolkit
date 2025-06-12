@@ -1,0 +1,19 @@
+TITLE: FCS for Linear Regression;
+DATA: 
+file = ./imps/implist.dat;
+! read in imputation data;
+type = imputation;
+VARIABLE:
+names = id male hispanic riskgrp atrisk behsymp1 lrnprob1 
+   read1 read2 read3 read9 read9grp stanread7 
+   math1 math2 math3 math9 math9grp stanmath7;
+usevariables = read9 read1 lrnprob1 behsymp1;
+MODEL:  
+!focal model;
+read9 on read1 lrnprob1 behsymp1 (beta1-beta3);
+MODEL TEST:
+! wald test that all slopes = 0;
+0 = beta1; 0 = beta2; 0 = beta3;
+OUTPUT:
+! output for standardized coefficients and confidence intervals;
+stdyx cinterval;

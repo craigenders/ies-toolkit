@@ -1,0 +1,252 @@
+
+---------------------------------------------------------------------------
+
+                                   Blimp
+                                  3.2.12
+
+             Blimp was developed with funding from Institute of
+           Education Sciences awards R305D150056 and R305D190002.
+
+            Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
+                 Han Du, Co-P.I. Email: hdu@psych.ucla.edu
+                 Roy Levy, Co-P.I. Email: roy.levy@asu.edu
+
+              Programming and Blimp Studio by Brian T. Keller
+
+                   There is no expressed license given.
+
+---------------------------------------------------------------------------
+
+
+ALGORITHMIC OPTIONS SPECIFIED:
+
+  Imputation method:                 Fully Bayesian model-based
+  MCMC algorithm:                    Full conditional Metropolis sampler with
+                                       Auto-Derived Conditional Distributions
+  Between-cluster imputation model:  Latent cluster means (LATENT)
+  Prior for random effect variances: Zero matrix, df = -(p + 1) (PRIOR2)
+  Prior for residual variances:      Zero sum of squares, df = -2 (PRIOR2)
+  Prior for predictor variances:     Unit sum of squares, df = 2 (XPRIOR1)
+  Chain Starting Values:             Random starting values
+
+
+  NOTE: The default prior for regression coefficients 
+        in categorical models is 'normal( 0.0, 5.0)'
+
+
+BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
+
+  NOTE: Split chain PSR is being used. This splits each chain's
+        iterations to create twice as many chains.
+
+  Comparing iterations across 2 chains     Highest PSR   Parameter #  
+                          126 to 250             1.740             3  
+                          251 to 500             1.124            29  
+                          376 to 750             1.085             2  
+                          501 to 1000            1.182             3  
+                          626 to 1250            1.386             3  
+                          751 to 1500            1.162             3  
+                          876 to 1750            1.054            20  
+                         1001 to 2000            1.061             3  
+                         1126 to 2250            1.072             2  
+                         1251 to 2500            1.167             3  
+                         1376 to 2750            1.049             3  
+                         1501 to 3000            1.015             5  
+                         1626 to 3250            1.017             7  
+                         1751 to 3500            1.063             3  
+                         1876 to 3750            1.110            20  
+                         2001 to 4000            1.043            20  
+                         2126 to 4250            1.024            20  
+                         2251 to 4500            1.030             3  
+                         2376 to 4750            1.073             3  
+                         2501 to 5000            1.068             3  
+
+
+METROPOLIS-HASTINGS ACCEPTANCE RATES:
+
+  Chain 1:
+
+    Variable                            Type    Probability   Target Value 
+    hispanic                      imputation          0.500          0.500 
+    frlunch                       imputation          0.494          0.500 
+    frlunch                        parameter          0.511          0.500 
+
+  NOTE: Suppressing printing of 1 chains.
+        Use keyword 'tuneinfo' in options to override.
+
+
+DATA INFORMATION:
+
+  Level-2 identifier:       student
+  Sample Size:              6874
+  Level-2 Clusters:         982
+  Missing Data Rates:
+
+                probsolve = 11.45
+                 hispanic = 08.96
+                  frlunch = 04.68
+
+
+
+MODEL INFORMATION:
+
+  NUMBER OF PARAMETERS
+    Outcome Models:         11
+    Predictor Models:       6
+
+  PREDICTORS
+    Fixed variables:        condition month
+    Incomplete ordinal:     hispanic frlunch
+
+  CENTERED PREDICTORS
+    Grand Mean Centered:    frlunch
+
+  MODELS
+    [1]  probsolve ~ Intercept month hispanic frlunch condition month*condition 
+                 month*hispanic | Intercept month
+
+
+WARNING MESSAGES:
+
+  WARNING: The focal predictor "month" is not centered.
+           Simple intercepts in the conditional effects table are
+           evaluated at a score of zero on the focal predictor.
+  
+  WARNING: The focal predictor "month" is not centered.
+           Simple intercepts in the conditional effects table are
+           evaluated at a score of zero on the focal predictor.
+  
+
+
+MODEL FIT:
+
+
+  INFORMATION CRITERIA
+
+    Marginal Likelihood
+      DIC2                  39392.339
+      WAIC                  39698.399
+
+    Conditional Likelihood
+      DIC2                  37581.271
+      WAIC                  38283.695
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  No residual correlations.
+
+
+
+OUTCOME MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 2 chains.
+
+
+Outcome Variable:  probsolve  
+
+Grand Mean Centered: frlunch
+
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  L2 : Var(Intercept)                11.290      0.798      9.792     12.935        ---        ---    655.902 
+  L2 : Cov(month,Intercept)           0.045      0.113     -0.191      0.255        ---        ---    152.656 
+  L2 : Var(month)                     0.105      0.028      0.055      0.162        ---        ---    109.994 
+  Residual Var.                      12.589      0.272     12.069     13.124        ---        ---    909.012 
+
+Coefficients:                   
+  Intercept                          49.371      0.304     48.781     49.978  26393.671      0.000    832.102 
+  month                               0.274      0.059      0.159      0.393     21.331      0.000   4285.049 
+  hispanic                            1.359      0.297      0.773      1.937     20.877      0.000    783.026 
+  frlunch                            -0.982      0.312     -1.584     -0.362      9.803      0.002    586.806 
+  condition                          -0.404      0.281     -0.952      0.137      2.110      0.146    943.216 
+  month*condition                     0.367      0.053      0.263      0.471     48.233      0.000   4860.941 
+  month*hispanic                      0.223      0.057      0.109      0.333     15.123      0.000   3109.911 
+
+Standardized Coefficients:      
+  month                               0.103      0.022      0.059      0.147     21.248      0.000   4210.897 
+  hispanic                            0.120      0.026      0.068      0.170     21.385      0.000    795.191 
+  frlunch                            -0.073      0.023     -0.118     -0.027      9.890      0.002    589.387 
+  condition                          -0.037      0.026     -0.087      0.012      2.109      0.146    943.306 
+  month*condition                     0.147      0.021      0.106      0.189     48.272      0.000   4912.569 
+  month*hispanic                      0.090      0.023      0.044      0.135     15.215      0.000   3163.591 
+
+Proportion Variance Explained   
+  by Coefficients                     0.107      0.010      0.088      0.127        ---        ---    728.376 
+  by Level-2 Random Intercepts        0.437      0.015      0.408      0.466        ---        ---   2925.414 
+  by Level-2 Random Slopes            0.015      0.004      0.008      0.023        ---        ---    110.770 
+  by Level-1 Residual Variation       0.441      0.013      0.416      0.467        ---        ---   1341.253 
+
+                                ------------------------------------------------------------------------------
+
+
+
+Conditional Effects                  Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+  month | condition @ 0                                                                                       
+    Intercept                        49.371      0.304     48.781     49.978  26393.671      0.000    832.102 
+    Slope                             0.274      0.059      0.159      0.393     21.331      0.000   4285.049 
+                                                                                                              
+  month | condition @ 1                                                                                       
+    Intercept                        48.965      0.256     48.460     49.455  36581.877      0.000    969.819 
+    Slope                             0.642      0.048      0.548      0.738    179.162      0.000   4014.808 
+                                                                                                              
+  month | hispanic @ 0                                                                                        
+    Intercept                        49.371      0.304     48.781     49.978  26393.671      0.000    832.102 
+    Slope                             0.274      0.059      0.159      0.393     21.331      0.000   4285.049 
+                                                                                                              
+  month | hispanic @ 1                                                                                        
+    Intercept                        50.730      0.231     50.268     51.167  48287.448      0.000    864.212 
+    Slope                             0.497      0.045      0.411      0.586    123.962      0.000   4706.053 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+                                NOTE: Intercepts are computed by setting all predictors
+                                      not involved in the conditional effect to zero.
+
+
+
+
+PREDICTOR MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 2 chains.
+
+
+Missing predictor:  hispanic   
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            0.439      0.044      0.354      0.526    101.159      0.000   2759.562 
+
+Level 2:                                                                                                      
+  condition                          -0.219      0.090     -0.398     -0.045      5.890      0.015   2754.597 
+  frlunch                            -0.040      0.060     -0.157      0.077      0.456      0.500   1615.916 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing predictor:  frlunch    
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            0.858      0.047      0.768      0.953    336.903      0.000    920.921 
+
+Level 2:                                                                                                      
+  condition                          -0.252      0.100     -0.450     -0.057      6.486      0.011   2538.567 
+  hispanic                           -0.041      0.059     -0.154      0.077      0.450      0.503   1431.642 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+

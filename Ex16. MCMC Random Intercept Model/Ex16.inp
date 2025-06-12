@@ -1,0 +1,36 @@
+TITLE: Two-Level Regression With Random Intercepts;
+DATA: 
+file = ./imps/implist.dat;
+! read in imputation data;
+type = imputation;
+VARIABLE:  
+names = school student condition teachexp eslpct hispanic male frlunch 
+	lowach stanmath efficacy1 efficacy2 psolvepre psolvepst;
+usevariables = psolvepst psolvepre hispanic frlunch condition 
+   psolveprej hispanicj frlunchj;
+! define second level grouping variable;
+cluster = school;
+! define first level variables;
+within = psolvepre hispanic frlunch;
+! define second level variables;
+between = psolveprej hispanicj frlunchj condition;
+DEFINE:
+! center covariates at their group means and grand means;
+psolveprej = cluster_mean(psolvepre);
+hispanicj = cluster_mean(hispanic);
+frlunchj = cluster_mean(frlunch);
+center psolvepre hispanic frlunch (groupmean);
+center psolveprej hispanicj frlunchj (grandmean);
+ANALYSIS:
+! specify a two level multilevel model analysis;
+type = twolevel;
+MODEL:
+! first level model;
+%within% 
+psolvepst on psolvepre hispanic frlunch;
+! second level model;
+%between% 
+psolvepst on psolveprej hispanicj frlunchj condition;
+OUTPUT:
+! output for standardized coefficients and confidence intervals;
+stdyx cinterval;

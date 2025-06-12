@@ -1,0 +1,43 @@
+TITLE: Two-Level Moderated Regression With Random Slopes;
+DATA: 
+file = ./imps/implist.dat;
+! read in imputation data;
+type = imputation;
+VARIABLE:  
+names = school student wave condition teachexp eslpct hispanic male frlunch 
+     lowach stanmath month month7 probsolve efficacy;
+usevariables = probsolve month hispanic frlunch condition;
+! define second level grouping variable;
+cluster = student;
+! define first level variables;
+within = month;
+! define second level variables;
+between = hispanic frlunch condition;
+DEFINE:
+! center covariates at their grandmean;
+center frlunch (grandmean);
+ANALYSIS:
+! speficy a two level multilevel model;
+type = twolevel random;
+MODEL:
+! first level model;
+%within%
+! create second level latent variable for random slope;
+ranslope | probsolve on month;
+! second level model;
+%between%
+! estimate the random slope coefficient;
+[ranslope] (beta1);
+probsolve on hispanic frlunch condition;
+! cross level interaction;
+ranslope on hispanic condition (beta5-beta6);
+ranslope with probsolve;
+MODEL CONSTRAINT:
+! compute simple slopes of month7 in each experimental group;
+new(slp_c0h0 slp_hisp1 slp_cond1);
+slp_c0h0 = beta1;
+slp_hisp1 = beta1 + beta5;
+slp_cond1 = beta1 + beta6;
+OUTPUT:
+! output for confidence intervals;
+cinterval;

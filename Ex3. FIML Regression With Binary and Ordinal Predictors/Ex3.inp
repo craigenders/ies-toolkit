@@ -1,0 +1,34 @@
+TITLE: fiml regression w binary and ordinal predictors;
+DATA: 
+file = mathachievement.dat;
+VARIABLE: 
+names = id condition male frlunch atrisk 
+   stanread efficacy anxiety mathpre mathpost;
+usevariables = mathpost condition frlunch efficacy mathpre atrisk stanread;
+categorical = frlunch efficacy atrisk; 
+missing = all(999);
+ANALYSIS:
+! set estimator to maximum likelihood;
+estimator = ml;
+! set integration method to montecarlo;
+integration = montecarlo;
+MODEL:
+! model for frlunch predictor;
+frlunch on condition mathpre;
+! model for efficacy predictor;
+efficacy on frlunch condition mathpre;
+! focal model for outcome;
+mathpost on condition frlunch efficacy mathpre (beta1-beta4);
+! model for atrisk auxiliary variable;
+atrisk on mathpost condition frlunch efficacy mathpre;
+! model for stanread auxiliary variable;
+stanread on atrisk mathpost condition frlunch efficacy mathpre;
+MODEL TEST:
+! wald test that each slope equals 0;
+0 = beta1; 0 = beta2; 0 = beta3; 0 = beta4;
+OUTPUT:
+! output for missing data patterns, sample statistics, and confidence intervals;
+patterns sampstat cinterval;
+
+
+

@@ -1,0 +1,25 @@
+TITLE: Bayes Regression With a Categorical Outcome;
+DATA: 
+file = ./imps/implist.dat;
+! read in imputation data;
+type = imputation;
+VARIABLE:
+names = id male hispanic riskgrp atrisk behsymp1 lrnprob1 
+   read1 read2 read3 read9 read9grp stanread7 
+   math1 math2 math3 math9 math9grp stanmath7;
+usevariables = read9grp read1 behsymp1 lrnprob1;
+categorical = read9grp;
+ANALYSIS:
+! set estimator to maximum likelihood;
+estimator = ml;
+! set link function as logit;
+link = logit;
+MODEL:  
+! focal model;
+read9grp on read1 lrnprob1 behsymp1 (beta1-beta3);
+MODEL TEST:
+! wald test that each slope equals 0;
+0 = beta1; 0 = beta2; 0 = beta3;
+OUTPUT:
+! output for standardized coefficients and confidence intervals;
+stdyx cinterval;

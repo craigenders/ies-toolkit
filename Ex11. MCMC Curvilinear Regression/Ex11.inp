@@ -1,0 +1,20 @@
+TITLE: Bayes Curvilinear Regression;
+DATA: 
+file = ./imps/implist.dat;
+type = imputation;
+VARIABLE: 
+names = id condition male frlunch lowach stanread efficacy anxiety mathpre mathpost;
+! list the squared variable anxietysq from the "DEFINE:" command below;
+usevariables = mathpost anxiety frlunch efficacy mathpre anxietysq;
+DEFINE:
+! center anxiety at its grandmean;
+center anxiety (grandmean);
+! compute the squared term;
+anxietysq = anxiety^2;
+MODEL: 
+! focal model
+mathpost on anxiety anxietysq frlunch efficacy mathpre;
+OUTPUT:
+! output for standardized coefficients and confidence intervals;
+stdyx cinterval;
+

@@ -1,0 +1,416 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+06/20/2024   1:59 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Bayes Moderated Regression;
+  DATA:
+  file = ./imps/implist.dat;
+  ! read in imputation data;
+  type = imputation;
+  VARIABLE:
+  names = id male hispanic riskgrp atrisk behsymp1 lrnprob1
+     read1 read2 read3 read9 read9grp stanread7
+     math1 math2 math3 math9 math9grp stanmath7;
+  ! include product variable from the "DEFINE:" command below;
+  usevariables = read9 read1 lrnprob1 atrisk product;
+  DEFINE:
+  ! center lower order variables read1 and lrnprob1 at their grandmean;
+  center read1 lrnprob1 atrisk (grandmean);
+  ! create product term for centered read1 and lrnprob1 variables;
+  product = read1 * lrnprob1;
+  MODEL:
+  ! focal model;
+  read9 on read1 lrnprob1 product atrisk (beta1-beta4);
+  MODEL CONSTRAINT:
+  ! define new variables for variance of moderator and three simple slopes;
+  new(lrnprobvar slp_low slp_mean slp_high);
+  ! fix variance of the moderator;
+  lrnprobvar = 114.354;
+  slp_high = beta1 + beta3*1*sqrt(lrnprobvar);
+  slp_mean = beta1 + beta3*0*sqrt(lrnprobvar);
+  slp_low =  beta1 - beta3*1*sqrt(lrnprobvar);
+  OUTPUT:
+  ! output for standardized coefficients and confidence intervals;
+  stdyx cinterval;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+Bayes Moderated Regression;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Average number of observations                                 138
+
+Number of replications
+    Requested                                                   20
+    Completed                                                   20
+
+Number of dependent variables                                    1
+Number of independent variables                                  4
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   READ9
+
+Observed independent variables
+   READ1       LRNPROB1    ATRISK      PRODUCT
+
+Variables with special functions
+
+  Centering (GRANDMEAN)
+   READ1       LRNPROB1    ATRISK
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+
+Input data file(s)
+  Multiple data files from
+    ./imps/implist.dat
+
+Input data format  FREE
+
+
+SAMPLE STATISTICS
+
+NOTE:  These are average results over 20 data sets.
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+               87.799         0.000         0.000         0.000       -10.518
+
+
+           Covariances
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+ READ9        220.955
+ READ1        213.597       407.030
+ LRNPROB1     -49.205       -10.518       115.896
+ ATRISK        -1.704        -2.299         0.181         0.227
+ PRODUCT      627.192       197.653       -64.589        -2.081     43566.714
+
+
+           Correlations
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+ READ9          1.000
+ READ1          0.712         1.000
+ LRNPROB1      -0.307        -0.048         1.000
+ ATRISK        -0.241        -0.239         0.035         1.000
+ PRODUCT        0.202         0.047        -0.029        -0.021         1.000
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        6
+
+Loglikelihood
+
+          H0 Value                        -502.262
+          H1 Value                        -502.262
+
+*   The loglikelihood cannot be used directly for chi-square testing with
+    imputed data.
+
+Information Criteria
+
+          Akaike (AIC)                    1016.524
+          Bayesian (BIC)                  1034.088
+          Sample-Size Adjusted BIC        1015.106
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           1.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+          90 Percent C.I.                    0.330  0.446
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                             84.833
+          Degrees of Freedom                     4
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+ READ9    ON
+    READ1              0.499      0.044     11.232      0.000      0.185
+    LRNPROB1          -0.372      0.084     -4.420      0.000      0.247
+    PRODUCT            0.012      0.005      2.580      0.010      0.319
+    ATRISK            -2.053      1.748     -1.174      0.240      0.055
+
+ Intercepts
+    READ9             87.917      0.846    103.950      0.000      0.138
+
+ Residual Variances
+    READ9             85.062     11.810      7.203      0.000      0.250
+
+New/Additional Parameters
+    LRNPROBV         114.354      0.022   5129.998      0.000      1.000
+    SLP_LOW            0.373      0.061      6.079      0.000      0.098
+    SLP_MEAN           0.499      0.044     11.232      0.000      0.185
+    SLP_HIGH           0.626      0.071      8.844      0.000      0.380
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.612E-05
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+ READ9    ON
+    READ1              0.677      0.048     14.191      0.000      0.100
+    LRNPROB1          -0.269      0.061     -4.393      0.000      0.237
+    PRODUCT            0.164      0.060      2.745      0.006      0.205
+    ATRISK            -0.066      0.056     -1.174      0.240      0.053
+
+ Intercepts
+    READ9              5.918      0.383     15.442      0.000      0.120
+
+ Residual Variances
+    READ9              0.385      0.057      6.788      0.000      0.182
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed   Rate of
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+    READ9              0.615      0.057     10.837      0.000      0.182
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ READ9    ON
+    READ1            0.385       0.412       0.426       0.499       0.572       0.586       0.614
+    LRNPROB1        -0.588      -0.536      -0.510      -0.372      -0.233      -0.207      -0.155
+    PRODUCT          0.000       0.003       0.004       0.012       0.019       0.021       0.024
+    ATRISK          -6.555      -5.478      -4.928      -2.053       0.822       1.373       2.449
+
+ Intercepts
+    READ9           85.738      86.259      86.525      87.917      89.308      89.574      90.095
+
+ Residual Variances
+    READ9           54.643      61.915      65.635      85.062     104.489     108.209     115.482
+
+New/Additional Parameters
+    LRNPROBV       114.297     114.310     114.317     114.354     114.391     114.398     114.411
+    SLP_LOW          0.215       0.252       0.272       0.373       0.473       0.493       0.531
+    SLP_MEAN         0.385       0.412       0.426       0.499       0.572       0.586       0.614
+    SLP_HIGH         0.444       0.487       0.509       0.626       0.742       0.765       0.808
+
+
+CONFIDENCE INTERVALS OF STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ READ9    ON
+    READ1            0.554       0.584       0.599       0.677       0.756       0.771       0.800
+    LRNPROB1        -0.427      -0.389      -0.370      -0.269      -0.168      -0.149      -0.111
+    PRODUCT          0.010       0.047       0.066       0.164       0.262       0.281       0.318
+    ATRISK          -0.210      -0.176      -0.158      -0.066       0.026       0.044       0.078
+
+ Intercepts
+    READ9            4.931       5.167       5.288       5.918       6.549       6.669       6.905
+
+ Residual Variances
+    READ9            0.239       0.274       0.292       0.385       0.478       0.496       0.531
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION
+
+
+           NU
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           LAMBDA
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+ READ9              0             0             0             0             0
+ READ1              0             0             0             0             0
+ LRNPROB1           0             0             0             0             0
+ ATRISK             0             0             0             0             0
+ PRODUCT            0             0             0             0             0
+
+
+           THETA
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+ READ9              0
+ READ1              0             0
+ LRNPROB1           0             0             0
+ ATRISK             0             0             0             0
+ PRODUCT            0             0             0             0             0
+
+
+           ALPHA
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+                  1             0             0             0             0
+
+
+           BETA
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+ READ9              0             2             3             4             5
+ READ1              0             0             0             0             0
+ LRNPROB1           0             0             0             0             0
+ ATRISK             0             0             0             0             0
+ PRODUCT            0             0             0             0             0
+
+
+           PSI
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+ READ9              6
+ READ1              0             0
+ LRNPROB1           0             0             0
+ ATRISK             0             0             0             0
+ PRODUCT            0             0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR THE ADDITIONAL PARAMETERS
+
+
+           New/Additional Parameters
+              LRNPROBV      SLP_LOW       SLP_MEAN      SLP_HIGH
+              ________      ________      ________      ________
+                    7             8             9            10
+
+
+     STARTING VALUES
+
+
+           NU
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+ READ9          1.000         0.000         0.000         0.000         0.000
+ READ1          0.000         1.000         0.000         0.000         0.000
+ LRNPROB1       0.000         0.000         1.000         0.000         0.000
+ ATRISK         0.000         0.000         0.000         1.000         0.000
+ PRODUCT        0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+ READ9          0.000
+ READ1          0.000         0.000
+ LRNPROB1       0.000         0.000         0.000
+ ATRISK         0.000         0.000         0.000         0.000
+ PRODUCT        0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+               87.852         0.000         0.000         0.000       -11.491
+
+
+           BETA
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+ READ9          0.000         0.000         0.000         0.000         0.000
+ READ1          0.000         0.000         0.000         0.000         0.000
+ LRNPROB1       0.000         0.000         0.000         0.000         0.000
+ ATRISK         0.000         0.000         0.000         0.000         0.000
+ PRODUCT        0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              READ9         READ1         LRNPROB1      ATRISK        PRODUCT
+              ________      ________      ________      ________      ________
+ READ9        105.370
+ READ1          0.000       417.517
+ LRNPROB1       0.000       -11.491       113.560
+ ATRISK         0.000        -2.395         0.184         0.227
+ PRODUCT        0.000       351.358       -32.221        -1.669     46340.002
+
+
+     STARTING VALUES FOR THE ADDITIONAL PARAMETERS
+
+
+           New/Additional Parameters
+              LRNPROBV      SLP_LOW       SLP_MEAN      SLP_HIGH
+              ________      ________      ________      ________
+                0.500         0.500         0.500         0.500
+
+
+     Beginning Time:  13:59:16
+        Ending Time:  13:59:16
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen

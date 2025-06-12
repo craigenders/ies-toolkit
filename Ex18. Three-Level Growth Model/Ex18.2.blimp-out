@@ -1,0 +1,274 @@
+
+---------------------------------------------------------------------------
+
+                                   Blimp
+                                  3.2.11
+
+             Blimp was developed with funding from Institute of
+           Education Sciences awards R305D150056 and R305D190002.
+
+            Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
+                 Han Du, Co-P.I. Email: hdu@psych.ucla.edu
+                 Roy Levy, Co-P.I. Email: roy.levy@asu.edu
+
+              Programming and Blimp Studio by Brian T. Keller
+
+                   There is no expressed license given.
+
+---------------------------------------------------------------------------
+
+
+ALGORITHMIC OPTIONS SPECIFIED:
+
+  Imputation method:                 Fully Bayesian model-based
+  MCMC algorithm:                    Full conditional Metropolis sampler with
+                                       Auto-Derived Conditional Distributions
+  Between-cluster imputation model:  Latent cluster means (LATENT)
+  Prior for random effect variances: Zero matrix, df = -(p + 1) (PRIOR2)
+  Prior for residual variances:      Zero sum of squares, df = -2 (PRIOR2)
+  Prior for predictor variances:     Unit sum of squares, df = 2 (XPRIOR1)
+  Chain Starting Values:             Random starting values
+
+
+  NOTE: The default prior for regression coefficients 
+        in categorical models is 'normal( 0.0, 5.0)'
+
+
+BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
+
+  NOTE: Split chain PSR is being used. This splits each chain's
+        iterations to create twice as many chains.
+
+  Comparing iterations across 20 chains    Highest PSR   Parameter #  
+                          501 to 1000            1.542             3  
+                         1001 to 2000            1.402             3  
+                         1501 to 3000            1.219             3  
+                         2001 to 4000            1.268             3  
+                         2501 to 5000            1.161             3  
+                         3001 to 6000            1.190            23  
+                         3501 to 7000            1.106            23  
+                         4001 to 8000            1.096            23  
+                         4501 to 9000            1.076             3  
+                         5001 to 10000           1.052             3  
+                         5501 to 11000           1.050             3  
+                         6001 to 12000           1.043             3  
+                         6501 to 13000           1.030             3  
+                         7001 to 14000           1.028             3  
+                         7501 to 15000           1.027             3  
+                         8001 to 16000           1.047             3  
+                         8501 to 17000           1.079             3  
+                         9001 to 18000           1.067             3  
+                         9501 to 19000           1.050             3  
+                        10001 to 20000           1.036             3  
+
+
+METROPOLIS-HASTINGS ACCEPTANCE RATES:
+
+  Chain 1:
+
+    Variable                            Type    Probability   Target Value 
+    teachexp                      imputation          0.553          0.500 
+    teachexp                       parameter          0.491          0.500 
+    frlunch                       imputation          0.499          0.500 
+    frlunch                        parameter          0.487          0.500 
+
+  NOTE: Suppressing printing of 19 chains.
+        Use keyword 'tuneinfo' in options to override.
+
+
+DATA INFORMATION:
+
+  Level-2 identifier:       student
+  Level-3 identifier:       school
+  Sample Size:              6874
+  Level-2 Clusters:         982
+  Level-3 Clusters:         29
+  Missing Data Rates:
+
+                probsolve = 11.45
+                 teachexp = 10.34
+                  frlunch = 04.68
+
+
+
+MODEL INFORMATION:
+
+  NUMBER OF PARAMETERS
+    Outcome Models:         14
+    Predictor Models:       9
+
+  PREDICTORS
+    Fixed variables:        condition male month7
+    Incomplete continuous:  teachexp
+    Incomplete ordinal:     frlunch
+
+  CENTERED PREDICTORS
+    Grand Mean Centered:    teachexp frlunch male
+
+  MODELS
+    [1]  probsolve ~ Intercept month7 male frlunch teachexp condition month7*condition 
+                 | Intercept month7
+
+
+WARNING MESSAGES:
+
+  WARNING: The following variables are fixed and centered.
+           The variables will be centered with observed means.
+  
+             male
+  
+  WARNING: The focal predictor "month7" is not centered.
+           Simple intercepts in the conditional effects table are
+           evaluated at a score of zero on the focal predictor.
+  
+
+
+MODEL FIT:
+
+
+  INFORMATION CRITERIA
+
+    Marginal Likelihood
+      DIC2                  42986.876
+      WAIC                  44648.844
+
+    Conditional Likelihood
+      DIC2                  37566.561
+      WAIC                  38267.574
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  No residual correlations.
+
+
+
+OUTCOME MODEL ESTIMATES:
+
+  Summaries based on 50000 iterations using 20 chains.
+
+
+Outcome Variable:  probsolve  
+
+Grand Mean Centered: frlunch male teachexp
+
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  L2 : Var(Intercept)                11.089      0.844      9.545     12.842        ---        ---   1305.851 
+  L2 : Cov(month7,Intercept)          0.323      0.118      0.112      0.571        ---        ---    261.742 
+  L2 : Var(month7)                    0.047      0.024      0.010      0.102        ---        ---    112.594 
+  L3 : Var(Intercept)                 7.693      2.966      4.179     15.633        ---        ---   3334.785 
+  L3 : Cov(month7,Intercept)          0.642      0.299      0.275      1.439        ---        ---   5710.795 
+  L3 : Var(month7)                    0.094      0.040      0.047      0.200        ---        ---  12688.905 
+  Residual Var.                      12.567      0.270     12.052     13.109        ---        ---   1077.025 
+
+Coefficients:                   
+  Intercept                          52.936      0.795     51.425     54.561   4440.224      0.000    456.485 
+  month7                              0.459      0.098      0.269      0.657     21.970      0.000   1285.983 
+  male                                0.338      0.224     -0.101      0.775      2.279      0.131   4346.790 
+  frlunch                            -0.286      0.302     -0.876      0.303      0.907      0.341   3388.218 
+  teachexp                            0.009      0.091     -0.174      0.189      0.009      0.924    231.779 
+  condition                           1.496      1.101     -0.724      3.640      1.855      0.173    353.962 
+  month7*condition                    0.294      0.132      0.026      0.547      4.919      0.027    871.682 
+
+Standardized Coefficients:      
+  month7                              0.168      0.036      0.098      0.239     21.940      0.000   1314.227 
+  male                                0.031      0.020     -0.009      0.070      2.279      0.131   4355.402 
+  frlunch                            -0.021      0.022     -0.064      0.022      0.906      0.341   3387.290 
+  teachexp                            0.007      0.068     -0.129      0.142      0.010      0.918    232.444 
+  condition                           0.134      0.096     -0.064      0.316      1.910      0.167    356.078 
+  month7*condition                    0.115      0.051      0.010      0.212      4.993      0.025    903.601 
+
+Proportion Variance Explained   
+  by Coefficients                     0.072      0.017      0.046      0.113        ---        ---    507.592 
+  by Level-2 Random Intercepts        0.323      0.024      0.270      0.364        ---        ---   2611.125 
+  by Level-2 Random Slopes            0.006      0.003      0.001      0.014        ---        ---    111.394 
+  by Level-3 Random Intercepts        0.157      0.046      0.093      0.273        ---        ---   3215.212 
+  by Level-3 Random Slopes            0.013      0.005      0.006      0.026        ---        ---  13419.741 
+  by Level-1 Residual Variation       0.423      0.028      0.359      0.468        ---        ---   2115.401 
+
+                                ------------------------------------------------------------------------------
+
+
+
+Conditional Effects                  Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+  month7 | condition @ 0                                                                                      
+    Intercept                        52.936      0.795     51.425     54.561   4440.224      0.000    456.485 
+    Slope                             0.459      0.098      0.269      0.657     21.970      0.000   1285.983 
+                                                                                                              
+  month7 | condition @ 1                                                                                      
+    Intercept                        54.437      0.767     52.978     56.023   5038.774      0.000    191.199 
+    Slope                             0.751      0.087      0.581      0.924     74.668      0.000    677.028 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+                                NOTE: Intercepts are computed by setting all predictors
+                                      not involved in the conditional effect to zero.
+
+
+
+
+PREDICTOR MODEL ESTIMATES:
+
+  Summaries based on 50000 iterations using 20 chains.
+
+
+Missing predictor:  teachexp   
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            9.862      0.901      8.080     11.651    119.873      0.000   2058.753 
+
+Level 3:                                                                                                      
+  condition                          -0.221      1.688     -3.569      3.126      0.016      0.898  17318.311 
+  frlunch                            -2.949      1.853     -6.741      0.595      2.594      0.107   9483.195 
+  Residual Var.                      16.214      5.460      9.427     30.548        ---        ---  15960.172 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing predictor:  frlunch    
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            0.980      0.126      0.739      1.237     60.862      0.000   4731.496 
+
+Level 2:                                                                                                      
+  male                               -0.154      0.103     -0.356      0.046      2.270      0.132  11113.120 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+
+Level 3:                                                                                                      
+  condition                          -0.150      0.238     -0.619      0.321      0.396      0.529  16377.175 
+  teachexp                           -0.045      0.028     -0.099      0.011      2.525      0.112  14580.993 
+  Residual Var.                       0.278      0.111      0.144      0.571        ---        ---   8296.727 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+VARIABLE ORDER IN IMPUTED DATA:
+
+  separate = './imps/imp*.dat'
+
+     school student wave condition teachexp eslpct ethnic male frlunch lowach
+     stanmath month0 month7 probsolve efficacy
+
+   stacked = './imps/imps.dat'
+
+     imp# school student wave condition teachexp eslpct ethnic male frlunch lowach
+     stanmath month0 month7 probsolve efficacy
+
+  stacked0 = './imps/imps0.dat'
+
+     imp# school student wave condition teachexp eslpct ethnic male frlunch lowach
+     stanmath month0 month7 probsolve efficacy
+

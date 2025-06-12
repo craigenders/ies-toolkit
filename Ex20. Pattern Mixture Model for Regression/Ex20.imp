@@ -1,0 +1,30 @@
+# mcmc regression w mnar pattern mixture model
+DATA: behaviorachievement.dat;
+VARIABLES: id male hispanic riskgrp atrisk behsymp1 lrnprob1 
+   read1 read2 read3 read9 read9grp stanread7 
+   math1 math2 math3 math9 math9grp stanmath7;
+MISSING: 999;
+TRANSFORM:
+m = ismissing(read9); # create binary missing data indicator variable
+ORDINAL: m;
+MODEL:  
+focal.model:
+read9 ~ 1@beta0com m@beta0diff read1 lrnprob1 behsymp1;
+missingness.model:
+m ~ 1@missmean;
+predictor.model:
+read1 lrnprob1 behsymp1 ~ m;
+# auxiliary.model:
+# stanread7 read2  ~ read9 m read1 lrnprob1 behsymp1;
+PARAMETERS:
+# set beta0diff equal to -.20 residual std. dev. units
+cohensd = -.20;
+beta0diff = cohensd * sqrt(read9.totalvar);
+# compute missingness group proportions from threshold parameter missmean
+pmis = phi(missmean);
+pcom = 1 - pmis;
+# compute weighted average intercept across patterns
+beta0 = (beta0com * pcom) + ((beta0com + beta0diff) * pmis);
+SEED: 90291;
+BURN: 1000; # set iteration number for warm up period
+ITERATIONS: 10000; # set iteartion number for analysis period

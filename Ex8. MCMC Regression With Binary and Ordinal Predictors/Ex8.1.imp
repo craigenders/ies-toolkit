@@ -1,0 +1,16 @@
+# mcmc regression w binary and ordinal predictors
+DATA: mathachievement.dat;
+VARIABLES: id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost;
+ORDINAL: condition frlunch atrisk efficacy;
+MISSING: 999;
+FIXED: condition mathpre; # complete variables
+MODEL: 
+focal.model:
+mathpost ~ condition@beta1 frlunch@beta2 efficacy@beta3 mathpre@beta4;
+auxiliary.models:
+stanread atrisk ~ mathpost condition frlunch efficacy mathpre;
+TEST:
+beta1:beta4 = 0; # MCMC-based frequentist Wald test
+SEED: 90291;
+BURN: 5000;  # set iteration number for warm up period
+ITERATIONS: 10000; # set iteration number for analysis period

@@ -1,0 +1,23 @@
+# mcmc curvilinear regression
+DATA: mathachievement.dat;
+VARIABLES: id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost;
+ORDINAL: atrisk frlunch efficacy;
+MISSING: 999;
+FIXED:  mathpre; # complete variables 
+CENTER: anxiety;  # center anxiety at its grand mean
+MODEL: 
+focal.model:
+mathpost ~ anxiety anxiety^2@beta2 frlunch efficacy mathpre;
+auxiliary.models:
+stanread atrisk ~ mathpost anxiety frlunch efficacy mathpre;
+SEED: 90291;
+BURN: 10000; # set iteration number for warm up period
+ITERATIONS: 10000; # set iteration number for analysis period
+NIMPS: 20; # set number of imputed data sets
+CHAINS: 20; # set number of MCMC chains
+SAVE: 
+stacked = ./imps/imps.dat; # R, SAS, SPSS format
+stacked0 = ./imps/imps0.dat; # Stata format
+separate = ./imps/imp*.dat; # Mplus format
+
+

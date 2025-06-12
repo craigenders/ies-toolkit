@@ -1,0 +1,16 @@
+# mcmc curvilinear regression
+DATA: mathachievement.dat;
+VARIABLES: id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost;
+ORDINAL: atrisk frlunch efficacy;
+MISSING: 999;
+FIXED:  mathpre; # complete variables
+CENTER: anxiety; # center anxiety at its grandmean
+MODEL: 
+focal.model:
+mathpost ~ anxiety anxiety^2 frlunch efficacy mathpre;
+auxiliary.models:
+stanread atrisk ~ mathpost anxiety frlunch efficacy mathpre;
+SEED: 90291;
+BURN: 10000; # set iteration number for warm up period
+ITERATIONS: 10000; # set iteration number for analysis period
+

@@ -1,0 +1,293 @@
+
+---------------------------------------------------------------------------
+
+                                   Blimp
+                                  3.2.12
+
+             Blimp was developed with funding from Institute of
+           Education Sciences awards R305D150056 and R305D190002.
+
+            Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
+                 Han Du, Co-P.I. Email: hdu@psych.ucla.edu
+                 Roy Levy, Co-P.I. Email: roy.levy@asu.edu
+
+              Programming and Blimp Studio by Brian T. Keller
+
+                   There is no expressed license given.
+
+---------------------------------------------------------------------------
+
+
+ALGORITHMIC OPTIONS SPECIFIED:
+
+  Imputation method:                 Fully Bayesian model-based
+  MCMC algorithm:                    Full conditional Metropolis sampler with
+                                       Auto-Derived Conditional Distributions
+  Between-cluster imputation model:  Not applicable, single-level imputation
+  Prior for random effect variances: Not applicable, single-level imputation
+  Prior for residual variances:      Zero sum of squares, df = -2 (PRIOR2)
+  Prior for predictor variances:     Unit sum of squares, df = 2 (XPRIOR1)
+  Chain Starting Values:             Random starting values
+
+
+  NOTE: The default prior for regression coefficients 
+        in categorical models is 'normal( 0.0, 5.0)'
+
+
+BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
+
+  NOTE: Split chain PSR is being used. This splits each chain's
+        iterations to create twice as many chains.
+
+  Comparing iterations across 2 chains     Highest PSR   Parameter #  
+                           26 to 50              1.459            44  
+                           51 to 100             1.086             9  
+                           76 to 150             1.102            14  
+                          101 to 200             1.082             2  
+                          126 to 250             1.036            39  
+                          151 to 300             1.039            45  
+                          176 to 350             1.018            44  
+                          201 to 400             1.030            44  
+                          226 to 450             1.012             5  
+                          251 to 500             1.012            36  
+                          276 to 550             1.010            14  
+                          301 to 600             1.007            14  
+                          326 to 650             1.016            37  
+                          351 to 700             1.020            33  
+                          376 to 750             1.019            33  
+                          401 to 800             1.017            37  
+                          426 to 850             1.011            37  
+                          451 to 900             1.010            33  
+                          476 to 950             1.015            33  
+                          501 to 1000            1.013            33  
+
+
+DATA INFORMATION:
+
+  Sample Size:              138
+  Missing Data Rates:
+
+                    read9 = 17.39
+                        m = 00.00
+                 behsymp1 = 03.62
+                 lrnprob1 = 02.17
+                    read1 = 06.52
+
+
+
+MODEL INFORMATION:
+
+  NUMBER OF PARAMETERS
+    Outcome Models:         18
+    Generated Parameters:   5
+    Predictor Models:       0
+
+  MODELS
+
+   focal.model:
+    [1]  read9 ~ Intercept@beta0com m@beta0diff read1 lrnprob1 behsymp1
+
+   missingness.model:
+    [2]  m ~ Intercept@missmean
+
+   predictor.model:
+    [3]  behsymp1 ~ Intercept m
+    [4]  lrnprob1 ~ Intercept behsymp1 m
+    [5]  read1 ~ Intercept lrnprob1 behsymp1 m
+
+  GENERATED PARAMETERS
+    [1]  cohensd = -.20
+    [2]  beta0diff = cohensd*sqrt(read9.totalvar)
+    [3]  pmis = phi(missmean)
+    [4]  pcom = 1-pmis
+    [5]  beta0 = (beta0com*pcom)+((beta0com+beta0diff)*pmis)
+
+
+WARNING MESSAGES:
+
+  No warning messages.
+
+
+MODEL FIT:
+
+
+  INFORMATION CRITERIA
+
+    Marginal Likelihood
+      DIC2                  4709.341
+      WAIC                  4770.513
+
+    Conditional Likelihood
+      DIC2                  4709.341
+      WAIC                  4770.513
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  Summaries based on 10000 iterations using 2 chains.
+
+
+Correlations                         Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+  read9, m                            0.001      0.121     -0.237      0.237      0.000      0.999   8637.331 
+  read9, behsymp1                     0.002      0.123     -0.237      0.242      0.000      0.985   9892.835 
+  read9, lrnprob1                     0.000      0.121     -0.238      0.237      0.000      1.000   9107.066 
+  read9, read1                       -0.001      0.122     -0.241      0.233      0.000      0.992   9845.458 
+  m, behsymp1                         0.003      0.122     -0.235      0.237      0.000      0.991  10089.267 
+  m, lrnprob1                        -0.001      0.123     -0.241      0.237      0.000      0.996  10089.655 
+  m, read1                            0.001      0.123     -0.241      0.241      0.000      0.999   9575.102 
+  behsymp1, lrnprob1                 -0.001      0.123     -0.244      0.238      0.000      0.995   9767.800 
+  behsymp1, read1                     0.000      0.122     -0.230      0.237      0.000      0.997   9648.177 
+  lrnprob1, read1                     0.000      0.122     -0.240      0.239      0.000      0.999   9330.924 
+
+                                ------------------------------------------------------------------------------
+
+
+
+OUTCOME MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 2 chains.
+
+  focal.model block:
+
+Outcome Variable:  read9      
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                      91.500     13.377     69.884    122.582        ---        ---   5722.413 
+
+Coefficients:                   
+  Intercept                          67.015      6.738     53.747     80.234     98.965      0.000   5080.000 
+  m                                  -2.986      0.162     -3.332     -2.701    341.993      0.000   6563.975 
+  read1                               0.502      0.046      0.407      0.593    116.610      0.000   6501.228 
+  lrnprob1                           -0.223      0.135     -0.491      0.042      2.745      0.098   4306.273 
+  behsymp1                           -0.223      0.112     -0.446     -0.001      3.969      0.046   6046.418 
+
+Standardized Coefficients:      
+  m                                  -0.076      0.005     -0.087     -0.067    215.646      0.000  40000.000 
+  read1                               0.666      0.045      0.566      0.741    221.614      0.000   5267.920 
+  lrnprob1                           -0.161      0.096     -0.346      0.030      2.790      0.095   4338.083 
+  behsymp1                           -0.182      0.090     -0.354     -0.001      4.079      0.043   6077.904 
+
+Proportion Variance Explained   
+  by Coefficients                     0.591      0.051      0.475      0.679        ---        ---   6169.949 
+  by Residual Variation               0.409      0.051      0.321      0.525        ---        ---   6169.949 
+
+                                ------------------------------------------------------------------------------
+
+
+  missingness.model block:
+
+Outcome Variable:  m          
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+
+Coefficients:                   
+  Intercept                          -0.944      0.125     -1.189     -0.701     56.917      0.000   2773.305 
+
+Thresholds:                     
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+
+Proportion Variance Explained   
+  by Coefficients                     0.000      0.000      0.000      0.000        ---        ---        nan 
+  by Residual Variation               1.000      0.000      1.000      1.000        ---        ---        nan 
+
+                                ------------------------------------------------------------------------------
+
+
+  predictor.model block:
+
+Outcome Variable:  behsymp1   
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                     142.640     18.025    113.104    183.703        ---        ---   9490.608 
+
+Coefficients:                   
+  Intercept                          48.154      1.125     45.912     50.364   1830.497      0.000   9474.936 
+  m                                   7.689      2.735      2.478     13.107      7.902      0.005   9256.520 
+
+Standardized Coefficients:      
+  m                                   0.238      0.080      0.077      0.388      8.641      0.003   9222.033 
+
+Proportion Variance Explained   
+  by Coefficients                     0.057      0.038      0.006      0.151        ---        ---   9258.879 
+  by Residual Variation               0.943      0.038      0.849      0.994        ---        ---   9258.879 
+
+                                ------------------------------------------------------------------------------
+
+
+
+Outcome Variable:  lrnprob1   
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                      56.154      7.171     44.349     72.363        ---        ---   8665.855 
+
+Coefficients:                   
+  Intercept                          22.004      2.761     16.560     27.398     63.670      0.000   9421.774 
+  behsymp1                            0.598      0.055      0.489      0.705    117.037      0.000   9237.827 
+  m                                   4.155      1.760      0.749      7.702      5.605      0.018   9789.462 
+
+Standardized Coefficients:      
+  behsymp1                            0.671      0.043      0.573      0.745    238.520      0.000   9294.304 
+  m                                   0.146      0.061      0.026      0.264      5.782      0.016   9834.911 
+
+Proportion Variance Explained   
+  by Coefficients                     0.521      0.051      0.411      0.612        ---        ---   8910.104 
+  by Residual Variation               0.479      0.051      0.388      0.589        ---        ---   8910.104 
+
+                                ------------------------------------------------------------------------------
+
+
+
+Outcome Variable:  read1      
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                     406.357     52.599    320.539    524.558        ---        ---   8049.075 
+
+Coefficients:                   
+  Intercept                          89.455      9.452     70.934    107.864     89.555      0.000   7436.037 
+  lrnprob1                            0.039      0.255     -0.463      0.541      0.021      0.884   6490.292 
+  behsymp1                           -0.091      0.212     -0.505      0.322      0.180      0.671   8197.998 
+  m                                  -0.971      4.980    -10.862      8.704      0.039      0.843   8001.802 
+
+Standardized Coefficients:      
+  lrnprob1                            0.021      0.132     -0.238      0.279      0.022      0.881   6446.032 
+  behsymp1                           -0.054      0.125     -0.293      0.190      0.183      0.669   8130.273 
+  m                                  -0.018      0.091     -0.199      0.157      0.041      0.840   7993.288 
+
+Proportion Variance Explained   
+  by Coefficients                     0.020      0.020      0.002      0.076        ---        ---   9613.828 
+  by Residual Variation               0.980      0.020      0.924      0.998        ---        ---   9613.828 
+
+                                ------------------------------------------------------------------------------
+
+
+
+GENERATED PARAMETERS:
+
+  Summaries based on 10000 iterations using 2 chains.
+
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+  cohensd                            -0.200      0.000     -0.200     -0.200        inf      0.000      2.001 
+  beta0diff                          -2.986      0.162     -3.332     -2.701    342.001      0.000   6558.584 
+  pmis                                0.173      0.032      0.117      0.242     29.838      0.000   2768.704 
+  pcom                                0.827      0.032      0.758      0.883    665.706      0.000   2768.704 
+  beta0                              66.491      6.743     53.208     79.723     97.278      0.000   5085.842 
+
+                                ------------------------------------------------------------------------------
+

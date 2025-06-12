@@ -1,0 +1,57 @@
+TITLE: Pattern Mixture Model for Regression;
+DATA: 
+file = behaviorachievement.dat;
+VARIABLE:
+names = id male hispanic riskgrp atrisk behsymp1 lrnprob1 
+   read1 read2 read3 read9 read9grp stanread7 
+   math1 math2 math3 math9 math9grp stanmath7;
+usevariables = read9 read1 lrnprob1 behsymp1 read2 stanread7 m;
+categorical = m;
+missing = all(999);
+DATA MISSING:
+! create missing data indicator;
+names = read9;
+! recode it as a binary variable called m; 
+binary = m;
+! specify it is for missing data;
+type = missing;
+ANALYSIS:
+! set estimator to maximum likelihood;
+estimator = ml;
+! set link function to probit;
+link = probit;
+! set integration method to montecarlo;
+integration = montecarlo;
+MODEL: 
+! create empty model for the missing data indicator variable with threshold parameter missmean;
+[m$1] (missmean);
+! predictor model for besymp predicted by m;
+behsymp1 on m;
+! predictor model for lrnprob1 predicted by behsymp1 and m;
+lrnprob1 on behsymp1 m;
+! predictor model for read1 predicted by lrnprob1, behsymp1, and m;
+read1 on lrnprob1 behsymp1 m;
+! focal model with pattern-specific intercepts for pattern mean difference;
+read9 on m (beta0diff)
+   read1 lrnprob1 behsymp1;
+ ! complete-case intercept and residual variance for focal predictor;
+[read9] (beta0com); read9 (resvar);
+! auxiliary model for read2; 
+read2 on read9 read1 lrnprob1 behsymp1 m;
+! auxiliary model for stanread7;
+stanread7 on read2 read9 read1 lrnprob1 behsymp1 m;
+MODEL CONSTRAINT:
+! define four new parameters;
+new(cohensd pcom pmis beta0);
+! set desired effect size difference for the group with missing data;
+cohensd = -.20;
+! define mean difference parameter as function of effect size and residual standard deviation;
+beta0diff = cohensd * sqrt(resvar);
+! use threshold parameter missmean to compute missing data proportions;
+pmis = phi(-missmean);
+pcom = 1 - pmis;
+! computes weighted intercept that averages over missing data patternsl
+beta0 = (beta0com * pcom) + ((beta0com + beta0diff) * pmis);
+OUTPUT:
+! output for missing data patterns, sample statistics, standardized coefficients, and confidence intervals;
+patterns sampstat stdyx cinterval;

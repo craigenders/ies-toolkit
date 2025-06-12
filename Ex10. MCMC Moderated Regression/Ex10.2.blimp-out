@@ -1,0 +1,415 @@
+
+---------------------------------------------------------------------------
+
+                                   Blimp
+                                  3.2.11
+
+             Blimp was developed with funding from Institute of
+           Education Sciences awards R305D150056 and R305D190002.
+
+            Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
+                 Han Du, Co-P.I. Email: hdu@psych.ucla.edu
+                 Roy Levy, Co-P.I. Email: roy.levy@asu.edu
+
+              Programming and Blimp Studio by Brian T. Keller
+
+                   There is no expressed license given.
+
+---------------------------------------------------------------------------
+
+
+ALGORITHMIC OPTIONS SPECIFIED:
+
+  Imputation method:                 Fully Bayesian model-based
+  MCMC algorithm:                    Full conditional Metropolis sampler with
+                                       Auto-Derived Conditional Distributions
+  Between-cluster imputation model:  Not applicable, single-level imputation
+  Prior for random effect variances: Not applicable, single-level imputation
+  Prior for residual variances:      Zero sum of squares, df = -2 (PRIOR2)
+  Prior for predictor variances:     Unit sum of squares, df = 2 (XPRIOR1)
+  Chain Starting Values:             Random starting values
+
+
+  NOTE: The default prior for regression coefficients 
+        in categorical models is 'normal( 0.0, 5.0)'
+
+
+BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
+
+  NOTE: Split chain PSR is being used. This splits each chain's
+        iterations to create twice as many chains.
+
+  Comparing iterations across 20 chains    Highest PSR   Parameter #  
+                          126 to 250             1.180            48  
+                          251 to 500             1.145            48  
+                          376 to 750             1.077            48  
+                          501 to 1000            1.073            48  
+                          626 to 1250            1.080            48  
+                          751 to 1500            1.047            48  
+                          876 to 1750            1.034            48  
+                         1001 to 2000            1.022            48  
+                         1126 to 2250            1.020            48  
+                         1251 to 2500            1.014            48  
+                         1376 to 2750            1.014            48  
+                         1501 to 3000            1.016            48  
+                         1626 to 3250            1.018            48  
+                         1751 to 3500            1.014            48  
+                         1876 to 3750            1.014            48  
+                         2001 to 4000            1.016            48  
+                         2126 to 4250            1.012            48  
+                         2251 to 4500            1.012            48  
+                         2376 to 4750            1.016            48  
+                         2501 to 5000            1.013            48  
+
+
+METROPOLIS-HASTINGS ACCEPTANCE RATES:
+
+  Chain 1:
+
+    Variable                            Type    Probability   Target Value 
+    atrisk                        imputation          0.502          0.500 
+    atrisk                         parameter          0.501          0.500 
+    lrnprob1                      imputation          0.521          0.500 
+    lrnprob1                       parameter          0.526          0.500 
+    read1                         imputation          0.521          0.500 
+    read1                          parameter          0.558          0.500 
+
+  NOTE: Suppressing printing of 19 chains.
+        Use keyword 'tuneinfo' in options to override.
+
+
+DATA INFORMATION:
+
+  Sample Size:              138
+  Missing Data Rates:
+
+                    read9 = 17.39
+                    read2 = 09.42
+                stanread7 = 19.57
+                   atrisk = 02.17
+                 lrnprob1 = 02.17
+                    read1 = 06.52
+
+
+
+MODEL INFORMATION:
+
+  NUMBER OF PARAMETERS
+    Outcome Models:         19
+    Predictor Models:       11
+
+  PREDICTORS
+    Incomplete continuous:  lrnprob1 read1
+    Incomplete ordinal:     atrisk
+
+  CENTERED PREDICTORS
+    Grand Mean Centered:    atrisk lrnprob1 read1
+
+  MODELS
+
+   focal.model:
+    [1]  read9 ~ Intercept read1 lrnprob1 atrisk read1*lrnprob1
+
+   auxiliary.models:
+    [2]  read2 ~ Intercept read9 read1 lrnprob1 atrisk
+    [3]  stanread7 ~ Intercept read2 read9 read1 lrnprob1 atrisk
+
+
+WARNING MESSAGES:
+
+  No warning messages.
+
+
+MODEL FIT:
+
+
+  INFORMATION CRITERIA
+
+    Marginal Likelihood
+      DIC2                  3455.292
+      WAIC                  3488.183
+
+    Conditional Likelihood
+      DIC2                  3455.292
+      WAIC                  3488.183
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  Summaries based on 10000 iterations using 20 chains.
+
+
+Correlations                         Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+  read9, read2                       -0.015      0.120     -0.248      0.222      0.016      0.899   9839.351 
+  read9, stanread7                    0.015      0.120     -0.222      0.246      0.014      0.906  10030.472 
+  read2, stanread7                   -0.002      0.120     -0.234      0.231      0.000      0.992  10001.495 
+
+                                ------------------------------------------------------------------------------
+
+
+
+OUTCOME MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 20 chains.
+
+  focal.model block:
+
+Outcome Variable:  read9      
+
+Grand Mean Centered: atrisk lrnprob1 read1
+
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                      89.382     13.417     67.739    120.573        ---        ---   4999.353 
+
+Coefficients:                   
+  Intercept                          87.806      1.346     85.074     90.328   4254.428      0.000    591.587 
+  read1                               0.502      0.048      0.408      0.594    110.574      0.000   4807.073 
+  lrnprob1                           -0.372      0.090     -0.551     -0.197     17.269      0.000   2896.741 
+  atrisk                             -1.948      1.878     -5.629      1.680      1.054      0.305   7025.994 
+  read1*lrnprob1                      0.012      0.005      0.003      0.021      6.821      0.009   3031.069 
+
+Standardized Coefficients:      
+  read1                               0.672      0.047      0.571      0.754    201.689      0.000   4284.023 
+  lrnprob1                           -0.266      0.062     -0.384     -0.142     18.467      0.000   2827.066 
+  atrisk                             -0.062      0.059     -0.175      0.054      1.062      0.303   7004.015 
+  read1*lrnprob1                      0.168      0.060      0.047      0.281      7.749      0.005   3834.032 
+
+Proportion Variance Explained   
+  by Coefficients                     0.609      0.052      0.495      0.698        ---        ---   4523.760 
+  by Residual Variation               0.391      0.052      0.302      0.505        ---        ---   4523.760 
+
+                                ------------------------------------------------------------------------------
+
+
+
+Conditional Effects                  Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+  read1 | lrnprob1 @ +2 SD                                                                                    
+    Intercept                        79.702      2.661     74.326     84.741    895.663      0.000   1052.199 
+    Slope                             0.765      0.119      0.538      1.003     41.655      0.000   2872.380 
+                                                                                                              
+  read1 | lrnprob1 @ +1 SD                                                                                    
+    Intercept                        83.754      1.848     80.034     87.248   2051.566      0.000    747.573 
+    Slope                             0.633      0.074      0.490      0.783     72.739      0.000   3035.504 
+                                                                                                              
+  read1 | lrnprob1 @ 0                                                                                        
+    Intercept                        87.806      1.346     85.074     90.328   4254.428      0.000    591.587 
+    Slope                             0.502      0.048      0.408      0.594    110.574      0.000   4807.073 
+                                                                                                              
+  read1 | lrnprob1 @ -1 SD                                                                                    
+    Intercept                        91.842      1.506     88.899     94.828   3719.036      0.000   1040.581 
+    Slope                             0.369      0.066      0.236      0.495     31.091      0.000   5169.040 
+                                                                                                              
+  read1 | lrnprob1 @ -2 SD                                                                                    
+    Intercept                        95.867      2.188     91.783    100.366   1921.610      0.000   2772.639 
+    Slope                             0.237      0.109      0.019      0.443      4.686      0.030   3980.301 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+                                NOTE: Intercepts are computed by setting all predictors
+                                      not involved in the conditional effect to zero.
+
+
+  auxiliary.models block:
+
+Outcome Variable:  read2      
+
+Grand Mean Centered: atrisk lrnprob1 read1
+
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                      51.991      8.144     39.438     71.328        ---        ---   4153.417 
+
+Coefficients:                   
+  Intercept                          34.570      6.762     21.469     48.064     26.171      0.000   4448.123 
+  read9                               0.661      0.075      0.510      0.806     76.722      0.000   5010.246 
+  read1                               0.556      0.052      0.455      0.656    115.953      0.000   5793.256 
+  lrnprob1                           -0.030      0.073     -0.169      0.114      0.167      0.683   4162.616 
+  atrisk                             -0.138      1.558     -3.213      2.896      0.009      0.924   4779.582 
+
+Standardized Coefficients:      
+  read9                               0.471      0.051      0.367      0.567     84.236      0.000   5102.734 
+  read1                               0.538      0.048      0.443      0.630    126.342      0.000   4919.263 
+  lrnprob1                           -0.015      0.037     -0.087      0.059      0.167      0.683   4187.306 
+  atrisk                             -0.003      0.036     -0.073      0.066      0.009      0.923   4779.544 
+
+Proportion Variance Explained   
+  by Coefficients                     0.881      0.018      0.839      0.910        ---        ---   4429.850 
+  by Residual Variation               0.119      0.018      0.090      0.161        ---        ---   4429.850 
+
+                                ------------------------------------------------------------------------------
+
+
+
+Conditional Effects                  Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+  read1 | lrnprob1 @ +2 SD                                                                                    
+    Intercept                        33.891      6.536     21.535     46.861     26.974      0.000   3783.916 
+    Slope                             0.556      0.052      0.455      0.656    115.953      0.000   5793.256 
+                                                                                                              
+  read1 | lrnprob1 @ +1 SD                                                                                    
+    Intercept                        34.223      6.602     21.606     47.232     26.941      0.000   4099.152 
+    Slope                             0.556      0.052      0.455      0.656    115.953      0.000   5793.256 
+                                                                                                              
+  read1 | lrnprob1 @ 0                                                                                        
+    Intercept                        34.570      6.762     21.469     48.064     26.171      0.000   4448.123 
+    Slope                             0.556      0.052      0.455      0.656    115.953      0.000   5793.256 
+                                                                                                              
+  read1 | lrnprob1 @ -1 SD                                                                                    
+    Intercept                        34.900      7.008     21.292     48.896     24.819      0.000   4803.541 
+    Slope                             0.556      0.052      0.455      0.656    115.953      0.000   5793.256 
+                                                                                                              
+  read1 | lrnprob1 @ -2 SD                                                                                    
+    Intercept                        35.226      7.333     20.969     49.832     23.092      0.000   5134.874 
+    Slope                             0.556      0.052      0.455      0.656    115.953      0.000   5793.256 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+                                NOTE: Intercepts are computed by setting all predictors
+                                      not involved in the conditional effect to zero.
+
+
+
+Outcome Variable:  stanread7  
+
+Grand Mean Centered: atrisk lrnprob1 read1
+
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                    2436.187    358.145   1867.572   3268.251        ---        ---   5640.969 
+
+Coefficients:                   
+  Intercept                         -17.958     52.826   -123.149     84.324      0.116      0.733   5089.645 
+  read2                               1.084      0.896     -0.745      2.756      1.405      0.236   2474.235 
+  read9                               2.047      0.831      0.450      3.737      6.062      0.014   2894.848 
+  read1                              -0.313      0.614     -1.513      0.883      0.257      0.612   2974.542 
+  lrnprob1                           -0.048      0.506     -1.026      0.958      0.009      0.926   5482.031 
+  atrisk                            -11.726     10.434    -32.174      8.530      1.268      0.260   5314.134 
+
+Standardized Coefficients:      
+  read2                               0.325      0.266     -0.218      0.817      1.427      0.232   2438.205 
+  read9                               0.438      0.172      0.097      0.774      6.436      0.011   2827.073 
+  read1                              -0.091      0.177     -0.436      0.254      0.262      0.609   2955.002 
+  lrnprob1                           -0.008      0.078     -0.158      0.148      0.008      0.930   5367.745 
+  atrisk                             -0.081      0.071     -0.218      0.058      1.285      0.257   5328.527 
+
+Proportion Variance Explained   
+  by Coefficients                     0.494      0.062      0.360      0.601        ---        ---   5305.097 
+  by Residual Variation               0.506      0.062      0.399      0.640        ---        ---   5305.097 
+
+                                ------------------------------------------------------------------------------
+
+
+
+Conditional Effects                  Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+  read1 | lrnprob1 @ +2 SD                                                                                    
+    Intercept                       -18.521     50.578   -120.323     79.868      0.141      0.707   4829.679 
+    Slope                            -0.313      0.614     -1.513      0.883      0.257      0.612   2974.542 
+                                                                                                              
+  read1 | lrnprob1 @ +1 SD                                                                                    
+    Intercept                       -18.429     51.418   -121.107     81.215      0.130      0.719   4956.437 
+    Slope                            -0.313      0.614     -1.513      0.883      0.257      0.612   2974.542 
+                                                                                                              
+  read1 | lrnprob1 @ 0                                                                                        
+    Intercept                       -17.958     52.826   -123.149     84.324      0.116      0.733   5089.645 
+    Slope                            -0.313      0.614     -1.513      0.883      0.257      0.612   2974.542 
+                                                                                                              
+  read1 | lrnprob1 @ -1 SD                                                                                    
+    Intercept                       -17.837     54.759   -125.671     88.935      0.102      0.749   5220.537 
+    Slope                            -0.313      0.614     -1.513      0.883      0.257      0.612   2974.542 
+                                                                                                              
+  read1 | lrnprob1 @ -2 SD                                                                                    
+    Intercept                       -17.186     57.162   -130.440     93.065      0.088      0.766   5427.913 
+    Slope                            -0.313      0.614     -1.513      0.883      0.257      0.612   2974.542 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+                                NOTE: Intercepts are computed by setting all predictors
+                                      not involved in the conditional effect to zero.
+
+
+
+
+PREDICTOR MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 20 chains.
+
+
+Missing predictor:  atrisk     
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            0.424      0.124      0.183      0.672     11.654      0.001    741.571 
+
+Level 1:                                                                                                      
+  lrnprob1                            0.003      0.011     -0.017      0.024      0.092      0.762   2997.804 
+  read1                              -0.016      0.006     -0.028     -0.005      7.964      0.005   2985.294 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing predictor:  lrnprob1   
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           52.386      0.961     50.527     54.322   2968.951      0.000   1316.130 
+
+Level 1:                                                                                                      
+  atrisk                              0.371      1.235     -2.039      2.809      0.099      0.753   5091.243 
+  read1                              -0.017      0.051     -0.118      0.084      0.109      0.741   5448.840 
+  Residual Var.                     115.527     14.552     91.793    148.093        ---        ---   7768.411 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing predictor:  read1      
+
+Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           86.162      1.792     82.539     89.546   2311.011      0.000    328.491 
+
+Level 1:                                                                                                      
+  atrisk                             -6.038      1.990     -9.804     -2.050      9.079      0.003   6220.211 
+  lrnprob1                           -0.055      0.163     -0.371      0.272      0.111      0.739   5706.901 
+  Residual Var.                     368.418     49.887    285.353    482.509        ---        ---   6408.413 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+VARIABLE ORDER IN IMPUTED DATA:
+
+  separate = './imps/imp*.dat'
+
+     id male hispanic riskgrp atrisk behsymp1 lrnprob1 read1 read2 read3 read9
+     read9grp stanread7 math1 math2 math3 math9 math9grp stanmath7
+
+   stacked = './imps/imps.dat'
+
+     imp# id male hispanic riskgrp atrisk behsymp1 lrnprob1 read1 read2 read3 read9
+     read9grp stanread7 math1 math2 math3 math9 math9grp stanmath7
+
+  stacked0 = './imps/imps0.dat'
+
+     imp# id male hispanic riskgrp atrisk behsymp1 lrnprob1 read1 read2 read3 read9
+     read9grp stanread7 math1 math2 math3 math9 math9grp stanmath7
+
