@@ -2,15 +2,14 @@
 # fiml linear regression
 ##################################################
 
-library(fdir)
 library(lavaan)
 
 ##################################################
-# set working directory and load data
+# load data from githib
 ##################################################
 
-set()
-load('behaviorachievement.rda')
+data_url <- "https://raw.githubusercontent.com/craigenders/ies-toolkit/main/Data/mathachievement.rda"
+load(gzcon(url(data_url, open = "rb")))
 
 ##################################################
 # analysis
