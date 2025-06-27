@@ -5,7 +5,7 @@
 library(lavaan)
 
 ##################################################
-# load data from githib
+# load data from github
 ##################################################
 
 data_url <- "https://raw.githubusercontent.com/craigenders/ies-toolkit/main/Data/mathachievement.rda"
