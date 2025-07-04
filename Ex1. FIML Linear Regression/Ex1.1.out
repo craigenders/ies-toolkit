@@ -1,0 +1,391 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+06/30/2025   1:22 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: fiml linear regression;
+  DATA:
+  file = behaviorachievement.dat;
+  VARIABLE:
+  names = id male hispanic riskgrp atrisk behsymp1 lrnprob1
+     read1 read2 read3 read9 readgrp9 stanread7
+     math1 math2 math3 math9 mathgrp9 stanmath7;
+  usevariables = read9 read1 lrnprob1 behsymp1;
+  missing = all(999);
+  ANALYSIS:
+  ! set estimator to maximum likelihood;
+  estimator = ml;
+  MODEL:
+  ! normal distribution for predictors;
+  read1 lrnprob1 behsymp1;
+  ! focal regression model;
+  read9 on read1 lrnprob1 behsymp1 (beta1-beta3);
+  MODEL TEST:
+  ! wald test that each slope equals 0;
+  0 = beta1; 0 = beta2; 0 = beta3;
+  OUTPUT:
+  ! output for missing data patterns, sample statistics, standardized coefficients, and conf
+  patterns sampstat stdyx cinterval;
+
+
+
+*** WARNING
+  Input line exceeded 90 characters. Some input may be truncated.
+  ! output for missing data patterns, sample statistics, standardized coefficients, and confi
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+fiml linear regression;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         138
+
+Number of dependent variables                                    1
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   READ9
+
+Observed independent variables
+   READ1       LRNPROB1    BEHSYMP1
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+
+Input data file(s)
+  behaviorachievement.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             7
+
+
+SUMMARY OF MISSING DATA PATTERNS
+
+
+     MISSING DATA PATTERNS (x = not missing)
+
+           1  2  3  4  5  6  7
+ READ9     x  x  x  x
+ READ1     x  x  x     x  x
+ LRNPROB1  x  x     x  x  x  x
+ BEHSYMP1  x     x  x  x     x
+
+
+     MISSING DATA PATTERN FREQUENCIES
+
+    Pattern   Frequency     Pattern   Frequency     Pattern   Frequency
+          1          99           4           8           7           1
+          2           4           5          22
+          3           3           6           1
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9          0.826
+ READ1          0.768         0.935
+ LRNPROB1       0.804         0.913         0.978
+ BEHSYMP1       0.797         0.899         0.942         0.964
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+               87.809        86.732        52.328        49.483
+
+
+           Covariances
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9        209.720
+ READ1        198.380       387.274
+ LRNPROB1     -48.791        -5.637       114.160
+ BEHSYMP1     -58.674       -11.228        92.048       146.317
+
+
+           Correlations
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9          1.000
+ READ1          0.696         1.000
+ LRNPROB1      -0.315        -0.027         1.000
+ BEHSYMP1      -0.335        -0.047         0.712         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -1971.757
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     READ9                88.553      -0.470      41.000    0.88%      79.000     86.000     89.000
+             114.000     213.388       1.006     123.000    1.75%      91.000    101.000
+     READ1                86.806       0.185      39.000    0.78%      71.000     83.000     86.000
+             129.000     384.776       0.403     153.000    0.78%      90.000    102.000
+     LRNPROB1             52.356       0.378      31.000    0.74%      43.000     49.000     51.000
+             135.000     114.777       0.003      88.000    0.74%      55.000     61.000
+     BEHSYMP1             49.466       0.273      17.000    0.75%      39.000     45.000     48.000
+             133.000     148.324       0.401      92.000    0.75%      52.000     61.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       14
+
+Loglikelihood
+
+          H0 Value                       -1971.757
+          H1 Value                       -1971.757
+
+Information Criteria
+
+          Akaike (AIC)                    3971.513
+          Bayesian (BIC)                  4012.495
+          Sample-Size Adjusted BIC        3968.203
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           0.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+          90 Percent C.I.                    0.000  0.000
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                             96.186
+          Degrees of Freedom                     3
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.000
+
+Wald Test of Parameter Constraints
+
+          Value                            159.666
+          Degrees of Freedom                     3
+          P-Value                           0.0000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ READ9    ON
+    READ1              0.503      0.045     11.230      0.000
+    LRNPROB1          -0.224      0.132     -1.703      0.089
+    BEHSYMP1          -0.222      0.110     -2.023      0.043
+
+ LRNPROB1 WITH
+    READ1             -5.643     19.063     -0.296      0.767
+
+ BEHSYMP1 WITH
+    READ1            -11.235     20.841     -0.539      0.590
+    LRNPROB1          92.048     13.548      6.794      0.000
+
+ Means
+    READ1             86.732      1.709     50.739      0.000
+    LRNPROB1          52.328      0.914     57.224      0.000
+    BEHSYMP1          49.483      1.039     47.631      0.000
+
+ Intercepts
+    READ9             66.901      6.465     10.349      0.000
+
+ Variances
+    READ1            387.270     48.040      8.061      0.000
+    LRNPROB1         114.162     13.820      8.260      0.000
+    BEHSYMP1         146.318     17.738      8.249      0.000
+
+ Residual Variances
+    READ9             86.095     11.813      7.288      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.107E-05
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ READ9    ON
+    READ1              0.683      0.049     13.901      0.000
+    LRNPROB1          -0.165      0.097     -1.698      0.089
+    BEHSYMP1          -0.185      0.091     -2.032      0.042
+
+ LRNPROB1 WITH
+    READ1             -0.027      0.091     -0.296      0.767
+
+ BEHSYMP1 WITH
+    READ1             -0.047      0.087     -0.541      0.588
+    LRNPROB1           0.712      0.042     16.784      0.000
+
+ Means
+    READ1              4.407      0.287     15.339      0.000
+    LRNPROB1           4.897      0.309     15.864      0.000
+    BEHSYMP1           4.091      0.262     15.594      0.000
+
+ Intercepts
+    READ9              4.620      0.575      8.032      0.000
+
+ Variances
+    READ1              1.000      0.000    999.000    999.000
+    LRNPROB1           1.000      0.000    999.000    999.000
+    BEHSYMP1           1.000      0.000    999.000    999.000
+
+ Residual Variances
+    READ9              0.411      0.059      6.974      0.000
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed
+    Variable        Estimate       S.E.  Est./S.E.    P-Value
+
+    READ9              0.589      0.059     10.014      0.000
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ READ9    ON
+    READ1            0.387       0.415       0.429       0.503       0.576       0.590       0.618
+    LRNPROB1        -0.563      -0.482      -0.440      -0.224      -0.008       0.034       0.115
+    BEHSYMP1        -0.504      -0.436      -0.402      -0.222      -0.041      -0.007       0.061
+
+ LRNPROB1 WITH
+    READ1          -54.744     -43.005     -37.001      -5.643      25.715      31.720      43.459
+
+ BEHSYMP1 WITH
+    READ1          -64.917     -52.083     -45.519     -11.235      23.048      29.613      42.447
+    LRNPROB1        57.152      65.495      69.762      92.048     114.335     118.602     126.945
+
+ Means
+    READ1           82.329      83.382      83.920      86.732      89.544      90.082      91.135
+    LRNPROB1        49.972      50.535      50.823      52.328      53.832      54.120      54.683
+    BEHSYMP1        46.807      47.447      47.774      49.483      51.192      51.519      52.159
+
+ Intercepts
+    READ9           50.249      54.230      56.267      66.901      77.535      79.572      83.553
+
+ Variances
+    READ1          263.529     293.112     308.244     387.270     466.295     481.427     511.010
+    LRNPROB1        78.563      87.073      91.427     114.162     136.896     141.250     149.760
+    BEHSYMP1       100.627     111.550     117.138     146.318     175.497     181.085     192.008
+
+ Residual Variances
+    READ9           55.667      62.941      66.663      86.095     105.528     109.250     116.524
+
+
+CONFIDENCE INTERVALS OF STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ READ9    ON
+    READ1            0.556       0.587       0.602       0.683       0.764       0.779       0.809
+    LRNPROB1        -0.416      -0.356      -0.325      -0.165      -0.005       0.025       0.085
+    BEHSYMP1        -0.420      -0.364      -0.335      -0.185      -0.035      -0.007       0.050
+
+ LRNPROB1 WITH
+    READ1           -0.260      -0.204      -0.176      -0.027       0.122       0.151       0.206
+
+ BEHSYMP1 WITH
+    READ1           -0.272      -0.218      -0.191      -0.047       0.096       0.124       0.177
+    LRNPROB1         0.603       0.629       0.642       0.712       0.782       0.795       0.822
+
+ Means
+    READ1            3.667       3.844       3.935       4.407       4.880       4.970       5.147
+    LRNPROB1         4.102       4.292       4.390       4.897       5.405       5.503       5.693
+    BEHSYMP1         3.415       3.577       3.659       4.091       4.522       4.605       4.767
+
+ Intercepts
+    READ9            3.138       3.492       3.674       4.620       5.566       5.747       6.101
+
+ Variances
+    READ1            1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    LRNPROB1         1.000       1.000       1.000       1.000       1.000       1.000       1.000
+    BEHSYMP1         1.000       1.000       1.000       1.000       1.000       1.000       1.000
+
+ Residual Variances
+    READ9            0.259       0.295       0.314       0.411       0.507       0.526       0.562
+
+
+     Beginning Time:  13:22:54
+        Ending Time:  13:22:54
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen
