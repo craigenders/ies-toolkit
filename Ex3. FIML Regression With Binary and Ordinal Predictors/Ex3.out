@@ -1,0 +1,505 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+07/09/2025   5:29 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: fiml regression w binary and ordinal predictors;
+  DATA:
+  file = mathachievement.dat;
+  VARIABLE:
+  names = id condition male frlunch atrisk
+     stanread efficacy anxiety mathpre mathpost;
+  usevariables = mathpost condition frlunch efficacy mathpre atrisk stanread;
+  categorical = frlunch efficacy atrisk;
+  missing = all(999);
+  ANALYSIS:
+  ! set estimator to maximum likelihood;
+  estimator = ml;
+  ! set a logistic regression for the outcome variable;
+  link = logit;
+  ! set integration method to montecarlo;
+  integration = montecarlo;
+  MODEL:
+  ! model for frlunch predictor;
+  frlunch on condition mathpre;
+  ! model for efficacy predictor;
+  efficacy on frlunch condition mathpre;
+  ! focal model for outcome;
+  mathpost on condition frlunch efficacy mathpre (beta1-beta4);
+  ! model for atrisk auxiliary variable;
+  atrisk on mathpost condition frlunch efficacy mathpre;
+  ! model for stanread auxiliary variable;
+  stanread on atrisk mathpost condition frlunch efficacy mathpre;
+  MODEL TEST:
+  ! wald test that each slope equals 0;
+  0 = beta1; 0 = beta2; 0 = beta3; 0 = beta4;
+  OUTPUT:
+  ! output for missing data patterns, sample statistics, and confidence intervals;
+  patterns sampstat cinterval;
+
+
+
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+fiml regression w binary and ordinal predictors;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         250
+
+Number of dependent variables                                    5
+Number of independent variables                                  2
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   MATHPOST    STANREAD
+
+  Binary and ordered categorical (ordinal)
+   FRLUNCH     EFFICACY    ATRISK
+
+Observed independent variables
+   CONDITIO    MATHPRE
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                  MONTECARLO
+  Number of integration points                                1000
+  Dimensions of numerical integration                            4
+  Adaptive quadrature                                           ON
+  Monte Carlo integration seed                                   0
+Link                                                         LOGIT
+Cholesky                                                       OFF
+
+Input data file(s)
+  mathachievement.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            14
+     Number of y missing data patterns           4
+     Number of u missing data patterns           6
+
+
+SUMMARY OF MISSING DATA PATTERNS
+
+
+     MISSING DATA PATTERNS (x = not missing)
+
+           1  2  3  4  5  6  7  8  9 10 11 12 13 14
+ FRLUNCH   x  x     x     x  x  x  x  x  x  x     x
+ EFFICACY  x  x  x           x  x  x     x  x  x
+ ATRISK    x     x  x  x     x  x     x  x     x  x
+ MATHPOST  x  x  x  x  x  x              x  x  x  x
+ STANREAD  x  x  x  x  x  x     x  x  x
+ CONDITIO  x  x  x  x  x  x  x  x  x  x  x  x  x  x
+ MATHPRE   x  x  x  x  x  x  x  x  x  x  x  x  x  x
+
+
+     MISSING DATA PATTERN FREQUENCIES
+
+    Pattern   Frequency     Pattern   Frequency     Pattern   Frequency
+          1         158           6           3          11          14
+          2           5           7           3          12           2
+          3           8           8          32          13           1
+          4           9           9           3          14           3
+          5           2          10           7
+
+
+     MISSING DATA PATTERNS FOR U (x = not missing)
+
+           1  2  3  4  5  6
+ FRLUNCH   x  x     x     x
+ EFFICACY  x  x  x
+ ATRISK    x     x  x  x
+
+
+     MISSING DATA PATTERN FREQUENCIES FOR U
+
+    Pattern   Frequency     Pattern   Frequency     Pattern   Frequency
+          1         207           3           9           5           2
+          2          10           4          19           6           3
+
+
+     MISSING DATA PATTERNS FOR Y (x = not missing)
+
+           1  2  3  4
+ MATHPOST  x        x
+ STANREAD  x     x
+ CONDITIO  x  x  x  x
+ MATHPRE   x  x  x  x
+
+
+     MISSING DATA PATTERN FREQUENCIES FOR Y
+
+    Pattern   Frequency     Pattern   Frequency     Pattern   Frequency
+          1         185           3          42
+          2           3           4          20
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              FRLUNCH       EFFICACY      ATRISK        MATHPOST      STANREAD
+              ________      ________      ________      ________      ________
+ FRLUNCH        0.956
+ EFFICACY       0.868         0.904
+ ATRISK         0.904         0.864         0.948
+ MATHPOST       0.776         0.752         0.780         0.820
+ STANREAD       0.868         0.824         0.864         0.740         0.908
+ CONDITIO       0.956         0.904         0.948         0.820         0.908
+ MATHPRE        0.956         0.904         0.948         0.820         0.908
+
+
+           Covariance Coverage
+              CONDITIO      MATHPRE
+              ________      ________
+ CONDITIO       1.000
+ MATHPRE        1.000         1.000
+
+
+     PROPORTION OF DATA PRESENT FOR U
+
+
+           Covariance Coverage
+              FRLUNCH       EFFICACY      ATRISK
+              ________      ________      ________
+ FRLUNCH        0.956
+ EFFICACY       0.868         0.904
+ ATRISK         0.904         0.864         0.948
+
+
+     PROPORTION OF DATA PRESENT FOR Y
+
+
+           Covariance Coverage
+              MATHPOST      STANREAD      CONDITIO      MATHPRE
+              ________      ________      ________      ________
+ MATHPOST       0.820
+ STANREAD       0.740         0.908
+ CONDITIO       0.820         0.908         1.000
+ MATHPRE        0.820         0.908         1.000         1.000
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    FRLUNCH
+      Category 1    0.590          141.000
+      Category 2    0.410           98.000
+    EFFICACY
+      Category 1    0.159           36.000
+      Category 2    0.150           34.000
+      Category 3    0.230           52.000
+      Category 4    0.199           45.000
+      Category 5    0.119           27.000
+      Category 6    0.142           32.000
+    ATRISK
+      Category 1    0.236           56.000
+      Category 2    0.764          181.000
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              MATHPOST      STANREAD      CONDITIO      MATHPRE
+              ________      ________      ________      ________
+               56.695        52.492         0.460        50.096
+
+
+           Covariances
+              MATHPOST      STANREAD      CONDITIO      MATHPRE
+              ________      ________      ________      ________
+ MATHPOST      88.016
+ STANREAD      46.235       112.040
+ CONDITIO       0.863         0.827         0.248
+ MATHPRE       45.094        24.952         0.372        74.679
+
+
+           Correlations
+              MATHPOST      STANREAD      CONDITIO      MATHPRE
+              ________      ________      ________      ________
+ MATHPOST       1.000
+ STANREAD       0.466         1.000
+ CONDITIO       0.185         0.157         1.000
+ MATHPRE        0.556         0.273         0.086         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -2615.056
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     MATHPOST             57.449       0.152      37.000    1.46%      50.000     55.000     57.000
+             205.000      86.374      -0.108      85.000    0.49%      59.000     65.000
+     STANREAD             52.524      -0.512      27.000    0.44%      42.000     51.000     55.000
+             227.000     112.981      -0.655      69.000    2.64%      57.000     62.000
+     CONDITION             0.460       0.161       0.000   54.00%       0.000      0.000      0.000
+             250.000       0.248      -1.974       1.000   46.00%       1.000      1.000
+     MATHPRE              50.096      -0.174      26.000    0.40%      43.000     48.000     50.000
+             250.000      74.679      -0.190      76.000    0.40%      53.000     58.000
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       31
+
+Loglikelihood
+
+          H0 Value                       -2134.639
+
+Information Criteria
+
+          Akaike (AIC)                    4331.277
+          Bayesian (BIC)                  4440.443
+          Sample-Size Adjusted BIC        4342.170
+            (n* = (n + 2) / 24)
+
+Wald Test of Parameter Constraints
+
+          Value                            149.182
+          Degrees of Freedom                     4
+          P-Value                           0.0000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+ FRLUNCH    ON
+    CONDITION          0.011      0.265      0.041      0.967
+    MATHPRE           -0.020      0.015     -1.290      0.197
+
+ EFFICACY   ON
+    FRLUNCH           -0.031      0.246     -0.125      0.901
+    CONDITION          0.506      0.240      2.107      0.035
+    MATHPRE            0.056      0.014      3.881      0.000
+
+ MATHPOST   ON
+    CONDITION          2.306      1.023      2.255      0.024
+    FRLUNCH           -5.498      1.063     -5.173      0.000
+    EFFICACY           0.833      0.340      2.448      0.014
+    MATHPRE            0.526      0.061      8.594      0.000
+
+ ATRISK     ON
+    MATHPOST          -0.028      0.025     -1.141      0.254
+    CONDITION         -0.080      0.342     -0.233      0.815
+    FRLUNCH            0.898      0.399      2.248      0.025
+    EFFICACY          -0.337      0.115     -2.925      0.003
+    MATHPRE           -0.018      0.024     -0.722      0.470
+
+ STANREAD   ON
+    ATRISK           -13.492      1.231    -10.957      0.000
+    MATHPOST           0.349      0.078      4.466      0.000
+    CONDITION          1.493      1.019      1.466      0.143
+    FRLUNCH           -2.435      1.177     -2.068      0.039
+    EFFICACY          -0.478      0.351     -1.361      0.173
+    MATHPRE            0.006      0.073      0.076      0.939
+
+ Intercepts
+    MATHPOST          29.375      3.016      9.739      0.000
+    STANREAD          44.135      4.035     10.938      0.000
+
+ Thresholds
+    FRLUNCH$1         -0.623      0.780     -0.799      0.425
+    EFFICACY$1         1.308      0.748      1.748      0.080
+    EFFICACY$2         2.213      0.752      2.942      0.003
+    EFFICACY$3         3.250      0.770      4.222      0.000
+    EFFICACY$4         4.186      0.786      5.324      0.000
+    EFFICACY$5         4.976      0.800      6.217      0.000
+    ATRISK$1          -4.351      1.317     -3.304      0.001
+
+ Residual Variances
+    MATHPOST          51.270      5.185      9.888      0.000
+    STANREAD          52.261      5.226     10.000      0.000
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.184E-05
+       (ratio of smallest to largest eigenvalue)
+
+
+LOGISTIC REGRESSION ODDS RATIO RESULTS
+
+                                                95% C.I.
+                    Estimate       S.E.  Lower 2.5% Upper 2.5%
+
+ FRLUNCH    ON
+    CONDITION          1.011      0.268      0.601      1.699
+    MATHPRE            0.980      0.015      0.951      1.010
+
+ EFFICACY   ON
+    FRLUNCH            0.970      0.239      0.598      1.572
+    CONDITION          1.658      0.398      1.036      2.653
+    MATHPRE            1.058      0.015      1.028      1.088
+
+ ATRISK     ON
+    MATHPOST           0.972      0.024      0.926      1.021
+    CONDITION          0.923      0.316      0.472      1.805
+    FRLUNCH            2.454      0.979      1.122      5.365
+    EFFICACY           0.714      0.082      0.570      0.895
+    MATHPRE            0.983      0.024      0.937      1.031
+
+
+BRANT WALD TEST FOR PROPORTIONAL ODDS
+
+                                   Degrees of
+                      Chi-Square     Freedom   P-Value
+
+  EFFICACY
+    Overall test          17.234         8      0.028
+    CONDITION              0.940         4      0.919
+    MATHPRE               16.331         4      0.003
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ FRLUNCH  ON
+    CONDITION       -0.672      -0.508      -0.425       0.011       0.447       0.530       0.693
+    MATHPRE         -0.060      -0.050      -0.045      -0.020       0.005       0.010       0.020
+
+ EFFICACY ON
+    FRLUNCH         -0.666      -0.514      -0.436      -0.031       0.375       0.452       0.604
+    CONDITION       -0.112       0.035       0.111       0.506       0.900       0.976       1.123
+    MATHPRE          0.019       0.028       0.032       0.056       0.080       0.084       0.093
+
+ MATHPOST ON
+    CONDITION       -0.328       0.301       0.623       2.306       3.988       4.310       4.939
+    FRLUNCH         -8.236      -7.582      -7.247      -5.498      -3.750      -3.415      -2.760
+    EFFICACY        -0.043       0.166       0.273       0.833       1.393       1.500       1.710
+    MATHPRE          0.369       0.406       0.426       0.526       0.627       0.646       0.684
+
+ ATRISK   ON
+    MATHPOST        -0.092      -0.077      -0.069      -0.028       0.012       0.020       0.036
+    CONDITION       -0.961      -0.750      -0.643      -0.080       0.483       0.591       0.801
+    FRLUNCH         -0.131       0.115       0.241       0.898       1.554       1.680       1.926
+    EFFICACY        -0.634      -0.563      -0.527      -0.337      -0.147      -0.111      -0.040
+    MATHPRE         -0.081      -0.066      -0.058      -0.018       0.023       0.030       0.045
+
+ STANREAD ON
+    ATRISK         -16.664     -15.905     -15.517     -13.492     -11.466     -11.078     -10.320
+    MATHPOST         0.148       0.196       0.221       0.349       0.478       0.502       0.551
+    CONDITION       -1.130      -0.503      -0.182       1.493       3.169       3.490       4.117
+    FRLUNCH         -5.467      -4.742      -4.371      -2.435      -0.498      -0.127       0.597
+    EFFICACY        -1.384      -1.167      -1.057      -0.478       0.100       0.210       0.427
+    MATHPRE         -0.184      -0.138      -0.115       0.006       0.126       0.150       0.195
+
+ Intercepts
+    MATHPOST        21.605      23.463      24.413      29.375      34.336      35.286      37.144
+    STANREAD        33.741      36.226      37.497      44.135      50.773      52.044      54.529
+
+ Thresholds
+    FRLUNCH$1       -2.632      -2.152      -1.906      -0.623       0.660       0.906       1.386
+    EFFICACY$1      -0.619      -0.158       0.077       1.308       2.539       2.775       3.236
+    EFFICACY$2       0.275       0.739       0.976       2.213       3.450       3.687       4.151
+    EFFICACY$3       1.267       1.741       1.984       3.250       4.517       4.760       5.234
+    EFFICACY$4       2.161       2.645       2.893       4.186       5.480       5.727       6.212
+    EFFICACY$5       2.914       3.407       3.659       4.976       6.292       6.545       7.037
+    ATRISK$1        -7.744      -6.933      -6.518      -4.351      -2.185      -1.770      -0.959
+
+ Residual Variances
+    MATHPOST        37.914      41.107      42.740      51.270      59.800      61.433      64.626
+    STANREAD        38.800      42.018      43.664      52.261      60.858      62.505      65.723
+
+
+CONFIDENCE INTERVALS FOR THE LOGISTIC REGRESSION ODDS RATIO RESULTS
+
+ FRLUNCH  ON
+    CONDITION        0.511       0.601       0.654       1.011       1.563       1.699       2.000
+    MATHPRE          0.942       0.951       0.956       0.980       1.005       1.010       1.020
+
+ EFFICACY ON
+    FRLUNCH          0.514       0.598       0.647       0.970       1.454       1.572       1.829
+    CONDITION        0.894       1.036       1.117       1.658       2.460       2.653       3.075
+    MATHPRE          1.019       1.028       1.033       1.058       1.083       1.088       1.098
+
+ ATRISK   ON
+    MATHPOST         0.912       0.926       0.933       0.972       1.013       1.021       1.036
+    CONDITION        0.383       0.472       0.526       0.923       1.621       1.805       2.228
+    FRLUNCH          0.878       1.122       1.272       2.454       4.731       5.365       6.860
+    EFFICACY         0.531       0.570       0.591       0.714       0.863       0.895       0.961
+    MATHPRE          0.923       0.937       0.944       0.983       1.023       1.031       1.046
+
+
+     Beginning Time:  17:29:01
+        Ending Time:  17:29:03
+       Elapsed Time:  00:00:02
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen

@@ -10,6 +10,8 @@ missing = all(999);
 ANALYSIS:
 ! set estimator to maximum likelihood;
 estimator = ml;
+! set a logistic regression for the outcome variable;
+link = logit;
 ! set integration method to montecarlo;
 integration = montecarlo;
 MODEL:

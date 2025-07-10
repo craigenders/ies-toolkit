@@ -2,15 +2,14 @@
 # fiml regression w binary and ordinal predictors
 ##################################################
 
-library(fdir)
 library(mdmb)
 
 ##################################################
-# set working directory and load data
+# load data from github
 ##################################################
 
-set()
-load('mathachievement.rda')
+data_url <- "https://raw.githubusercontent.com/craigenders/ies-toolkit/main/Data/mathachievement.rda"
+load(gzcon(url(data_url, open = "rb")))
 
 ##################################################
 # analysis
@@ -20,11 +19,11 @@ load('mathachievement.rda')
 summary(mathachievement)
 
 # set ranges (nodes) for pseudo-imputations
-nodes.atrisk <- c(0,1)
-nodes.stanread <- c(20, 80, by = 2)
-nodes.mathpost <- seq(30, 90, by = 2)
 nodes.frlunch <- c(0,1)
 nodes.efficacy <- seq(1, 6, by = 1)
+nodes.mathpost <- seq(30, 90, by = 2)
+nodes.atrisk <- c(0,1)
+nodes.stanread <- seq(20, 80, by = 2)
 
 # model for frlunch predictor
 model.frlunch <- list("model" = "logistic", "formula" = frlunch ~ condition + mathpre, nodes = nodes.frlunch)
