@@ -37,17 +37,6 @@ model.mathpost <- list("model" = "linreg", "formula" = mathpost ~ condition + fr
 # model for atrisk auxiliary variable
 model.atrisk <- list("model" = "logistic", "formula" = atrisk ~ mathpost + condition + frlunch + efficacy + mathpre, nodes = nodes.atrisk)
 
-# the commented out code below works if atrisk is the final variable in the sequence
-
-# combine predictor models into a list
-# predictor.models <- list(frlunch = model.frlunch, efficacy = model.efficacy, mathpost = model.mathpost)
-
-# estimate factored regression model w mdmb
-# fit <- frm_em(dat = mathachievement, dep = model.atrisk, ind = predictor.models)
-# summary(fit)
-
-# the code below doesn't run when stanread is the final variable in the sequence
-
 # model for stanread auxiliary variable
 model.stanread <- list("model" = "linreg", "formula" = stanread ~ atrisk + mathpost + condition + frlunch + efficacy + mathpre, nodes = nodes.stanread)
 
