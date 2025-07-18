@@ -2,16 +2,15 @@
 # mcmc linear regression
 ##################################################
 
-library(fdir)
 library(rblimp)
 library(mitml)
 
 ##################################################
-# set working directory and load data
+# load data from github
 ##################################################
 
-set()
-load('behaviorachievement.rda')
+data_url <- "https://raw.githubusercontent.com/craigenders/ies-toolkit/main/Data/behaviorachievement.rda"
+load(gzcon(url(data_url, open = "rb")))
 
 ##################################################
 # fit model with mcmc (ex6.1.imp)
