@@ -9,7 +9,7 @@ focal.model:
 read9 ~ read1@beta1 lrnprob1@beta2 behsymp1@beta3;
 auxiliary.models:
 stanread7 read2  ~ read9 read1 lrnprob1 behsymp1;
-TEST:
+WALDTEST:
 beta1:beta3 = 0; # MCMC-based frequentist Wald test
 SEED: 
 90291;

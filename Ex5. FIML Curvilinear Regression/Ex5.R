@@ -32,7 +32,7 @@ summary(mathachievement)
 
 # set ranges (nodes) for pseudo-imputations
 nodes.frlunch <- c(0,1)
-nodes.efficacy <- seq(1, 6, by = .2) # 1 or 2?
+nodes.efficacy <- seq(1, 6, by = 1) 
 nodes.mathpost <- seq(30, 90, by = 2)
 nodes.anxiety <- seq(-30, 30, by = 2)
 nodes.atrisk <- c(0,1)
@@ -42,7 +42,7 @@ nodes.stanread <- seq(20, 80, by = 2)
 model.frlunch <- list("model" = "logistic", "formula" = frlunch ~ mathpre, nodes = nodes.frlunch)
 
 # model for efficacy predictor
-model.efficacy <- list("model" = "linreg", "formula" = efficacy ~ frlunch + mathpre, nodes = nodes.efficacy)
+model.efficacy <- list("model" = "probit", "formula" = efficacy ~ frlunch + mathpre, nodes = nodes.efficacy)
 
 # model for anxiety predictor
 model.anxiety <- list("model"="linreg", "formula" = anxiety.cgm ~ efficacy + frlunch + mathpre, nodes = nodes.anxiety)

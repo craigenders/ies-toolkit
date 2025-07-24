@@ -27,7 +27,7 @@ mymodel <- rblimp(
   seed = 90291,
   burn = 1000,
   iter = 10000)
-mymodel@output
+output(mymodel)
 
 ##################################################
 # fit model and save imputations (ex6.2.imp)
@@ -46,7 +46,7 @@ mymodel <- rblimp(
   iter = 10000,
   nimps = 20,
   chains = 20)
-mymodel@output
+output(mymodel)
 
 ##################################################
 # analysis and pooling
