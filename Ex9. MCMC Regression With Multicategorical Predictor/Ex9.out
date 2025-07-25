@@ -1,0 +1,507 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+07/25/2025   4:04 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Bayes Regression With Nominal Predictors;
+  DATA:
+  file = ./imps/implist.dat;
+  ! read in imputation data;
+  type = imputation;
+  VARIABLE:
+  names = id male hispanic riskgrp atrisk behsymp1 lrnprob1
+     read1 read2 read3 read9 readgrp9 stanread7
+     math1 math2 math3 math9 mathgrp9 stanmath7;
+  ! include the dummy coded riskgrp2 and riskgrp3 variables from the "DEFINE:" command;
+  usevariables = read9 read1 lrnprob1 behsymp1 riskgrp2 riskgrp3;
+  DEFINE:
+  ! creating dummy coded variables;
+  riskgrp2 = 0;
+  riskgrp3 = 0;
+  if(riskgrp eq 2) then riskgrp2 = 1;
+  if(riskgrp eq 3) then riskgrp3 = 1;
+  MODEL:
+  ! focal model;
+  read9 on read1 lrnprob1 behsymp1 riskgrp2 riskgrp3 (beta1-beta5);
+  MODEL TEST:
+  ! wald test that each slope equals 0;
+  0 = beta1; 0 = beta2; 0 = beta3; 0 = beta4; 0 = beta5;
+  OUTPUT:
+  ! output for standardized coefficients and confidence intervals;
+  stdyx cinterval;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+Bayes Regression With Nominal Predictors;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Average number of observations                                 138
+
+Number of replications
+    Requested                                                   20
+    Completed                                                   20
+
+Number of dependent variables                                    1
+Number of independent variables                                  5
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   READ9
+
+Observed independent variables
+   READ1       LRNPROB1    BEHSYMP1    RISKGRP2    RISKGRP3
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+
+Input data file(s)
+  Multiple data files from
+    ./imps/implist.dat
+
+Input data format  FREE
+
+
+SAMPLE STATISTICS
+
+NOTE:  These are average results over 20 data sets.
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+               87.620        86.163        52.310        49.495         0.421
+
+
+           Means
+              RISKGRP3
+              ________
+                0.229
+
+
+           Covariances
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+ READ9        216.998
+ READ1        213.679       415.810
+ LRNPROB1     -51.099       -12.409       114.521
+ BEHSYMP1     -56.524       -14.929        91.531       145.987
+ RISKGRP2       0.968         1.722        -0.673        -0.577         0.244
+ RISKGRP3      -2.694        -4.031         0.835         1.071        -0.096
+
+
+           Covariances
+              RISKGRP3
+              ________
+ RISKGRP3       0.176
+
+
+           Correlations
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+ READ9          1.000
+ READ1          0.711         1.000
+ LRNPROB1      -0.324        -0.057         1.000
+ BEHSYMP1      -0.318        -0.061         0.708         1.000
+ RISKGRP2       0.133         0.171        -0.127        -0.097         1.000
+ RISKGRP3      -0.436        -0.471         0.186         0.211        -0.465
+
+
+           Correlations
+              RISKGRP3
+              ________
+ RISKGRP3       1.000
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        7
+
+Loglikelihood
+
+          H0 Value                        -502.623
+          H1 Value                        -502.623
+
+*   The loglikelihood cannot be used directly for chi-square testing with
+    imputed data.
+
+Information Criteria
+
+          Akaike (AIC)                    1019.247
+          Bayesian (BIC)                  1039.738
+          Sample-Size Adjusted BIC        1017.592
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           1.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+          90 Percent C.I.                    0.284  0.391
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                             92.416
+          Degrees of Freedom                     5
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.000
+
+Wald Test of Parameter Constraints
+
+          Value                            173.432
+          Degrees of Freedom                     5
+          P-Value                           0.0000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+ READ9    ON
+    READ1              0.477      0.047     10.122      0.000      0.134
+    LRNPROB1          -0.250      0.115     -2.173      0.030      0.172
+    BEHSYMP1          -0.166      0.106     -1.566      0.117      0.228
+    RISKGRP2          -1.710      1.882     -0.908      0.364      0.076
+    RISKGRP3          -3.115      2.820     -1.105      0.269      0.272
+
+ Intercepts
+    READ9             69.174      6.218     11.125      0.000      0.154
+
+ Residual Variances
+    READ9             85.516     11.867      7.206      0.000      0.249
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.637E-05
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+ READ9    ON
+    READ1              0.661      0.057     11.604      0.000      0.151
+    LRNPROB1          -0.181      0.083     -2.184      0.029      0.158
+    BEHSYMP1          -0.136      0.087     -1.562      0.118      0.233
+    RISKGRP2          -0.057      0.063     -0.908      0.364      0.074
+    RISKGRP3          -0.089      0.080     -1.106      0.269      0.266
+
+ Intercepts
+    READ9              4.699      0.551      8.531      0.000      0.129
+
+ Residual Variances
+    READ9              0.394      0.058      6.758      0.000      0.203
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed   Rate of
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+    READ9              0.606      0.058     10.379      0.000      0.203
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ READ9    ON
+    READ1            0.356       0.385       0.400       0.477       0.555       0.570       0.599
+    LRNPROB1        -0.546      -0.475      -0.439      -0.250      -0.061      -0.024       0.046
+    BEHSYMP1        -0.438      -0.373      -0.340      -0.166       0.008       0.042       0.107
+    RISKGRP2        -6.558      -5.399      -4.806      -1.710       1.386       1.979       3.138
+    RISKGRP3       -10.380      -8.643      -7.755      -3.115       1.524       2.412       4.149
+
+ Intercepts
+    READ9           53.158      56.987      58.945      69.174      79.403      81.361      85.190
+
+ Residual Variances
+    READ9           54.949      62.257      65.995      85.516     105.036     108.774     116.082
+
+
+CONFIDENCE INTERVALS OF STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ READ9    ON
+    READ1            0.514       0.549       0.567       0.661       0.755       0.773       0.808
+    LRNPROB1        -0.395      -0.344      -0.318      -0.181      -0.045      -0.019       0.033
+    BEHSYMP1        -0.361      -0.307      -0.280      -0.136       0.007       0.035       0.088
+    RISKGRP2        -0.220      -0.181      -0.161      -0.057       0.046       0.066       0.105
+    RISKGRP3        -0.295      -0.246      -0.220      -0.089       0.043       0.068       0.118
+
+ Intercepts
+    READ9            3.280       3.619       3.793       4.699       5.605       5.779       6.118
+
+ Residual Variances
+    READ9            0.244       0.280       0.298       0.394       0.490       0.509       0.545
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION
+
+
+           NU
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           NU
+              RISKGRP3
+              ________
+                  0
+
+
+           LAMBDA
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+ READ9              0             0             0             0             0
+ READ1              0             0             0             0             0
+ LRNPROB1           0             0             0             0             0
+ BEHSYMP1           0             0             0             0             0
+ RISKGRP2           0             0             0             0             0
+ RISKGRP3           0             0             0             0             0
+
+
+           LAMBDA
+              RISKGRP3
+              ________
+ READ9              0
+ READ1              0
+ LRNPROB1           0
+ BEHSYMP1           0
+ RISKGRP2           0
+ RISKGRP3           0
+
+
+           THETA
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+ READ9              0
+ READ1              0             0
+ LRNPROB1           0             0             0
+ BEHSYMP1           0             0             0             0
+ RISKGRP2           0             0             0             0             0
+ RISKGRP3           0             0             0             0             0
+
+
+           THETA
+              RISKGRP3
+              ________
+ RISKGRP3           0
+
+
+           ALPHA
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+                  1             0             0             0             0
+
+
+           ALPHA
+              RISKGRP3
+              ________
+                  0
+
+
+           BETA
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+ READ9              0             2             3             4             5
+ READ1              0             0             0             0             0
+ LRNPROB1           0             0             0             0             0
+ BEHSYMP1           0             0             0             0             0
+ RISKGRP2           0             0             0             0             0
+ RISKGRP3           0             0             0             0             0
+
+
+           BETA
+              RISKGRP3
+              ________
+ READ9              6
+ READ1              0
+ LRNPROB1           0
+ BEHSYMP1           0
+ RISKGRP2           0
+ RISKGRP3           0
+
+
+           PSI
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+ READ9              7
+ READ1              0             0
+ LRNPROB1           0             0             0
+ BEHSYMP1           0             0             0             0
+ RISKGRP2           0             0             0             0             0
+ RISKGRP3           0             0             0             0             0
+
+
+           PSI
+              RISKGRP3
+              ________
+ RISKGRP3           0
+
+
+     STARTING VALUES
+
+
+           NU
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              RISKGRP3
+              ________
+                0.000
+
+
+           LAMBDA
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+ READ9          1.000         0.000         0.000         0.000         0.000
+ READ1          0.000         1.000         0.000         0.000         0.000
+ LRNPROB1       0.000         0.000         1.000         0.000         0.000
+ BEHSYMP1       0.000         0.000         0.000         1.000         0.000
+ RISKGRP2       0.000         0.000         0.000         0.000         1.000
+ RISKGRP3       0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              RISKGRP3
+              ________
+ READ9          0.000
+ READ1          0.000
+ LRNPROB1       0.000
+ BEHSYMP1       0.000
+ RISKGRP2       0.000
+ RISKGRP3       1.000
+
+
+           THETA
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+ READ9          0.000
+ READ1          0.000         0.000
+ LRNPROB1       0.000         0.000         0.000
+ BEHSYMP1       0.000         0.000         0.000         0.000
+ RISKGRP2       0.000         0.000         0.000         0.000         0.000
+ RISKGRP3       0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              RISKGRP3
+              ________
+ RISKGRP3       0.000
+
+
+           ALPHA
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+               87.167        86.263        52.232        49.440         0.420
+
+
+           ALPHA
+              RISKGRP3
+              ________
+                0.225
+
+
+           BETA
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+ READ9          0.000         0.000         0.000         0.000         0.000
+ READ1          0.000         0.000         0.000         0.000         0.000
+ LRNPROB1       0.000         0.000         0.000         0.000         0.000
+ BEHSYMP1       0.000         0.000         0.000         0.000         0.000
+ RISKGRP2       0.000         0.000         0.000         0.000         0.000
+ RISKGRP3       0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              RISKGRP3
+              ________
+ READ9          0.000
+ READ1          0.000
+ LRNPROB1       0.000
+ BEHSYMP1       0.000
+ RISKGRP2       0.000
+ RISKGRP3       0.000
+
+
+           PSI
+              READ9         READ1         LRNPROB1      BEHSYMP1      RISKGRP2
+              ________      ________      ________      ________      ________
+ READ9        106.191
+ READ1          0.000       429.818
+ LRNPROB1       0.000       -12.372       113.499
+ BEHSYMP1       0.000       -13.316        90.836       146.081
+ RISKGRP2       0.000         1.764        -0.625        -0.481         0.244
+ RISKGRP3       0.000        -4.159         0.916         1.068        -0.094
+
+
+           PSI
+              RISKGRP3
+              ________
+ RISKGRP3       0.174
+
+
+     Beginning Time:  16:04:43
+        Ending Time:  16:04:44
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen

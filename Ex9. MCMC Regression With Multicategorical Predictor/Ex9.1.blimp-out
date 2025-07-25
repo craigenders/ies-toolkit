@@ -1,0 +1,385 @@
+
+---------------------------------------------------------------------------
+
+                                   Blimp
+                                  3.2.21
+
+             Blimp was developed with funding from Institute of
+           Education Sciences awards R305D150056 and R305D190002.
+
+            Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
+                 Han Du, Co-P.I. Email: hdu@psych.ucla.edu
+                 Roy Levy, Co-P.I. Email: roy.levy@asu.edu
+
+              Programming and Blimp Studio by Brian T. Keller
+
+                   There is no expressed license given.
+
+---------------------------------------------------------------------------
+
+
+ALGORITHMIC OPTIONS SPECIFIED:
+
+  Imputation method:                 Fully Bayesian model-based
+  MCMC algorithm:                    Full conditional Metropolis sampler with
+                                       Auto-Derived Conditional Distributions
+  Default Priors:
+    Multilevel covariance matrices:  Not applicable, single-level imputation
+    Outcome covariance matrices:     Zero matrix, df = -(p + 1) (PRIOR2)
+    Predictor model variances:       Unit sum of squares, df = 2 (XPRIOR1)
+  Chain Starting Values:             Random starting values
+
+
+  NOTE: The default prior for regression coefficients 
+        in categorical models is 'normal( 0.0, 5.0)'
+
+  NOTE: For complete list of priors include 'pinfo' in the options.
+
+  NOTE: The following nominal variables have automatically
+        been assigned a reference group.
+
+          'riskgrp' with reference value '1'
+
+        To change reference group use the following command:
+          NOMINAL: variable_name(reference_value);
+
+
+BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
+
+  NOTE: Split chain PSR is being used. This splits each chain's
+        iterations to create twice as many chains.
+
+  Comparing iterations across 2 chains     Highest PSR   Parameter #  
+                           51 to 100             1.305            80  
+                          101 to 200             1.200            65  
+                          151 to 300             1.064            59  
+                          201 to 400             1.058            54  
+                          251 to 500             1.039            54  
+                          301 to 600             1.028            59  
+                          351 to 700             1.041            59  
+                          401 to 800             1.026            53  
+                          451 to 900             1.035            53  
+                          501 to 1000            1.047            59  
+                          551 to 1100            1.026            56  
+                          601 to 1200            1.022            63  
+                          651 to 1300            1.025            56  
+                          701 to 1400            1.029            53  
+                          751 to 1500            1.020            53  
+                          801 to 1600            1.015            78  
+                          851 to 1700            1.017            56  
+                          901 to 1800            1.017            56  
+                          951 to 1900            1.014            56  
+                         1001 to 2000            1.017            59  
+
+
+METROPOLIS-HASTINGS ACCEPTANCE RATES:
+
+  Chain 1:
+
+    Variable                            Type    Probability   Target Value 
+    riskgrp                       imputation          0.457          0.500 
+    behsymp1                      imputation          0.492          0.500 
+    lrnprob1                      imputation          0.507          0.500 
+    read1                         imputation          0.497          0.500 
+
+  NOTE: Suppressing printing of 1 chains.
+        Use keyword 'tuneinfo' in options to override.
+
+
+DATA INFORMATION:
+
+  Sample Size:              138
+  Nominal Dummy Codes:
+
+                  riskgrp = riskgrp.2 riskgrp.3
+  Missing Data Info:
+
+                      Pattern #:       1     2     3     4     5     6     7     8     9    10
+                          miss % --------------------------------------------------------------
+                    read2 =  9.4       -     -     -     M     -     -     -     -     -     M  
+                    read9 = 17.4       -     M     -     -     -     M     -     -     -     -  
+                stanread7 = 19.6       -     -     M     -     -     M     M     -     M     M  
+                  riskgrp =  2.2       -     -     -     -     -     -     -     -     -     -  
+                 behsymp1 =  3.6       -     -     -     -     -     -     M     M     -     -  
+                 lrnprob1 =  2.2       -     -     -     -     -     -     -     -     -     -  
+                    read1 =  6.5       -     -     -     -     M     -     -     -     M     -  
+                                 --------------------------------------------------------------
+                                 %  50.0  12.3  10.1   8.0   4.3   3.6   1.4   1.4   1.4   1.4
+
+  NOTE: Suppressing printing of 6 missing data patterns.
+        These patterns consist of 5.8% of the data.
+        Use keyword 'allpatterns' in options to print all patterns.
+
+
+MODEL INFORMATION:
+
+  NUMBER OF PARAMETERS
+    Outcome Models:         24
+    Predictor Models:       26
+
+  PREDICTORS
+    Incomplete continuous:  behsymp1 lrnprob1 read1
+    Incomplete nominal:     riskgrp
+
+  MODELS
+
+   focal.model:
+    [1]  read9 ~ Intercept read1 lrnprob1 behsymp1 riskgrp.2 riskgrp.3
+
+   auxiliary.models:
+    [2]  read2 ~ Intercept read9 read1 lrnprob1 behsymp1 riskgrp.2 riskgrp.3
+    [3]  stanread7 ~ Intercept read2 read9 read1 lrnprob1 behsymp1 riskgrp.2 
+                 riskgrp.3
+
+
+WARNING MESSAGES:
+
+  No warning messages.
+
+
+MODEL FIT:
+
+
+  INFORMATION CRITERIA
+
+    Conditional Likelihood
+      DIC2                  3434.325
+      WAIC                  3469.169
+
+
+IMPUTED DATA SUMMARIES:
+
+  NOTE: Imputed data summaries are averaged across 10000 data sets.
+
+
+Variables                              Mean     StdDev        25%        50%        75%        Min        Max 
+                                ------------------------------------------------------------------------------
+
+  read9                              87.581     14.869     80.012     88.054     96.669     39.210    123.164 
+  read2                              92.889     20.681     82.288     91.278    107.001     20.000    150.000 
+  stanread7                         259.830     68.088    220.202    260.321    308.465     81.215    404.126 
+  riskgrp.2                           0.424      0.496      0.000      0.000      1.000      0.000      1.000 
+  riskgrp.3                           0.228      0.421      0.000      0.000      0.000      0.000      1.000 
+  behsymp1                           49.515     12.115     40.895     48.193     58.233     16.999     92.000 
+  lrnprob1                           52.304     10.740     45.000     51.000     60.427     30.766     88.000 
+  read1                              86.194     20.503     74.000     85.962     99.362     22.107    153.000 
+
+                                ------------------------------------------------------------------------------
+
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
+
+
+Correlations                       Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+  read9, read2                       -0.002      0.120     -0.236      0.232      0.000      0.990   9504.151 
+  read9, stanread7                   -0.000      0.121     -0.237      0.236      0.000      0.995   9672.203 
+  read2, stanread7                    0.001      0.121     -0.229      0.237      0.000      0.991   9121.924 
+
+                                ------------------------------------------------------------------------------
+
+
+
+OUTCOME MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
+
+  focal.model block:
+
+Outcome Variable:  read9      
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                      91.703     13.152     70.459    121.914        ---        ---   5589.273 
+
+Coefficients:                   
+  Intercept                          68.621      6.614     55.479     81.676    107.763      0.000   5703.283 
+  read1                               0.484      0.049      0.389      0.581     98.268      0.000   7086.883 
+  lrnprob1                           -0.250      0.121     -0.485     -0.007      4.205      0.040   5583.683 
+  behsymp1                           -0.170      0.107     -0.379      0.041      2.528      0.112   6010.276 
+  riskgrp.2                          -1.682      1.991     -5.632      2.220      0.707      0.401   7073.237 
+  riskgrp.3                          -2.814      2.707     -8.233      2.511      1.084      0.298   6138.228 
+
+Standard Deviations:            
+  Residual SD                         9.576      0.675      8.394     11.041        ---        ---   5551.169 
+
+Standardized Coefficients:      
+  read1                               0.658      0.052      0.544      0.751    155.706      0.000   6469.725 
+  lrnprob1                           -0.178      0.085     -0.340     -0.005      4.277      0.039   5544.858 
+  behsymp1                           -0.137      0.085     -0.300      0.033      2.566      0.109   5901.722 
+  riskgrp.2                          -0.055      0.065     -0.182      0.073      0.714      0.398   7086.836 
+  riskgrp.3                          -0.079      0.075     -0.225      0.072      1.094      0.296   6182.638 
+
+Proportion Variance Explained   
+  by Coefficients                     0.599      0.050      0.488      0.684        ---        ---   5849.961 
+  by Residual Variation               0.401      0.050      0.316      0.512        ---        ---   5849.961 
+
+                                ------------------------------------------------------------------------------
+
+
+  auxiliary.models block:
+
+Outcome Variable:  read2      
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                      42.714      6.752     31.859     58.269        ---        ---   4051.162 
+
+Coefficients:                   
+  Intercept                         -17.791      6.482    -30.553     -5.294      7.550      0.006   5573.094 
+  read9                               0.669      0.069      0.528      0.804     93.312      0.000   4691.428 
+  read1                               0.546      0.049      0.449      0.642    125.201      0.000   5586.567 
+  lrnprob1                           -0.288      0.088     -0.457     -0.113     10.728      0.001   3790.870 
+  behsymp1                            0.413      0.081      0.253      0.569     25.982      0.000   3783.505 
+  riskgrp.2                          -0.180      1.470     -3.050      2.715      0.015      0.902   5545.583 
+  riskgrp.3                          -0.955      2.078     -5.085      3.027      0.213      0.644   4247.624 
+
+Standard Deviations:            
+  Residual SD                         6.536      0.506      5.644      7.633        ---        ---   4072.092 
+
+Standardized Coefficients:      
+  read9                               0.479      0.047      0.381      0.568    101.495      0.000   4811.162 
+  read1                               0.538      0.046      0.446      0.628    136.185      0.000   4319.561 
+  lrnprob1                           -0.149      0.045     -0.235     -0.058     10.812      0.001   3779.898 
+  behsymp1                            0.241      0.047      0.147      0.329     26.397      0.000   3749.875 
+  riskgrp.2                          -0.004      0.035     -0.072      0.065      0.015      0.902   5546.552 
+  riskgrp.3                          -0.019      0.042     -0.103      0.061      0.214      0.644   4255.127 
+
+Proportion Variance Explained   
+  by Coefficients                     0.901      0.015      0.866      0.926        ---        ---   4069.434 
+  by Residual Variation               0.099      0.015      0.074      0.134        ---        ---   4069.434 
+
+                                ------------------------------------------------------------------------------
+
+
+
+Outcome Variable:  stanread7  
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                    2386.866    363.613   1810.994   3226.794        ---        ---   4982.312 
+
+Coefficients:                   
+  Intercept                          31.588     57.430    -79.655    141.146      0.295      0.587   3790.471 
+  read2                               1.863      0.974     -0.113      3.683      3.558      0.059   2598.273 
+  read9                               1.534      0.902     -0.210      3.337      2.909      0.088   2966.807 
+  read1                              -0.675      0.656     -1.924      0.633      1.030      0.310   2819.993 
+  lrnprob1                            0.443      0.696     -0.936      1.783      0.404      0.525   5020.316 
+  behsymp1                           -0.716      0.688     -2.092      0.591      1.104      0.293   3950.358 
+  riskgrp.2                         -12.724     10.818    -33.837      9.164      1.373      0.241   6155.344 
+  riskgrp.3                          -5.244     15.679    -36.309     25.457      0.115      0.734   3691.261 
+
+Standard Deviations:            
+  Residual SD                        48.856      3.649     42.556     56.805        ---        ---   4990.557 
+
+Standardized Coefficients:      
+  read2                               0.551      0.284     -0.033      1.066      3.628      0.057   2523.867 
+  read9                               0.326      0.187     -0.046      0.685      3.017      0.082   2983.379 
+  read1                              -0.198      0.190     -0.559      0.183      1.047      0.306   2766.503 
+  lrnprob1                            0.068      0.106     -0.140      0.275      0.413      0.520   4952.164 
+  behsymp1                           -0.124      0.118     -0.360      0.101      1.117      0.291   3896.870 
+  riskgrp.2                          -0.090      0.076     -0.236      0.064      1.393      0.238   6167.834 
+  riskgrp.3                          -0.031      0.093     -0.215      0.150      0.117      0.732   3690.420 
+
+Proportion Variance Explained   
+  by Coefficients                     0.513      0.061      0.381      0.617        ---        ---   5346.135 
+  by Residual Variation               0.487      0.061      0.383      0.619        ---        ---   5346.135 
+
+                                ------------------------------------------------------------------------------
+
+
+
+
+PREDICTOR MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
+
+
+
+Missing predictor:  riskgrp    
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean: riskgrp.2                 0.126      0.121     -0.103      0.365      1.101      0.294   2183.813 
+Grand Mean: riskgrp.3                -0.473      0.177     -0.845     -0.143      7.340      0.007    945.770 
+
+Level 1:                                                                                                      
+  riskgrp.2 ~ behsymp1                0.008      0.014     -0.020      0.035      0.307      0.579   1902.969 
+  riskgrp.2 ~ lrnprob1               -0.014      0.016     -0.046      0.017      0.768      0.381   2370.764 
+  riskgrp.2 ~ read1                  -0.004      0.006     -0.016      0.009      0.313      0.576   1904.572 
+  riskgrp.3 ~ behsymp1                0.022      0.018     -0.014      0.057      1.499      0.221    921.666 
+  riskgrp.3 ~ lrnprob1                0.002      0.021     -0.039      0.045      0.014      0.906   1041.010 
+  riskgrp.3 ~ read1                  -0.043      0.009     -0.061     -0.026     23.168      0.000    841.223 
+  Var(riskgrp.2)                      1.000      0.000      1.000      1.000        ---        ---        nan 
+  Cov(riskgrp.3, riskgrp.2)           0.500      0.000      0.500      0.500        ---        ---        nan 
+  Var(riskgrp.3)                      1.000      0.000      1.000      1.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing predictor:  behsymp1   
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           49.488      1.068     47.414     51.540   2146.505      0.000   2850.470 
+
+Level 1:                                                                                                      
+  riskgrp.2                          -0.299      1.258     -2.744      2.206      0.049      0.825   2110.052 
+  riskgrp.3                           1.695      1.474     -1.497      4.289      1.205      0.272   1207.607 
+  lrnprob1                            0.765      0.079      0.610      0.923     93.436      0.000   3578.870 
+  read1                               0.058      0.073     -0.092      0.197      0.601      0.438   1485.601 
+  Residual Var.                      70.121      9.654     53.864     91.465        ---        ---   4288.504 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing predictor:  lrnprob1   
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           52.280      0.952     50.395     54.155   3017.812      0.000   2881.179 
+
+Level 1:                                                                                                      
+  riskgrp.2                          -1.110      1.089     -3.156      1.090      1.012      0.314   2722.058 
+  riskgrp.3                           0.721      1.384     -2.080      3.281      0.249      0.618   1304.232 
+  behsymp1                            0.612      0.065      0.489      0.742     89.211      0.000   3670.248 
+  read1                               0.021      0.067     -0.113      0.155      0.100      0.751   1534.815 
+  Residual Var.                      55.856      7.436     43.392     72.496        ---        ---   5497.835 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing predictor:  read1      
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           86.138      1.830     82.585     89.831   2217.388      0.000   3336.863 
+
+Level 1:                                                                                                      
+  riskgrp.2                           5.062      1.912      1.219      8.781      6.956      0.008   4857.667 
+  riskgrp.3                         -11.553      1.343    -14.336     -9.028     74.476      0.000   5901.871 
+  behsymp1                            0.178      0.224     -0.264      0.617      0.619      0.431   1486.003 
+  lrnprob1                            0.082      0.261     -0.432      0.596      0.100      0.751   1538.475 
+  Residual Var.                     219.752     44.740    145.560    319.655        ---        ---   1418.290 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+

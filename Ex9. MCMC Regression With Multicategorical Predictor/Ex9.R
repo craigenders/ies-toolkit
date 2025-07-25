@@ -2,16 +2,15 @@
 # mcmc regression w multicategorical predictor
 ##################################################
 
-library(fdir)
 library(rblimp)
 library(mitml)
 
 ##################################################
-# set working directory and load data
+# load data from github
 ##################################################
 
-set()
-load('behaviorachievement.rda')
+data_url <- "https://raw.githubusercontent.com/craigenders/ies-toolkit/main/Data/behaviorachievement.rda"
+load(gzcon(url(data_url, open = "rb")))
 
 ##################################################
 # fit model with mcmc (ex9.1.imp)
@@ -24,7 +23,7 @@ mymodel <- rblimp(
    focal.model:
    read9 ~ read1 lrnprob1 behsymp1 riskgrp;
    auxiliary.models:
-   stanread7 read2   ~ read9 read1 lrnprob1 behsymp1 riskgrp',
+   stanread7 read2 ~ read9 read1 lrnprob1 behsymp1 riskgrp',
   seed = 90291,
   burn = 2000,
   iter = 10000)
@@ -41,7 +40,7 @@ mymodel <- rblimp(
    focal.model:
    read9 ~ read1 lrnprob1 behsymp1 riskgrp;
    auxiliary.models:
-   stanread7 read2   ~ read9 read1 lrnprob1 behsymp1 riskgrp',
+   stanread7 read2 ~ read9 read1 lrnprob1 behsymp1 riskgrp',
   seed = 90291,
   burn = 2000,
   iter = 10000,
