@@ -1,0 +1,358 @@
+
+---------------------------------------------------------------------------
+
+                                   Blimp
+                                  3.2.21
+
+             Blimp was developed with funding from Institute of
+           Education Sciences awards R305D150056 and R305D190002.
+
+            Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
+                 Han Du, Co-P.I. Email: hdu@psych.ucla.edu
+                 Roy Levy, Co-P.I. Email: roy.levy@asu.edu
+
+              Programming and Blimp Studio by Brian T. Keller
+
+                   There is no expressed license given.
+
+---------------------------------------------------------------------------
+
+
+ALGORITHMIC OPTIONS SPECIFIED:
+
+  Imputation method:                 Fully Bayesian model-based
+  MCMC algorithm:                    Full conditional Metropolis sampler with
+                                       Auto-Derived Conditional Distributions
+  Default Priors:
+    Multilevel covariance matrices:  Not applicable, single-level imputation
+    Outcome covariance matrices:     Zero matrix, df = -(p + 1) (PRIOR2)
+    Predictor model variances:       Unit sum of squares, df = 2 (XPRIOR1)
+  Chain Starting Values:             Random starting values
+
+
+  NOTE: The default prior for regression coefficients 
+        in categorical models is 'normal( 0.0, 5.0)'
+
+  NOTE: For complete list of priors include 'pinfo' in the options.
+
+
+BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
+
+  NOTE: Split chain PSR is being used. This splits each chain's
+        iterations to create twice as many chains.
+
+  Comparing iterations across 2 chains     Highest PSR   Parameter #  
+                          126 to 250             1.416            62  
+                          251 to 500             1.425            60  
+                          376 to 750             1.146            60  
+                          501 to 1000            1.303            61  
+                          626 to 1250            1.073            61  
+                          751 to 1500            1.068            62  
+                          876 to 1750            1.097            62  
+                         1001 to 2000            1.052            62  
+                         1126 to 2250            1.111            62  
+                         1251 to 2500            1.060            62  
+                         1376 to 2750            1.069            62  
+                         1501 to 3000            1.095            62  
+                         1626 to 3250            1.030            62  
+                         1751 to 3500            1.007            59  
+                         1876 to 3750            1.034            59  
+                         2001 to 4000            1.022            59  
+                         2126 to 4250            1.035            60  
+                         2251 to 4500            1.040            60  
+                         2376 to 4750            1.016            59  
+                         2501 to 5000            1.009            59  
+
+
+METROPOLIS-HASTINGS ACCEPTANCE RATES:
+
+  Chain 1:
+
+    Variable                            Type    Probability   Target Value 
+    atrisk                        imputation          0.493          0.500 
+    frlunch                       imputation          0.496          0.500 
+    efficacy                      imputation          0.503          0.500 
+    efficacy                       threshold          0.373          0.350 
+
+  NOTE: Suppressing printing of 1 chains.
+        Use keyword 'tuneinfo' in options to override.
+
+
+DATA INFORMATION:
+
+  Sample Size:              250
+  Missing Data Info:
+
+                      Pattern #:       1     2     3     4     5     6     7     8     9    10
+                          miss % --------------------------------------------------------------
+                   atrisk =  5.2       -     -     -     -     -     -     M     M     -     M  
+                 stanread =  9.2       -     -     M     -     -     -     -     -     M     -  
+                 mathpost = 18.0       -     M     -     -     -     M     -     -     -     M  
+                condition =  0.0       -     -     -     -     -     -     -     -     -     -  
+                  frlunch =  4.4       -     -     -     -     M     -     -     -     -     -  
+                 efficacy =  9.6       -     -     -     M     -     M     -     M     M     -  
+                  mathpre =  0.0       -     -     -     -     -     -     -     -     -     -  
+                                 --------------------------------------------------------------
+                                 %  63.2  12.8   5.6   3.6   3.2   2.8   2.0   1.2   1.2   1.2
+
+  NOTE: Suppressing printing of 4 missing data patterns.
+        These patterns consist of 3.2% of the data.
+        Use keyword 'allpatterns' in options to print all patterns.
+
+
+MODEL INFORMATION:
+
+  NUMBER OF PARAMETERS
+    Outcome Models:         20
+    Predictor Models:       12
+
+  PREDICTORS
+    Fixed variables:        condition mathpre
+    Incomplete ordinal:     frlunch efficacy
+
+  MODELS
+
+   focal.model:
+    [1]  mathpost ~ Intercept condition@beta1 frlunch@beta2 efficacy@beta3 
+                 mathpre@beta4
+
+   auxiliary.models:
+    [2]  atrisk ~ Intercept mathpost condition frlunch efficacy mathpre
+    [3]  stanread ~ Intercept atrisk mathpost condition frlunch efficacy mathpre
+
+
+WARNING MESSAGES:
+
+  No warning messages.
+
+
+MODEL FIT:
+
+
+  INFORMATION CRITERIA
+
+    Conditional Likelihood
+      DIC2                  4228.553
+      WAIC                  4340.823
+
+  WALD TESTS (Asparouhov & Muthén, 2021)
+
+  Test #1
+
+    Full:
+      [1]  mathpost ~ Intercept condition@beta1 frlunch@beta2 efficacy@beta3 
+                 mathpre@beta4
+
+    Restricted:
+      [1]  mathpost ~ Intercept condition@beta1 frlunch@beta2 efficacy@beta3 
+                 mathpre@beta4
+
+    Constraints in Restricted:
+      [1]  beta1 = 0
+      [2]  beta2 = 0
+      [3]  beta3 = 0
+      [4]  beta4 = 0
+
+
+    Wald Statistic (Chi-Square)               142.310
+    Number of Parameters Tested (df)                4
+    Probability                                 0.000
+
+
+IMPUTED DATA SUMMARIES:
+
+  NOTE: Imputed data summaries are averaged across 10000 data sets.
+
+
+Variables                              Mean     StdDev        25%        50%        75%        Min        Max 
+                                ------------------------------------------------------------------------------
+
+  mathpost                           56.503      9.521     50.650     56.418     62.568     31.586     85.017 
+  atrisk                              0.764      0.425      0.998      1.000      1.000      0.000      1.000 
+  stanread                           52.394     10.591     44.880     54.271     60.138     26.805     73.188 
+  frlunch                             0.410      0.493      0.000      0.000      1.000      0.000      1.000 
+  efficacy                            3.357      1.608      2.000      3.000      4.639      1.000      6.000 
+  condition                           0.460      0.499      0.000      0.000      1.000      0.000      1.000 
+  mathpre                            50.096      8.659     45.000     50.000     56.000     26.000     76.000 
+
+                                ------------------------------------------------------------------------------
+
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
+
+
+Correlations                       Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+  mathpost, atrisk                   -0.006      0.089     -0.179      0.170      0.004      0.952   9945.710 
+  mathpost, stanread                 -0.002      0.089     -0.171      0.178      0.000      0.990   9396.409 
+  atrisk, stanread                   -0.010      0.091     -0.186      0.166      0.013      0.909   9086.476 
+
+                                ------------------------------------------------------------------------------
+
+
+
+OUTCOME MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
+
+  focal.model block:
+
+Outcome Variable:  mathpost   
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                      53.303      5.509     43.687     65.369        ---        ---   5636.603 
+
+Coefficients:                   
+  Intercept                          28.345      3.088     22.308     34.514     84.418      0.000   7012.232 
+  condition                           2.263      1.047      0.202      4.311      4.644      0.031   6953.241 
+  frlunch                            -5.502      1.095     -7.608     -3.325     25.087      0.000   5344.564 
+  efficacy                            0.831      0.346      0.159      1.517      5.773      0.016   4712.974 
+  mathpre                             0.530      0.062      0.408      0.653     71.920      0.000   6537.163 
+
+Standard Deviations:            
+  Residual SD                         7.301      0.375      6.610      8.085        ---        ---   5629.417 
+
+Standardized Coefficients:      
+  condition                           0.117      0.054      0.010      0.222      4.715      0.030   6897.665 
+  frlunch                            -0.281      0.052     -0.378     -0.173     28.538      0.000   5652.427 
+  efficacy                            0.139      0.057      0.027      0.248      5.904      0.015   4706.081 
+  mathpre                             0.477      0.048      0.378      0.564     98.308      0.000   6400.853 
+
+Proportion Variance Explained   
+  by Coefficients                     0.426      0.046      0.328      0.510        ---        ---   5954.279 
+  by Residual Variation               0.574      0.046      0.490      0.672        ---        ---   5954.279 
+
+                                ------------------------------------------------------------------------------
+
+
+  auxiliary.models block:
+
+Outcome Variable:  atrisk     
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+
+Coefficients:                   
+  Intercept                           2.281      0.703      0.909      3.658     10.577      0.001   1909.721 
+  mathpost                           -0.011      0.014     -0.037      0.016      0.632      0.427   2084.870 
+  condition                          -0.007      0.192     -0.381      0.368      0.001      0.976   2322.884 
+  frlunch                             0.617      0.224      0.179      1.064      7.612      0.006   1791.352 
+  efficacy                           -0.202      0.068     -0.337     -0.073      9.010      0.003   1661.477 
+  mathpre                            -0.008      0.014     -0.035      0.019      0.356      0.551   2539.616 
+
+Thresholds:                     
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+
+Standard Deviations:            
+  Residual SD                         1.000      0.000      1.000      1.000        ---        ---        nan 
+
+Standardized Coefficients:      
+  mathpost                           -0.091      0.112     -0.305      0.134      0.640      0.424   2088.273 
+  condition                          -0.003      0.083     -0.164      0.158      0.001      0.975   2322.209 
+  frlunch                             0.264      0.089      0.079      0.431      8.605      0.003   1830.033 
+  efficacy                           -0.283      0.087     -0.442     -0.106     10.466      0.001   1740.320 
+  mathpre                            -0.063      0.103     -0.261      0.143      0.359      0.549   2511.712 
+
+Proportion Variance Explained   
+  by Coefficients                     0.247      0.064      0.125      0.375        ---        ---   1682.286 
+  by Residual Variation               0.753      0.064      0.625      0.875        ---        ---   1682.286 
+
+                                ------------------------------------------------------------------------------
+
+
+
+Outcome Variable:  stanread   
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                      54.667      5.609     45.014     67.083        ---        ---   5047.465 
+
+Coefficients:                   
+  Intercept                          44.691      4.089     36.786     52.709    119.581      0.000   6002.365 
+  atrisk                            -13.504      1.254    -15.938    -11.021    115.846      0.000   6610.984 
+  mathpost                            0.349      0.079      0.187      0.499     19.160      0.000   4547.502 
+  condition                           1.483      1.040     -0.589      3.555      2.024      0.155   7209.735 
+  frlunch                            -2.442      1.212     -4.789     -0.032      4.007      0.045   4617.829 
+  efficacy                           -0.464      0.359     -1.178      0.226      1.704      0.192   5223.039 
+  mathpre                             0.006      0.075     -0.141      0.152      0.005      0.943   5658.806 
+
+Standard Deviations:            
+  Residual SD                         7.394      0.376      6.709      8.190        ---        ---   5025.773 
+
+Standardized Coefficients:      
+  atrisk                             -0.536      0.042     -0.611     -0.447    161.070      0.000   5885.080 
+  mathpost                            0.310      0.070      0.165      0.441     19.261      0.000   4264.619 
+  condition                           0.069      0.048     -0.028      0.164      2.043      0.153   7221.718 
+  frlunch                            -0.112      0.055     -0.217     -0.001      4.072      0.044   4528.278 
+  efficacy                           -0.070      0.053     -0.176      0.034      1.715      0.190   5217.212 
+  mathpre                             0.005      0.060     -0.114      0.122      0.005      0.943   5664.732 
+
+Proportion Variance Explained   
+  by Coefficients                     0.526      0.041      0.438      0.601        ---        ---   5173.754 
+  by Residual Variation               0.474      0.041      0.399      0.562        ---        ---   5173.754 
+
+                                ------------------------------------------------------------------------------
+
+
+
+
+PREDICTOR MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
+
+
+
+Missing predictor:  frlunch    
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           -0.231      0.082     -0.392     -0.074      7.976      0.005   3842.250 
+
+Level 1:                                                                                                      
+  condition                           0.016      0.167     -0.308      0.345      0.010      0.922   3581.498 
+  efficacy                           -0.028      0.087     -0.200      0.140      0.102      0.749   2615.214 
+  mathpre                            -0.012      0.010     -0.031      0.007      1.456      0.228   3091.456 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing predictor:  efficacy   
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            1.048      0.108      0.840      1.269     94.629      0.000    168.349 
+
+Level 1:                                                                                                      
+  condition                           0.307      0.140      0.035      0.578      4.792      0.029   3815.581 
+  frlunch                            -0.027      0.089     -0.205      0.147      0.095      0.758   2984.426 
+  mathpre                             0.034      0.008      0.017      0.050     16.287      0.000   3054.956 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+  Tau 2                               0.539      0.087      0.376      0.722        ---        ---    123.903 
+  Tau 3                               1.180      0.111      0.979      1.425        ---        ---    121.904 
+  Tau 4                               1.761      0.127      1.506      2.030        ---        ---    126.056 
+  Tau 5                               2.227      0.142      1.937      2.499        ---        ---    130.999 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+

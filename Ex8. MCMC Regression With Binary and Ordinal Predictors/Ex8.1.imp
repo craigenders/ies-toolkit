@@ -9,7 +9,7 @@ focal.model:
 mathpost ~ condition@beta1 frlunch@beta2 efficacy@beta3 mathpre@beta4;
 auxiliary.models:
 stanread atrisk ~ mathpost condition frlunch efficacy mathpre;
-TEST:
+WALDTEST:
 beta1:beta4 = 0; # MCMC-based frequentist Wald test
 SEED: 90291;
 BURN: 5000;  # set iteration number for warm up period

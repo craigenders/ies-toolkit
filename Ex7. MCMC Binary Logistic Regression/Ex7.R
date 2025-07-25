@@ -2,16 +2,15 @@
 # mcmc logistic regression
 ##################################################
 
-library(fdir)
 library(rblimp)
 library(mitml)
 
 ##################################################
-# set working directory and load data
+# load data from github
 ##################################################
 
-set()
-load('behaviorachievement.rda')
+data_url <- "https://raw.githubusercontent.com/craigenders/ies-toolkit/main/Data/behaviorachievement.rda"
+load(gzcon(url(data_url, open = "rb")))
 
 ##################################################
 # fit model with mcmc (ex7.1.imp)
@@ -19,12 +18,12 @@ load('behaviorachievement.rda')
 
 mymodel <- rblimp(
   data = behaviorachievement,
-  ordinal = 'read9grp ',
+  ordinal = 'readgrp9 ',
   model = '  
    focal.model:
-   logit(read9grp) ~ read1@beta1 lrnprob1@beta2 behsymp1@beta3;
+   logit(readgrp9) ~ read1@beta1 lrnprob1@beta2 behsymp1@beta3;
    auxiliary.models:
-   stanread7 read2  ~ read9grp read1 lrnprob1 behsymp1',
+   stanread7 read2  ~ readgrp9 read1 lrnprob1 behsymp1',
   waldtest = 'beta1:beta3 = 0',
   seed = 90291,
   burn = 1000,
@@ -37,19 +36,19 @@ output(mymodel)
 
 mymodel <- rblimp(
   data = behaviorachievement,
-  ordinal = 'read9grp ',
+  ordinal = 'readgrp9 ',
   model = '  
    focal.model:
-   logit(read9grp) ~ read1@beta1 lrnprob1@beta2 behsymp1@beta3;
+   logit(readgrp9) ~ read1@beta1 lrnprob1@beta2 behsymp1@beta3;
    auxiliary.models:
-   stanread7 read2  ~ read9grp read1 lrnprob1 behsymp1',
+   stanread7 read2  ~ readgrp9 read1 lrnprob1 behsymp1',
   waldtest = 'beta1:beta3 = 0',
   seed = 90291,
   burn = 1000,
   iter = 10000,
   nimps = 20,
   chains = 20)
-mymodel@output
+output(mymodel)
 
 ##################################################
 # analysis and pooling
@@ -59,7 +58,7 @@ mymodel@output
 implist <- as.mitml(mymodel)
 
 # analysis
-fit <- with(implist, glm(read9grp ~ read1 + lrnprob1 + behsymp1, family = 'binomial'))
+fit <- with(implist, glm(readgrp9 ~ read1 + lrnprob1 + behsymp1, family = 'binomial'))
 
 # pooling + barnard & rubin df for t-tests
 estimates <- testEstimates(fit, df.com = 134)
@@ -70,5 +69,5 @@ confint(estimates) # confidence intervals
 # wald test of null model
 ##################################################
 
-null <- with(implist, glm(read9grp ~ 1, family = 'binomial'))
+null <- with(implist, glm(readgrp9 ~ 1, family = 'binomial'))
 testModels(fit, null, df.com = 134, method = 'D1')
