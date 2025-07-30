@@ -1,6 +1,6 @@
 Mplus VERSION 8.11 (Mac)
 MUTHEN & MUTHEN
-06/20/2024   1:59 PM
+07/30/2025   1:20 AM
 
 INPUT INSTRUCTIONS
 
@@ -11,8 +11,8 @@ INPUT INSTRUCTIONS
   type = imputation;
   VARIABLE:
   names = id male hispanic riskgrp atrisk behsymp1 lrnprob1
-     read1 read2 read3 read9 read9grp stanread7
-     math1 math2 math3 math9 math9grp stanmath7;
+     read1 read2 read3 read9 readgrp9 stanread7
+     math1 math2 math3 math9 mathgrp9 stanmath7;
   ! include product variable from the "DEFINE:" command below;
   usevariables = read9 read1 lrnprob1 atrisk product;
   DEFINE:
@@ -398,8 +398,8 @@ TECHNICAL 1 OUTPUT
                 0.500         0.500         0.500         0.500
 
 
-     Beginning Time:  13:59:16
-        Ending Time:  13:59:16
+     Beginning Time:  01:20:57
+        Ending Time:  01:20:57
        Elapsed Time:  00:00:00
 
 

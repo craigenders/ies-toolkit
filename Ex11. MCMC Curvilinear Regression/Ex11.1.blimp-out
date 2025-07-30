@@ -1,0 +1,368 @@
+
+---------------------------------------------------------------------------
+
+                                   Blimp
+                                  3.2.21
+
+             Blimp was developed with funding from Institute of
+           Education Sciences awards R305D150056 and R305D190002.
+
+            Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
+                 Han Du, Co-P.I. Email: hdu@psych.ucla.edu
+                 Roy Levy, Co-P.I. Email: roy.levy@asu.edu
+
+              Programming and Blimp Studio by Brian T. Keller
+
+                   There is no expressed license given.
+
+---------------------------------------------------------------------------
+
+
+ALGORITHMIC OPTIONS SPECIFIED:
+
+  Imputation method:                 Fully Bayesian model-based
+  MCMC algorithm:                    Full conditional Metropolis sampler with
+                                       Auto-Derived Conditional Distributions
+  Default Priors:
+    Multilevel covariance matrices:  Not applicable, single-level imputation
+    Outcome covariance matrices:     Zero matrix, df = -(p + 1) (PRIOR2)
+    Predictor model variances:       Unit sum of squares, df = 2 (XPRIOR1)
+  Chain Starting Values:             Random starting values
+
+
+  NOTE: The default prior for regression coefficients 
+        in categorical models is 'normal( 0.0, 5.0)'
+
+  NOTE: For complete list of priors include 'pinfo' in the options.
+
+
+BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
+
+  NOTE: Split chain PSR is being used. This splits each chain's
+        iterations to create twice as many chains.
+
+  Comparing iterations across 2 chains     Highest PSR   Parameter #  
+                          251 to 500             1.045            64  
+                          501 to 1000            1.087            61  
+                          751 to 1500            1.042            61  
+                         1001 to 2000            1.065            62  
+                         1251 to 2500            1.046            63  
+                         1501 to 3000            1.056            62  
+                         1751 to 3500            1.177            64  
+                         2001 to 4000            1.077            63  
+                         2251 to 4500            1.086            64  
+                         2501 to 5000            1.141            64  
+                         2751 to 5500            1.043            64  
+                         3001 to 6000            1.042            63  
+                         3251 to 6500            1.019            61  
+                         3501 to 7000            1.022            64  
+                         3751 to 7500            1.046            64  
+                         4001 to 8000            1.064            63  
+                         4251 to 8500            1.059            63  
+                         4501 to 9000            1.045            63  
+                         4751 to 9500            1.009            61  
+                         5001 to 10000           1.012            62  
+
+
+METROPOLIS-HASTINGS ACCEPTANCE RATES:
+
+  Chain 1:
+
+    Variable                            Type    Probability   Target Value 
+    atrisk                        imputation          0.496          0.500 
+    frlunch                       imputation          0.523          0.500 
+    efficacy                      imputation          0.502          0.500 
+    efficacy                       threshold          0.386          0.350 
+    anxiety                       imputation          0.500          0.500 
+    anxiety                        parameter          0.448          0.500 
+
+  NOTE: Suppressing printing of 1 chains.
+        Use keyword 'tuneinfo' in options to override.
+
+
+DATA INFORMATION:
+
+  Sample Size:              250
+  Missing Data Info:
+
+                      Pattern #:       1     2     3     4     5     6     7     8     9    10
+                          miss % --------------------------------------------------------------
+                   atrisk =  5.2       -     -     -     -     -     -     -     M     -     -  
+                 stanread =  9.2       -     -     -     M     -     -     -     -     -     M  
+                 mathpost = 18.0       -     M     -     -     -     M     -     -     M     -  
+                  frlunch =  4.4       -     -     -     -     -     -     M     -     -     -  
+                 efficacy =  9.6       -     -     -     -     M     M     -     -     -     M  
+                  anxiety =  8.4       -     -     M     -     -     -     -     -     M     -  
+                  mathpre =  0.0       -     -     -     -     -     -     -     -     -     -  
+                                 --------------------------------------------------------------
+                                 %  58.0  11.2   5.2   4.8   3.2   2.8   2.8   2.0   1.6   1.2
+
+  NOTE: Suppressing printing of 9 missing data patterns.
+        These patterns consist of 7.2% of the data.
+        Use keyword 'allpatterns' in options to print all patterns.
+
+
+MODEL INFORMATION:
+
+  NUMBER OF PARAMETERS
+    Outcome Models:         21
+    Predictor Models:       17
+
+  PREDICTORS
+    Fixed variables:        mathpre
+    Incomplete continuous:  anxiety
+    Incomplete ordinal:     frlunch efficacy
+
+  CENTERED PREDICTORS
+    Grand Mean Centered:    anxiety
+
+  MODELS
+
+   focal.model:
+    [1]  mathpost ~ Intercept anxiety frlunch efficacy mathpre anxiety^2
+
+   auxiliary.models:
+    [2]  atrisk ~ Intercept mathpost anxiety frlunch efficacy mathpre
+    [3]  stanread ~ Intercept atrisk mathpost anxiety frlunch efficacy mathpre
+
+
+WARNING MESSAGES:
+
+  No warning messages.
+
+
+MODEL FIT:
+
+
+  INFORMATION CRITERIA
+
+    Conditional Likelihood
+      DIC2                  4220.583
+      WAIC                  4332.510
+
+
+IMPUTED DATA SUMMARIES:
+
+  NOTE: Imputed data summaries are averaged across 10000 data sets.
+
+
+Variables                              Mean     StdDev        25%        50%        75%        Min        Max 
+                                ------------------------------------------------------------------------------
+
+  mathpost                           56.484      9.540     50.677     56.414     62.528     30.143     85.015 
+  atrisk                              0.765      0.425      1.000      1.000      1.000      0.000      1.000 
+  stanread                           52.356     10.604     44.820     54.223     60.110     26.775     72.836 
+  frlunch                             0.411      0.493      0.000      0.000      1.000      0.000      1.000 
+  efficacy                            3.352      1.610      2.000      3.000      4.613      1.000      6.000 
+  anxiety                            18.281      7.426     13.000     17.317     22.422     -0.057     44.020 
+  mathpre                            50.096      8.659     45.000     50.000     56.000     26.000     76.000 
+
+                                ------------------------------------------------------------------------------
+
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
+
+
+Correlations                       Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+  mathpost, atrisk                   -0.006      0.088     -0.178      0.167      0.005      0.941   9555.316 
+  mathpost, stanread                 -0.022      0.086     -0.189      0.146      0.068      0.794   9917.808 
+  atrisk, stanread                   -0.011      0.092     -0.191      0.167      0.016      0.900   9366.665 
+
+                                ------------------------------------------------------------------------------
+
+
+
+OUTCOME MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
+
+  focal.model block:
+
+Outcome Variable:  mathpost   
+
+Grand Mean Centered: anxiety
+
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                      50.966      5.388     41.841     63.021        ---        ---   5413.246 
+
+Coefficients:                   
+  Intercept                          32.689      3.457     25.967     39.568     89.528      0.000   6410.684 
+  anxiety                             0.041      0.084     -0.122      0.206      0.237      0.626   4221.113 
+  frlunch                            -5.840      1.073     -7.949     -3.750     29.724      0.000   4993.497 
+  efficacy                            1.103      0.342      0.444      1.781     10.449      0.001   5838.380 
+  mathpre                             0.471      0.067      0.338      0.602     49.615      0.000   6319.544 
+  anxiety^2                          -0.021      0.006     -0.033     -0.009     11.705      0.001   5091.389 
+
+Standard Deviations:            
+  Residual SD                         7.139      0.374      6.468      7.939        ---        ---   5429.981 
+
+Standardized Coefficients:      
+  anxiety                             0.031      0.064     -0.093      0.157      0.238      0.626   4228.247 
+  frlunch                            -0.298      0.051     -0.394     -0.195     33.903      0.000   5053.969 
+  efficacy                            0.184      0.056      0.074      0.292     10.798      0.001   5698.632 
+  mathpre                             0.423      0.055      0.309      0.523     59.287      0.000   6522.033 
+  anxiety^2                          -0.204      0.058     -0.315     -0.087     12.120      0.000   5054.272 
+
+Proportion Variance Explained   
+  by Coefficients                     0.453      0.045      0.359      0.539        ---        ---   5780.687 
+  by Residual Variation               0.547      0.045      0.461      0.641        ---        ---   5780.687 
+
+                                ------------------------------------------------------------------------------
+
+
+  auxiliary.models block:
+
+Outcome Variable:  atrisk     
+
+Grand Mean Centered: anxiety
+
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+
+Coefficients:                   
+  Intercept                           2.005      0.746      0.571      3.476      7.240      0.007   1669.708 
+  mathpost                           -0.013      0.014     -0.041      0.014      0.879      0.348   1715.641 
+  anxiety                             0.033      0.016      0.003      0.065      4.427      0.035   1729.892 
+  frlunch                             0.624      0.224      0.185      1.061      7.744      0.005   1667.920 
+  efficacy                           -0.180      0.069     -0.316     -0.043      6.743      0.009   1913.051 
+  mathpre                            -0.001      0.015     -0.030      0.028      0.005      0.943   2188.085 
+
+Thresholds:                     
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+
+Standard Deviations:            
+  Residual SD                         1.000      0.000      1.000      1.000        ---        ---        nan 
+
+Standardized Coefficients:      
+  mathpost                           -0.108      0.112     -0.321      0.113      0.890      0.345   1802.028 
+  anxiety                             0.206      0.094      0.017      0.387      4.820      0.028   1870.166 
+  frlunch                             0.259      0.088      0.079      0.421      8.573      0.003   1629.724 
+  efficacy                           -0.243      0.089     -0.410     -0.060      7.350      0.007   1899.162 
+  mathpre                            -0.009      0.108     -0.215      0.203      0.005      0.943   2200.332 
+
+Proportion Variance Explained   
+  by Coefficients                     0.290      0.068      0.159      0.422        ---        ---   1411.342 
+  by Residual Variation               0.710      0.068      0.578      0.841        ---        ---   1411.342 
+
+                                ------------------------------------------------------------------------------
+
+
+
+Outcome Variable:  stanread   
+
+Grand Mean Centered: anxiety
+
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                      54.801      5.691     45.181     67.154        ---        ---   4580.046 
+
+Coefficients:                   
+  Intercept                          47.582      4.339     39.143     56.282    120.543      0.000   5345.211 
+  atrisk                            -13.249      1.277    -15.810    -10.755    107.698      0.000   7226.643 
+  mathpost                            0.345      0.078      0.189      0.497     19.507      0.000   4327.484 
+  anxiety                            -0.151      0.077     -0.299      0.002      3.766      0.052   5091.819 
+  frlunch                            -2.616      1.205     -4.992     -0.211      4.665      0.031   4075.053 
+  efficacy                           -0.483      0.364     -1.199      0.235      1.745      0.187   5257.858 
+  mathpre                            -0.037      0.078     -0.192      0.115      0.234      0.628   6356.997 
+
+Standard Deviations:            
+  Residual SD                         7.403      0.381      6.722      8.195        ---        ---   4586.193 
+
+Standardized Coefficients:      
+  atrisk                             -0.524      0.043     -0.603     -0.433    148.018      0.000   5034.405 
+  mathpost                            0.306      0.069      0.167      0.438     19.728      0.000   3985.893 
+  anxiety                            -0.104      0.053     -0.204      0.001      3.839      0.050   5097.799 
+  frlunch                            -0.120      0.055     -0.226     -0.010      4.747      0.029   4036.726 
+  efficacy                           -0.072      0.054     -0.178      0.035      1.754      0.185   5213.441 
+  mathpre                            -0.030      0.063     -0.154      0.093      0.235      0.628   6345.092 
+
+Proportion Variance Explained   
+  by Coefficients                     0.526      0.042      0.438      0.601        ---        ---   4630.493 
+  by Residual Variation               0.474      0.042      0.399      0.562        ---        ---   4630.493 
+
+                                ------------------------------------------------------------------------------
+
+
+
+
+PREDICTOR MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
+
+
+
+Missing predictor:  frlunch    
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           -0.227      0.081     -0.386     -0.067      7.867      0.005   3608.934 
+
+Level 1:                                                                                                      
+  efficacy                           -0.024      0.087     -0.196      0.147      0.071      0.791   2564.649 
+  anxiety                            -0.006      0.013     -0.031      0.019      0.198      0.656   2872.808 
+  mathpre                            -0.014      0.011     -0.035      0.008      1.544      0.214   3350.106 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing predictor:  efficacy   
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            1.034      0.107      0.832      1.256     93.523      0.000    175.246 
+
+Level 1:                                                                                                      
+  frlunch                            -0.023      0.089     -0.197      0.150      0.068      0.795   3128.938 
+  anxiety                            -0.024      0.011     -0.046     -0.003      5.108      0.024   3022.140 
+  mathpre                             0.028      0.009      0.010      0.045      9.431      0.002   3968.312 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+  Tau 2                               0.528      0.087      0.375      0.721        ---        ---    185.248 
+  Tau 3                               1.173      0.110      0.979      1.401        ---        ---    119.722 
+  Tau 4                               1.752      0.126      1.522      2.014        ---        ---    113.606 
+  Tau 5                               2.212      0.144      1.956      2.525        ---        ---    117.661 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing predictor:  anxiety    
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           18.269      0.449     17.386     19.149   1653.977      0.000   1474.112 
+
+Level 1:                                                                                                      
+  frlunch                            -0.262      0.576     -1.400      0.869      0.209      0.647   3824.549 
+  efficacy                           -1.063      0.476     -2.009     -0.143      5.019      0.025   4184.445 
+  mathpre                            -0.318      0.055     -0.427     -0.210     33.461      0.000   6203.848 
+  Residual Var.                      44.622      4.292     37.285     54.132        ---        ---   6330.455 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+

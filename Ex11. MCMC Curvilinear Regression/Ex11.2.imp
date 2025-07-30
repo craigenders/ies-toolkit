@@ -1,10 +1,10 @@
 # mcmc curvilinear regression
 DATA: mathachievement.dat;
 VARIABLES: id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost;
-ORDINAL: atrisk frlunch efficacy;
+ORDINAL: frlunch atrisk efficacy;
 MISSING: 999;
 FIXED:  mathpre; # complete variables 
-CENTER: anxiety;  # center anxiety at its grand mean
+CENTER: anxiety; # center anxiety at its grand mean
 MODEL: 
 focal.model:
 mathpost ~ anxiety anxiety^2@beta2 frlunch efficacy mathpre;

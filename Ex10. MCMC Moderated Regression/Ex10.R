@@ -2,16 +2,15 @@
 # mcmc moderated regression
 ##################################################
 
-library(fdir)
 library(rblimp)
 library(mitml)
 
 ##################################################
-# set working directory and load data
+# load data from github
 ##################################################
 
-set()
-load('behaviorachievement.rda')
+data_url <- "https://raw.githubusercontent.com/craigenders/ies-toolkit/main/Data/behaviorachievement.rda"
+load(gzcon(url(data_url, open = "rb")))
 
 ##################################################
 # fit model with mcmc (ex10.1.imp)
@@ -23,7 +22,7 @@ mymodel <- rblimp(
   center = 'read1 lrnprob1 atrisk',
   model = '  
    focal.model:
-   read9 ~ read1 lrnprob1 read1*lrnprob1 atrisk ;
+   read9 ~ read1 lrnprob1 read1*lrnprob1 atrisk;
    auxiliary.models:
    stanread7 read2  ~ read9 read1 lrnprob1 atrisk',
   simple = 'read1 | lrnprob1',
@@ -45,7 +44,7 @@ mymodel <- rblimp(
   center = 'read1 lrnprob1 atrisk',
   model = '  
    focal.model:
-   read9 ~ read1 lrnprob1 read1*lrnprob1 atrisk ;
+   read9 ~ read1 lrnprob1 read1*lrnprob1 atrisk;
    auxiliary.models:
    stanread7 read2  ~ read9 read1 lrnprob1 atrisk',
   simple = 'read1 | lrnprob1',
@@ -107,3 +106,4 @@ testConstraints(fit, constraints = slp_mean, df.com = 133)
 # test conditional effect (simple slope) at -1 SD below the mean
 slp_low <- 'read1.cgm + read1.cgm*lrnprob1.cgm*-1*10.77'
 testConstraints(fit, constraints = slp_low, df.com = 133)
+
