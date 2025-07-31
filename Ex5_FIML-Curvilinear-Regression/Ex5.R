@@ -45,16 +45,16 @@ model.frlunch <- list("model" = "logistic", "formula" = frlunch ~ mathpre, nodes
 model.efficacy <- list("model" = "probit", "formula" = efficacy ~ frlunch + mathpre, nodes = nodes.efficacy)
 
 # model for anxiety predictor
-model.anxiety <- list("model"="linreg", "formula" = anxiety.cgm ~ efficacy + frlunch + mathpre, nodes = nodes.anxiety)
+model.anxiety <- list("model" = "linreg", "formula" = anxiety.cgm ~ efficacy + frlunch + mathpre, nodes = nodes.anxiety)
 
 # focal model for mathpost outcome
-model.mathpost <- list("model" = "linreg", "formula" = mathpost ~ anxiety.cgm + I(anxiety.cgm^2) + frlunch + efficacy + mathpre, nodes = nodes.mathpost)
+model.mathpost <- list("model" = "linreg", "formula" = mathpost ~ anxiety.cgm + I(anxiety.cgm^2) + efficacy + frlunch + mathpre, nodes = nodes.mathpost)
 
 # model for atrisk auxiliary variable
 model.atrisk <- list("model" = "logistic", "formula" = atrisk ~ mathpost + anxiety.cgm + efficacy + frlunch + mathpre, nodes = nodes.atrisk)
 
 # model for stanread auxiliary variable
-model.stanread <- list("model" = "linreg", "formula" = stanread ~ atrisk + mathpost + anxiety.cgm + frlunch + efficacy + mathpre, nodes = nodes.stanread)
+model.stanread <- list("model" = "linreg", "formula" = stanread ~ atrisk + mathpost + anxiety.cgm + efficacy + frlunch + mathpre, nodes = nodes.stanread)
 
 # combine predictor models into a list
 predictor.models <- list(frlunch = model.frlunch, efficacy = model.efficacy, anxiety = model.anxiety, mathpost = model.mathpost, atrisk = model.atrisk)
