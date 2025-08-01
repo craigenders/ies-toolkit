@@ -2,7 +2,7 @@
 ---------------------------------------------------------------------------
 
                                    Blimp
-                                  3.2.20
+                                  3.2.21
 
              Blimp was developed with funding from Institute of
            Education Sciences awards R305D150056 and R305D190002.
@@ -24,12 +24,14 @@ ALGORITHMIC OPTIONS SPECIFIED:
   Imputation method:                 Fully Bayesian model-based
   MCMC algorithm:                    Full conditional Metropolis sampler with
                                        Auto-Derived Conditional Distributions
-  Between-cluster imputation model:  Not applicable, single-level imputation
-  Prior for random effect variances: Not applicable, single-level imputation
-  Prior for residual variances:      Zero sum of squares, df = -2 (PRIOR2)
-  Prior for predictor variances:     Unit sum of squares, df = 2 (XPRIOR1)
+  Default Priors:
+    Multilevel covariance matrices:  Not applicable, single-level imputation
+    Outcome covariance matrices:     Zero matrix, df = -(p + 1) (PRIOR2)
+    Predictor model variances:       Unit sum of squares, df = 2 (XPRIOR1)
   Chain Starting Values:             Random starting values
 
+
+  NOTE: For complete list of priors include 'pinfo' in the options.
 
 
 BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
@@ -38,26 +40,26 @@ BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
         iterations to create twice as many chains.
 
   Comparing iterations across 2 chains     Highest PSR   Parameter #  
-                           26 to 50              1.263            15  
-                           51 to 100             1.081            41  
-                           76 to 150             1.056            37  
-                          101 to 200             1.037            26  
-                          126 to 250             1.059            32  
-                          151 to 300             1.027            17  
-                          176 to 350             1.031            41  
-                          201 to 400             1.022            33  
-                          226 to 450             1.034            17  
-                          251 to 500             1.020            15  
-                          276 to 550             1.027            20  
-                          301 to 600             1.023            44  
-                          326 to 650             1.014            19  
-                          351 to 700             1.010            45  
-                          376 to 750             1.014            33  
-                          401 to 800             1.012            33  
-                          426 to 850             1.017            37  
-                          451 to 900             1.023            41  
-                          476 to 950             1.025            41  
-                          501 to 1000            1.016            41  
+                           26 to 50              1.263            16  
+                           51 to 100             1.081            44  
+                           76 to 150             1.056            40  
+                          101 to 200             1.037            28  
+                          126 to 250             1.059            35  
+                          151 to 300             1.027            19  
+                          176 to 350             1.031            44  
+                          201 to 400             1.022            36  
+                          226 to 450             1.034            19  
+                          251 to 500             1.020            16  
+                          276 to 550             1.027            22  
+                          301 to 600             1.023            47  
+                          326 to 650             1.014            21  
+                          351 to 700             1.010            48  
+                          376 to 750             1.014            36  
+                          401 to 800             1.012            36  
+                          426 to 850             1.017            40  
+                          451 to 900             1.023            44  
+                          476 to 950             1.025            44  
+                          501 to 1000            1.016            44  
 
 
 METROPOLIS-HASTINGS ACCEPTANCE RATES:
@@ -77,8 +79,9 @@ DATA INFORMATION:
 
   Sample Size:              138
   Missing Data Info:
-                          miss %       1     2     3     4     5     6     7     8     9    10
-                                 --------------------------------------------------------------
+
+                      Pattern #:       1     2     3     4     5     6     7     8     9    10
+                          miss % --------------------------------------------------------------
                     read2 =  9.4       -     -     -     M     -     -     -     -     M     -  
                     read9 = 17.4       -     M     -     -     -     M     -     -     -     -  
                 stanread7 = 19.6       -     -     M     -     -     M     M     -     M     M  
@@ -147,6 +150,25 @@ MODEL FIT:
     Probability                                 0.000
 
 
+IMPUTED DATA SUMMARIES:
+
+  NOTE: Imputed data summaries are averaged across 10000 data sets.
+
+
+Variables                              Mean     StdDev        25%        50%        75%        Min        Max 
+                                ------------------------------------------------------------------------------
+
+  read9                              87.596     14.853     80.038     88.053     96.669     39.267    123.171 
+  read2                              92.894     20.672     82.297     91.268    107.001     20.000    150.000 
+  stanread7                         260.121     68.111    220.463    260.494    308.780     80.706    404.873 
+  behsymp1                           49.485     12.108     40.864     48.156     58.178     17.000     92.000 
+  lrnprob1                           52.302     10.747     45.000     51.000     60.448     30.708     88.000 
+  read1                              86.163     20.502     74.000     85.951     99.318     21.665    153.000 
+
+                                ------------------------------------------------------------------------------
+
+
+
 CORRELATIONS AMONG RESIDUALS:
 
   Summaries based on 10000 iterations using 2 chains.
@@ -184,6 +206,9 @@ Coefficients:
   lrnprob1                           -0.247      0.120     -0.479     -0.009      4.229      0.040   5248.396 
   behsymp1                           -0.182      0.105     -0.387      0.025      3.001      0.083   6089.990 
 
+Standard Deviations:            
+  Residual SD                         9.553      0.659      8.410     10.980        ---        ---   6111.811 
+
 Standardized Coefficients:      
   read1                               0.689      0.040      0.603      0.757    296.216      0.000   5630.823 
   lrnprob1                           -0.177      0.085     -0.342     -0.006      4.301      0.038   5208.179 
@@ -211,6 +236,9 @@ Coefficients:
   read1                               0.551      0.045      0.462      0.642    147.715      0.000   6253.163 
   lrnprob1                           -0.288      0.086     -0.458     -0.120     11.251      0.001   4250.920 
   behsymp1                            0.409      0.079      0.253      0.563     26.611      0.000   3917.315 
+
+Standard Deviations:            
+  Residual SD                         6.472      0.489      5.636      7.532        ---        ---   4182.060 
 
 Standardized Coefficients:      
   read9                               0.483      0.046      0.388      0.571    107.519      0.000   4890.250 
@@ -240,6 +268,9 @@ Coefficients:
   read1                              -0.698      0.631     -1.895      0.570      1.188      0.276   3202.113 
   lrnprob1                            0.509      0.692     -0.871      1.866      0.521      0.470   5519.292 
   behsymp1                           -0.721      0.685     -2.069      0.609      1.126      0.289   4462.470 
+
+Standard Deviations:            
+  Residual SD                        48.756      3.547     42.569     56.327        ---        ---   5755.457 
 
 Standardized Coefficients:      
   read2                               0.549      0.281     -0.031      1.076      3.726      0.054   2854.378 
