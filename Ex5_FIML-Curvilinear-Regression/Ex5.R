@@ -42,7 +42,7 @@ nodes.stanread <- seq(20, 80, by = 2)
 model.frlunch <- list("model" = "logistic", "formula" = frlunch ~ mathpre, nodes = nodes.frlunch)
 
 # model for efficacy predictor
-model.efficacy <- list("model" = "probit", "formula" = efficacy ~ frlunch + mathpre, nodes = nodes.efficacy)
+model.efficacy <- list("model" = "linreg", "formula" = efficacy ~ frlunch + mathpre, nodes = nodes.efficacy)
 
 # model for anxiety predictor
 model.anxiety <- list("model" = "linreg", "formula" = anxiety.cgm ~ efficacy + frlunch + mathpre, nodes = nodes.anxiety)
