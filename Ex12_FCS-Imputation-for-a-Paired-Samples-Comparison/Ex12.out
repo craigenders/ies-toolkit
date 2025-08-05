@@ -1,0 +1,220 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+08/05/2025   4:42 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: FCS for Paired-Samples Test;
+  DATA:
+  file = ./imps/implist.dat;
+  ! read in imputation data;
+  type = imputation;
+  VARIABLE:
+  names = id condition male frlunch lowach stanread efficacy anxiety mathpre mathpost;
+  ! list change variable from "DEFINE:" command below;
+  usevariables =  change;
+  DEFINE:
+  ! define change variable of the difference of mathpost and mathpre;
+  change = mathpost - mathpre;
+  MODEL:
+  ! estimate mean and variance of the change variables;
+  change;
+  OUTPUT:
+  ! output for confidence intervals;
+  cinterval;
+
+
+
+*** WARNING in MODEL command
+  All variables are uncorrelated with all other variables in the model.
+  Check that this is what is intended.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+FCS for Paired-Samples Test;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Average number of observations                                 250
+
+Number of replications
+    Requested                                                   20
+    Completed                                                   20
+
+Number of dependent variables                                    1
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   CHANGE
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+
+Input data file(s)
+  Multiple data files from
+    ./imps/implist.dat
+
+Input data format  FREE
+
+
+SAMPLE STATISTICS
+
+NOTE:  These are average results over 20 data sets.
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              CHANGE
+              ________
+                6.418
+
+
+           Covariances
+              CHANGE
+              ________
+ CHANGE        72.441
+
+
+           Correlations
+              CHANGE
+              ________
+ CHANGE         1.000
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        2
+
+Loglikelihood
+
+          H0 Value                        -890.026
+          H1 Value                        -890.026
+
+*   The loglikelihood cannot be used directly for chi-square testing with
+    imputed data.
+
+Information Criteria
+
+          Akaike (AIC)                    1784.053
+          Bayesian (BIC)                  1791.095
+          Sample-Size Adjusted BIC        1784.755
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           1.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+          90 Percent C.I.                    0.000  0.000
+          Probability RMSEA <= .05           0.979
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           1.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+ Means
+    CHANGE             6.418      0.577     11.131      0.000      0.130
+
+ Variances
+    CHANGE            72.439      6.864     10.554      0.000      0.109
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.928E+00
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ Means
+    CHANGE           4.933       5.288       5.470       6.418       7.367       7.548       7.903
+
+ Variances
+    CHANGE          54.759      58.986      61.148      72.439      83.730      85.892      90.118
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION
+
+
+           NU
+              CHANGE
+              ________
+                  1
+
+
+           THETA
+              CHANGE
+              ________
+ CHANGE             2
+
+
+     STARTING VALUES
+
+
+           NU
+              CHANGE
+              ________
+                0.000
+
+
+           THETA
+              CHANGE
+              ________
+ CHANGE        36.494
+
+
+     Beginning Time:  16:42:50
+        Ending Time:  16:42:50
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen

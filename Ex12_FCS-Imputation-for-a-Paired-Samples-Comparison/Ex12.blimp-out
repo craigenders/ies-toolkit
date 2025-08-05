@@ -1,0 +1,233 @@
+
+---------------------------------------------------------------------------
+
+                                   Blimp
+                                  3.2.22
+
+             Blimp was developed with funding from Institute of
+           Education Sciences awards R305D150056 and R305D190002.
+
+            Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
+                 Han Du, Co-P.I. Email: hdu@psych.ucla.edu
+                 Roy Levy, Co-P.I. Email: roy.levy@asu.edu
+
+              Programming and Blimp Studio by Brian T. Keller
+
+                   There is no expressed license given.
+
+---------------------------------------------------------------------------
+
+
+ALGORITHMIC OPTIONS SPECIFIED:
+
+  Imputation method:                 Latent Fully conditional specification
+  MCMC algorithm:                    Gibbs sampler (GIBBS)
+  Default Priors:
+    Variances:                       Unit sum of squares, df = 2 (XPRIOR1)
+  Chain Starting Values:             Random starting values
+
+
+  NOTE: The default prior for regression coefficients 
+        in categorical models is 'normal( 0.0, 5.0)'
+
+  NOTE: For complete list of priors include 'pinfo' in the options.
+
+
+BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
+
+  NOTE: Split chain PSR is being used. This splits each chain's
+        iterations to create twice as many chains.
+
+  Comparing iterations across 20 chains    Highest PSR   Parameter #  
+                          126 to 250             1.480            23  
+                          251 to 500             1.395            24  
+                          376 to 750             1.272            23  
+                          501 to 1000            1.250            23  
+                          626 to 1250            1.163            23  
+                          751 to 1500            1.144            23  
+                          876 to 1750            1.093            23  
+                         1001 to 2000            1.101            23  
+                         1126 to 2250            1.140            23  
+                         1251 to 2500            1.097            24  
+                         1376 to 2750            1.104            23  
+                         1501 to 3000            1.116            23  
+                         1626 to 3250            1.101            23  
+                         1751 to 3500            1.075            23  
+                         1876 to 3750            1.068            23  
+                         2001 to 4000            1.076            23  
+                         2126 to 4250            1.055            23  
+                         2251 to 4500            1.048            22  
+                         2376 to 4750            1.038            23  
+                         2501 to 5000            1.042            23  
+
+
+METROPOLIS-HASTINGS ACCEPTANCE RATES:
+
+  Chain 1:
+
+    Variable                            Type    Probability   Target Value 
+    efficacy                       threshold          0.365          0.350 
+
+  NOTE: Suppressing printing of 19 chains.
+        Use keyword 'tuneinfo' in options to override.
+
+
+DATA INFORMATION:
+
+  Sample Size:              250
+  Missing Data Info:
+
+                      Pattern #:       1     2     3     4     5     6     7     8     9    10
+                          miss % --------------------------------------------------------------
+                  frlunch =  4.4       -     -     -     -     M     -     -     -     M     M  
+                 stanread =  9.2       -     -     M     -     -     -     M     M     -     M  
+                 efficacy =  9.6       -     -     -     M     -     M     M     -     M     -  
+                  mathpre =  0.0       -     -     -     -     -     -     -     -     -     -  
+                 mathpost = 18.0       -     M     -     -     -     M     -     M     -     -  
+                                 --------------------------------------------------------------
+                                 %  65.2  14.0   6.4   4.8   3.2   2.8   1.2   1.2   0.8   0.4
+
+
+VARIABLES IN IMPUTATION MODEL:
+
+  Fixed variables:        mathpre
+  Incomplete continuous:  stanread mathpost
+  Incomplete ordinal:     frlunch efficacy
+
+  NUMBER OF PARAMETERS
+    Imputation Models:      26
+
+WARNING MESSAGES:
+
+  No warning messages.
+
+
+IMPUTED DATA SUMMARIES:
+
+  NOTE: Imputed data summaries are averaged across 10000 data sets.
+
+
+Variables                              Mean     StdDev        25%        50%        75%        Min        Max 
+                                ------------------------------------------------------------------------------
+
+  frlunch                             0.410      0.493      0.000      0.000      1.000      0.000      1.000 
+  stanread                           52.393     10.622     44.863     54.410     60.222     26.292     72.107 
+  efficacy                            3.363      1.609      2.000      3.000      4.709      1.000      6.000 
+  mathpost                           56.500      9.486     50.669     56.402     62.512     31.668     85.011 
+  mathpre                            50.096      8.659     45.000     50.000     56.000     26.000     76.000 
+
+                                ------------------------------------------------------------------------------
+
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  No residual correlations.
+
+
+
+PREDICTOR MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 20 chains.
+  NOTE: Estimate column based on posterior median.
+
+
+
+Missing variable:   frlunch    
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           -0.264      0.096     -0.450     -0.079      7.613      0.006   2867.204 
+
+Level 1:                                                                                                      
+  stanread                           -0.032      0.010     -0.052     -0.013     10.826      0.001   3307.263 
+  efficacy                            0.085      0.094     -0.099      0.267      0.807      0.369   2548.145 
+  mathpre                             0.023      0.013     -0.002      0.049      3.179      0.075   3252.862 
+  mathpost                           -0.049      0.014     -0.077     -0.021     11.956      0.001   2148.887 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing variable:   stanread   
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           52.381      0.691     51.036     53.740   5739.271      0.000   5066.442 
+
+Level 1:                                                                                                      
+  frlunch                            -2.583      0.747     -4.030     -1.080     11.908      0.001   4833.331 
+  efficacy                            0.648      0.675     -0.690      1.971      0.925      0.336   5530.063 
+  mathpre                             0.062      0.094     -0.121      0.251      0.445      0.505   6542.510 
+  mathpost                            0.340      0.104      0.131      0.535     10.689      0.001   5465.943 
+  Residual Var.                      80.614      8.382     66.264     99.205        ---        ---   6756.807 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing variable:   efficacy   
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            1.062      0.107      0.855      1.275     99.207      0.000    203.218 
+
+Level 1:                                                                                                      
+  frlunch                             0.087      0.095     -0.099      0.274      0.831      0.362   3118.578 
+  stanread                            0.008      0.008     -0.008      0.026      1.003      0.317   4917.003 
+  mathpre                             0.018      0.010     -0.002      0.038      2.953      0.086   5234.108 
+  mathpost                            0.028      0.012      0.005      0.051      5.709      0.017   3945.254 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+  Tau 2                               0.538      0.086      0.377      0.715        ---        ---    215.180 
+  Tau 3                               1.184      0.109      0.977      1.407        ---        ---    149.233 
+  Tau 4                               1.777      0.124      1.543      2.027        ---        ---    124.692 
+  Tau 5                               2.263      0.140      1.984      2.551        ---        ---    113.959 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing variable:   mathpost   
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           56.504      0.555     55.396     57.567  10378.870      0.000   4353.468 
+
+Level 1:                                                                                                      
+  frlunch                            -2.188      0.575     -3.270     -1.038     14.303      0.000   3351.406 
+  stanread                            0.189      0.060      0.073      0.306     10.035      0.002   4430.891 
+  efficacy                            1.222      0.517      0.215      2.252      5.608      0.018   4406.012 
+  mathpre                             0.476      0.062      0.354      0.596     58.590      0.000   6043.712 
+  Residual Var.                      45.242      4.994     36.454     56.254        ---        ---   4585.610 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+VARIABLE ORDER IN IMPUTED DATA:
+
+  separate = './imps/imp*.dat'
+
+     id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost
+    
+
+   stacked = './imps/imps.dat'
+
+     imp# id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost
+    
+
+  stacked0 = './imps/imps0.dat'
+
+     imp# id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost
+    
+
