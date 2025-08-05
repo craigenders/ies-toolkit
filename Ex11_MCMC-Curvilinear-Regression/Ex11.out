@@ -1,6 +1,6 @@
 Mplus VERSION 8.11 (Mac)
 MUTHEN & MUTHEN
-07/30/2025   2:56 AM
+08/05/2025  12:29 PM
 
 INPUT INSTRUCTIONS
 
@@ -9,7 +9,7 @@ INPUT INSTRUCTIONS
   file = ./imps/implist.dat;
   type = imputation;
   VARIABLE:
-  names = id condition male frlunch lowach stanread efficacy anxiety mathpre mathpost;
+  names = id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost;
   ! list the squared variable anxietysq from the "DEFINE:" command below;
   usevariables = mathpost anxiety frlunch efficacy mathpre anxietysq;
   DEFINE:
@@ -485,8 +485,8 @@ TECHNICAL 1 OUTPUT
  ANXIETYS    8738.579
 
 
-     Beginning Time:  02:56:11
-        Ending Time:  02:56:11
+     Beginning Time:  12:29:38
+        Ending Time:  12:29:38
        Elapsed Time:  00:00:00
 
 

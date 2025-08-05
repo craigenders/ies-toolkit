@@ -3,7 +3,7 @@ DATA:
 file = ./imps/implist.dat;
 type = imputation;
 VARIABLE: 
-names = id condition male frlunch lowach stanread efficacy anxiety mathpre mathpost;
+names = id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost;
 ! list the squared variable anxietysq from the "DEFINE:" command below;
 usevariables = mathpost anxiety frlunch efficacy mathpre anxietysq;
 DEFINE:

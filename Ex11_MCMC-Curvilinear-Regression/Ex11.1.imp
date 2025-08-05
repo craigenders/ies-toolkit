@@ -4,7 +4,7 @@ VARIABLES: id condition male frlunch atrisk stanread efficacy anxiety mathpre ma
 ORDINAL: frlunch atrisk efficacy;
 MISSING: 999;
 FIXED:  mathpre; # complete variables
-CENTER: anxiety; # center anxiety at its grandmean
+CENTER: anxiety; # center anxiety at its grand mean
 MODEL: 
 focal.model:
 mathpost ~ anxiety anxiety^2 frlunch efficacy mathpre;

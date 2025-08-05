@@ -24,7 +24,7 @@ mymodel <- rblimp(
   center = 'anxiety',
   model = ' 
    focal.model:
-   mathpost ~ anxiety anxiety^2@beta2 frlunch efficacy mathpre;
+   mathpost ~ anxiety anxiety^2 frlunch efficacy mathpre;
    auxiliary.models:
    stanread atrisk ~ mathpost anxiety frlunch efficacy mathpre',
   seed = 90291,
@@ -43,7 +43,7 @@ mymodel <- rblimp(
   center = 'anxiety',
   model = ' 
    focal.model:
-   mathpost ~ anxiety anxiety^2@beta2 frlunch efficacy mathpre;
+   mathpost ~ anxiety anxiety^2 frlunch efficacy mathpre;
    auxiliary.models:
    stanread atrisk ~ mathpost anxiety frlunch efficacy mathpre',
   seed = 90291,
