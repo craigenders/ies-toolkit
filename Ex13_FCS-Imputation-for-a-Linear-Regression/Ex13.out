@@ -1,0 +1,362 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+08/05/2025   6:51 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: FCS for Linear Regression;
+  DATA:
+  file = ./imps/implist.dat;
+  ! read in imputation data;
+  type = imputation;
+  VARIABLE:
+  names = id male hispanic riskgrp atrisk behsymp1 lrnprob1
+     read1 read2 read3 read9 readgrp9 stanread7
+     math1 math2 math3 math9 mathgrp9 stanmath7;
+  usevariables = read9 read1 lrnprob1 behsymp1;
+  MODEL:
+  !focal model;
+  read9 on read1 lrnprob1 behsymp1 (beta1-beta3);
+  MODEL TEST:
+  ! wald test that all slopes = 0;
+  0 = beta1; 0 = beta2; 0 = beta3;
+  OUTPUT:
+  ! output for standardized coefficients and confidence intervals;
+  stdyx cinterval;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+FCS for Linear Regression;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Average number of observations                                 138
+
+Number of replications
+    Requested                                                   20
+    Completed                                                   20
+
+Number of dependent variables                                    1
+Number of independent variables                                  3
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   READ9
+
+Observed independent variables
+   READ1       LRNPROB1    BEHSYMP1
+
+
+Estimator                                                       ML
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+
+Input data file(s)
+  Multiple data files from
+    ./imps/implist.dat
+
+Input data format  FREE
+
+
+SAMPLE STATISTICS
+
+NOTE:  These are average results over 20 data sets.
+
+
+     SAMPLE STATISTICS
+
+
+           Means
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+               87.458        86.166        52.297        49.541
+
+
+           Covariances
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9        221.495
+ READ1        218.194       421.539
+ LRNPROB1     -51.918       -12.570       114.536
+ BEHSYMP1     -56.839       -13.774        91.459       146.471
+
+
+           Correlations
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9          1.000
+ READ1          0.714         1.000
+ LRNPROB1      -0.326        -0.057         1.000
+ BEHSYMP1      -0.316        -0.055         0.706         1.000
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        5
+
+Loglikelihood
+
+          H0 Value                        -504.178
+          H1 Value                        -504.178
+
+*   The loglikelihood cannot be used directly for chi-square testing with
+    imputed data.
+
+Information Criteria
+
+          Akaike (AIC)                    1018.355
+          Bayesian (BIC)                  1032.992
+          Sample-Size Adjusted BIC        1017.173
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                              0.000
+          Degrees of Freedom                     0
+          P-Value                           1.0000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+          90 Percent C.I.                    0.361  0.488
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                             90.212
+          Degrees of Freedom                     3
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.000
+
+Wald Test of Parameter Constraints
+
+          Value                            157.173
+          Degrees of Freedom                     3
+          P-Value                           0.0000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+ READ9    ON
+    READ1              0.505      0.046     11.079      0.000      0.278
+    LRNPROB1          -0.251      0.121     -2.079      0.038      0.247
+    BEHSYMP1          -0.184      0.105     -1.747      0.081      0.223
+
+ Intercepts
+    READ9             66.190      6.154     10.756      0.000      0.234
+
+ Residual Variances
+    READ9             87.463     12.279      7.123      0.000      0.267
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.878E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+ READ9    ON
+    READ1              0.696      0.046     15.144      0.000      0.142
+    LRNPROB1          -0.181      0.088     -2.066      0.039      0.257
+    BEHSYMP1          -0.149      0.085     -1.749      0.080      0.218
+
+ Intercepts
+    READ9              4.454      0.561      7.933      0.000      0.243
+
+ Residual Variances
+    READ9              0.395      0.055      7.187      0.000      0.095
+
+
+R-SQUARE
+
+    Observed                                        Two-Tailed   Rate of
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+    READ9              0.605      0.055     11.015      0.000      0.095
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ READ9    ON
+    READ1            0.388       0.416       0.430       0.505       0.580       0.594       0.622
+    LRNPROB1        -0.562      -0.488      -0.450      -0.251      -0.052      -0.014       0.060
+    BEHSYMP1        -0.455      -0.390      -0.357      -0.184      -0.011       0.022       0.087
+
+ Intercepts
+    READ9           50.340      54.129      56.067      66.190      76.312      78.251      82.040
+
+ Residual Variances
+    READ9           55.834      63.395      67.263      87.463     107.662     111.530     119.092
+
+
+CONFIDENCE INTERVALS OF STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ READ9    ON
+    READ1            0.578       0.606       0.621       0.696       0.772       0.786       0.815
+    LRNPROB1        -0.407      -0.353      -0.325      -0.181      -0.037      -0.009       0.045
+    BEHSYMP1        -0.369      -0.317      -0.290      -0.149      -0.009       0.018       0.071
+
+ Intercepts
+    READ9            3.008       3.354       3.530       4.454       5.377       5.554       5.900
+
+ Residual Variances
+    READ9            0.253       0.287       0.304       0.395       0.485       0.503       0.536
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION
+
+
+           NU
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+                  0             0             0             0
+
+
+           LAMBDA
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9              0             0             0             0
+ READ1              0             0             0             0
+ LRNPROB1           0             0             0             0
+ BEHSYMP1           0             0             0             0
+
+
+           THETA
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9              0
+ READ1              0             0
+ LRNPROB1           0             0             0
+ BEHSYMP1           0             0             0             0
+
+
+           ALPHA
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+                  1             0             0             0
+
+
+           BETA
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9              0             2             3             4
+ READ1              0             0             0             0
+ LRNPROB1           0             0             0             0
+ BEHSYMP1           0             0             0             0
+
+
+           PSI
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9              5
+ READ1              0             0
+ LRNPROB1           0             0             0
+ BEHSYMP1           0             0             0             0
+
+
+     STARTING VALUES
+
+
+           NU
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9          1.000         0.000         0.000         0.000
+ READ1          0.000         1.000         0.000         0.000
+ LRNPROB1       0.000         0.000         1.000         0.000
+ BEHSYMP1       0.000         0.000         0.000         1.000
+
+
+           THETA
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9          0.000
+ READ1          0.000         0.000
+ LRNPROB1       0.000         0.000         0.000
+ BEHSYMP1       0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+               87.667        85.889        52.299        49.721
+
+
+           BETA
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9          0.000         0.000         0.000         0.000
+ READ1          0.000         0.000         0.000         0.000
+ LRNPROB1       0.000         0.000         0.000         0.000
+ BEHSYMP1       0.000         0.000         0.000         0.000
+
+
+           PSI
+              READ9         READ1         LRNPROB1      BEHSYMP1
+              ________      ________      ________      ________
+ READ9        106.173
+ READ1          0.000       427.952
+ LRNPROB1       0.000       -18.257       115.885
+ BEHSYMP1       0.000       -20.292        92.373       145.391
+
+
+     Beginning Time:  18:51:14
+        Ending Time:  18:51:15
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen
