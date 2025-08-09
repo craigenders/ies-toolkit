@@ -4,7 +4,7 @@ file = ./imps/implist.dat;
 ! read in imputation data;
 type = imputation;
 VARIABLE: 
-names = id condition male frlunch lowach stanread efficacy anxiety mathpre mathpost;
+names = id condition male frlunch atrisk stanread efficacy anxiety mathpre mathpost;
 ! list change variable from "DEFINE:" command below;
 usevariables =  change;
 DEFINE:
