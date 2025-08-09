@@ -7,7 +7,7 @@ FIXED:  mathpre; # complete variables
 CENTER: anxiety; # center anxiety at its grand mean
 MODEL: 
 focal.model:
-mathpost ~ anxiety anxiety^2@beta2 frlunch efficacy mathpre;
+mathpost ~ anxiety anxiety^2 frlunch efficacy mathpre;
 auxiliary.models:
 stanread atrisk ~ mathpost anxiety frlunch efficacy mathpre;
 SEED: 90291;

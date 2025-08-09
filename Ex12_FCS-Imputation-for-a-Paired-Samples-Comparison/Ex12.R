@@ -2,16 +2,15 @@
 # fcs imputation for paired t-test
 ##################################################
 
-library(fdir)
 library(rblimp)
 library(mitml)
 
 ##################################################
-# set working directory and load data
+# load data from github
 ##################################################
 
-set()
-load('mathachievement.rda')
+data_url <- "https://raw.githubusercontent.com/craigenders/ies-toolkit/main/Data/mathachievement.rda"
+load(gzcon(url(data_url, open = "rb")))
 
 ##################################################
 # fcs imputation (ex12.imp)

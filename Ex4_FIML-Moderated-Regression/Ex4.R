@@ -40,7 +40,7 @@ nodes.read1 <- seq(-55, 75, by = 2)
 nodes.lrnprob1 <- seq(-30, 50, by = 2)
 nodes.atrisk <- c(0,1)
 
-# model for behsymp1 predictor
+# model for atrisk predictor
 model.atrisk <- list( "model" = "logistic", "formula" = atrisk ~ 1, nodes = nodes.atrisk)
 
 # model for lrnprob1 predictor
