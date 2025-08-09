@@ -2,18 +2,17 @@
 # fcs imputation with random intercepts
 ##################################################
 
-library(fdir)
 library(rblimp)
 library(rockchalk)
 library(lme4)
 library(mitml)
 
 ##################################################
-# set working directory and load data
+# load data from github
 ##################################################
 
-set()
-load('problemsolving2level.rda')
+data_url <- "https://raw.githubusercontent.com/craigenders/ies-toolkit/main/Data/problemsolving2level.rda"
+load(gzcon(url(data_url, open = "rb")))
 
 ##################################################
 # fcs imputation (ex15.imp)
@@ -23,7 +22,7 @@ mymodel <- rblimp_fcs(
   data = problemsolving2level,
   clusterid = 'school',
   ordinal = 'condition hispanic frlunch',
-  fixed = 'condition',
+  fixed = 'condition psolvepre',
   variables = 'psolvepst psolvepre hispanic frlunch condition',
   seed = 90291,
   burn = 1000,

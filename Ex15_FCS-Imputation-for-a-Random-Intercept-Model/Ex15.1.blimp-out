@@ -1,0 +1,223 @@
+
+---------------------------------------------------------------------------
+
+                                   Blimp
+                                  3.2.22
+
+             Blimp was developed with funding from Institute of
+           Education Sciences awards R305D150056 and R305D190002.
+
+            Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
+                 Han Du, Co-P.I. Email: hdu@psych.ucla.edu
+                 Roy Levy, Co-P.I. Email: roy.levy@asu.edu
+
+              Programming and Blimp Studio by Brian T. Keller
+
+                   There is no expressed license given.
+
+---------------------------------------------------------------------------
+
+
+ALGORITHMIC OPTIONS SPECIFIED:
+
+  Imputation method:                 Latent Fully conditional specification
+  MCMC algorithm:                    Gibbs sampler (GIBBS)
+  Default Priors:
+    Variances:                       Unit sum of squares, df = 2 (XPRIOR1)
+  Chain Starting Values:             Random starting values
+
+
+  NOTE: The default prior for regression coefficients 
+        in categorical models is 'normal( 0.0, 5.0)'
+
+  NOTE: For complete list of priors include 'pinfo' in the options.
+
+  NOTE: The following variables have been renamed
+        to be 9 characters or less.
+
+           efficacypre -> efficacyp
+           efficacypst -> efficacy1
+
+
+BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
+
+  NOTE: Split chain PSR is being used. This splits each chain's
+        iterations to create twice as many chains.
+
+  Comparing iterations across 20 chains    Highest PSR   Parameter #  
+                           26 to 50              1.374            14  
+                           51 to 100             1.300            19  
+                           76 to 150             1.125            12  
+                          101 to 200             1.109            12  
+                          126 to 250             1.089            12  
+                          151 to 300             1.085            12  
+                          176 to 350             1.053            12  
+                          201 to 400             1.064            12  
+                          226 to 450             1.053            12  
+                          251 to 500             1.045            12  
+                          276 to 550             1.040            12  
+                          301 to 600             1.033            12  
+                          326 to 650             1.038            12  
+                          351 to 700             1.033            12  
+                          376 to 750             1.025            12  
+                          401 to 800             1.025            12  
+                          426 to 850             1.026            12  
+                          451 to 900             1.022            12  
+                          476 to 950             1.019            12  
+                          501 to 1000            1.015             1  
+
+
+DATA INFORMATION:
+
+  Level-2 identifier:       school
+  Sample Size:              982
+  Level-2 Clusters:         29
+  Missing Data Info:
+
+                      Pattern #:       1     2     3     4     5     6     7     8
+                          miss % --------------------------------------------------
+                condition =  0.0       -     -     -     -     -     -     -     -  
+                 hispanic =  9.0       -     -     M     -     M     -     M     M  
+                  frlunch =  4.7       -     -     -     M     -     M     M     M  
+                psolvepre =  0.0       -     -     -     -     -     -     -     -  
+                psolvepst = 20.5       -     M     -     -     M     M     -     M  
+                                 --------------------------------------------------
+                                 %  68.5  18.2   7.2   3.5   1.3   0.8   0.3   0.1
+
+
+VARIABLES IN IMPUTATION MODEL:
+
+  Fixed variables:        condition psolvepre
+  Incomplete continuous:  psolvepst
+  Incomplete ordinal:     hispanic frlunch
+
+  NUMBER OF PARAMETERS
+    Imputation Models:      25
+
+WARNING MESSAGES:
+
+  No warning messages.
+
+
+IMPUTED DATA SUMMARIES:
+
+  NOTE: Imputed data summaries are averaged across 10000 data sets.
+
+
+Variables                              Mean     StdDev        25%        50%        75%        Min        Max 
+                                ------------------------------------------------------------------------------
+
+  hispanic                            0.666      0.472      0.000      1.000      1.000      0.000      1.000 
+  frlunch                             0.803      0.398      1.000      1.000      1.000      0.000      1.000 
+  psolvepst                          54.129      5.800     50.840     54.242     58.234     36.520     70.237 
+  condition                           0.552      0.506      0.000      1.000      1.000      0.000      1.000 
+  psolvepre                          49.910      4.945     47.000     50.000     53.000     37.000     66.000 
+
+                                ------------------------------------------------------------------------------
+
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  No residual correlations.
+
+
+
+PREDICTOR MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 20 chains.
+  NOTE: Estimate column based on posterior median.
+
+
+
+Missing variable:   hispanic   
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            0.464      0.197      0.067      0.836      5.523      0.019   1827.368 
+
+Level 1:                                                                                                      
+  frlunch                             0.113      0.068     -0.016      0.250      2.811      0.094   1183.630 
+  psolvepre                           0.001      0.012     -0.022      0.024      0.011      0.918   2346.875 
+  psolvepst                           0.028      0.012      0.004      0.051      5.270      0.022   2024.350 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+
+Level 2:                                                                                                      
+  condition                          -0.934      0.315     -1.556     -0.325      8.814      0.003   3949.281 
+  frlunch                             0.031      0.342     -0.637      0.715      0.008      0.928   2371.010 
+  psolvepst                           0.303      0.084      0.148      0.480     13.245      0.000   3048.364 
+  Residual Var.                       0.358      0.150      0.170      0.754        ---        ---   2700.086 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing variable:   frlunch    
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            1.013      0.138      0.754      1.295     54.233      0.000   2339.218 
+
+Level 1:                                                                                                      
+  hispanic                            0.112      0.067     -0.015      0.248      2.825      0.093   1013.866 
+  psolvepre                           0.010      0.012     -0.013      0.034      0.698      0.403   1991.112 
+  psolvepst                          -0.025      0.013     -0.050     -0.000      3.761      0.052   1781.354 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+
+Level 2:                                                                                                      
+  condition                           0.093      0.360     -0.620      0.822      0.068      0.794   3010.372 
+  hispanic                            0.016      0.256     -0.473      0.538      0.008      0.929   2250.809 
+  psolvepst                          -0.124      0.102     -0.333      0.066      1.536      0.215   2603.149 
+  Residual Var.                       0.269      0.111      0.136      0.563        ---        ---   1860.140 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing variable:   psolvepst  
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           53.980      0.511     52.928     54.972  11177.479      0.000   1613.820 
+
+Level 1:                                                                                                      
+  hispanic                            0.551      0.234      0.079      0.998      5.467      0.019   2671.842 
+  frlunch                            -0.499      0.252     -0.992     -0.009      3.876      0.049   2193.596 
+  psolvepre                           0.457      0.035      0.388      0.526    166.632      0.000   5164.288 
+  Residual Var.                      20.153      1.080     18.169     22.428        ---        ---   4897.824 
+
+Level 2:                                                                                                      
+  condition                           2.377      0.702      1.014      3.757     11.512      0.001   3588.754 
+  hispanic                            1.686      0.451      0.812      2.596     14.149      0.000   2973.301 
+  frlunch                            -0.960      0.730     -2.403      0.477      1.711      0.191   2305.737 
+  Residual Var.                       1.840      0.859      0.767      4.031        ---        ---   2697.889 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+VARIABLE ORDER IN IMPUTED DATA:
+
+  separate = './imps/imp*.dat'
+
+     school student condition teachexp eslpct hispanic male frlunch lowach stanmath
+     efficacyp efficacy1 psolvepre psolvepst
+
+   stacked = './imps/imps.dat'
+
+     imp# school student condition teachexp eslpct hispanic male frlunch lowach stanmath
+     efficacyp efficacy1 psolvepre psolvepst
+
+  stacked0 = './imps/imps0.dat'
+
+     imp# school student condition teachexp eslpct hispanic male frlunch lowach stanmath
+     efficacyp efficacy1 psolvepre psolvepst
+

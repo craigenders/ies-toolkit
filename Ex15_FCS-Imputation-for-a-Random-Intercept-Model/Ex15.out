@@ -1,0 +1,888 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+08/09/2025  12:18 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Two-Level Regression With Random Intercepts;
+  DATA:
+  file = ./imps/implist.dat;
+  ! read in imputation data;
+  type = imputation;
+  VARIABLE:
+  names = school student condition teachexp eslpct hispanic male frlunch
+  	lowach stanmath efficacy1 efficacy2 psolvepre psolvepst;
+  usevariables = psolvepst psolvepre hispanic frlunch condition
+     psolveprej hispanicj frlunchj;
+  ! define second level grouping variable;
+  cluster = school;
+  ! define first level variables;
+  within = psolvepre hispanic frlunch;
+  ! define second level variables;
+  between = psolveprej hispanicj frlunchj condition;
+  DEFINE:
+  ! center covariates at their group means and grand means;
+  psolveprej = cluster_mean(psolvepre);
+  hispanicj = cluster_mean(hispanic);
+  frlunchj = cluster_mean(frlunch);
+  center psolvepre hispanic frlunch (groupmean);
+  center psolveprej hispanicj frlunchj (grandmean);
+  ANALYSIS:
+  ! specify a two level multilevel model analysis;
+  type = twolevel;
+  MODEL:
+  ! first level model;
+  %within%
+  psolvepst on psolvepre hispanic frlunch;
+  ! second level model;
+  %between%
+  psolvepst on psolveprej hispanicj frlunchj condition;
+  OUTPUT:
+  ! output for standardized coefficients and confidence intervals;
+  stdyx cinterval;
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Two-Level Regression With Random Intercepts;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Average number of observations                                 982
+
+Number of replications
+    Requested                                                   20
+    Completed                                                   20
+
+Number of dependent variables                                    1
+Number of independent variables                                  7
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   PSOLVEPST
+
+Observed independent variables
+   PSOLVEPR    HISPANIC    FRLUNCH     CONDITIO    PSOLVEPR    HISPANIC
+   FRLUNCHJ
+
+Variables with special functions
+
+  Cluster variable      SCHOOL
+
+  Within variables
+   PSOLVEPR    HISPANIC    FRLUNCH
+
+  Between variables
+   CONDITIO    PSOLVEPR    HISPANIC    FRLUNCHJ
+
+  Centering (GRANDMEAN)
+   PSOLVEPR    HISPANIC    FRLUNCHJ
+
+  Centering (GROUPMEAN)
+   PSOLVEPR    HISPANIC    FRLUNCH
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  Multiple data files from
+    ./imps/implist.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA FOR THE FIRST DATA SET
+
+     Number of clusters                         29
+
+     Average cluster size       33.862
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass
+     Variable  Correlation
+
+     PSOLVEPS     0.236
+
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+NOTE:  These are average results over 20 data sets.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           Means
+              PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           Covariances
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ PSOLVEPS      25.268
+ PSOLVEPR       9.753        21.185
+ HISPANIC       0.194         0.087         0.155
+ FRLUNCH       -0.078         0.023         0.006         0.133
+ CONDITIO       0.000         0.000         0.000         0.000         0.000
+ PSOLVEPR       0.000         0.000         0.000         0.000         0.000
+ HISPANIC       0.000         0.000         0.000         0.000         0.000
+ FRLUNCHJ       0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________
+ PSOLVEPR       0.000
+ HISPANIC       0.000         0.000
+ FRLUNCHJ       0.000         0.000         0.000
+
+
+           Correlations
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ PSOLVEPS       1.000
+ PSOLVEPR       0.422         1.000
+ HISPANIC       0.098         0.048         1.000
+ FRLUNCH       -0.043         0.014         0.042         1.000
+ CONDITIO       0.000         0.000         0.000         0.000         0.000
+ PSOLVEPR       0.000         0.000         0.000         0.000         0.000
+ HISPANIC       0.000         0.000         0.000         0.000         0.000
+ FRLUNCHJ       0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________
+ PSOLVEPR       0.000
+ HISPANIC       0.000         0.000
+ FRLUNCHJ       0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+               53.824         0.000         0.000         0.000         0.552
+
+
+           Means
+              PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           Covariances
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ PSOLVEPS       7.846
+ PSOLVEPR       0.000         0.000
+ HISPANIC       0.000         0.000         0.000
+ FRLUNCH        0.000         0.000         0.000         0.000
+ CONDITIO       0.530         0.000         0.000         0.000         0.247
+ PSOLVEPR       3.185         0.000         0.000         0.000         0.099
+ HISPANIC       0.438         0.000         0.000         0.000        -0.030
+ FRLUNCHJ      -0.214         0.000         0.000         0.000        -0.011
+
+
+           Covariances
+              PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________
+ PSOLVEPR       2.975
+ HISPANIC       0.158         0.076
+ FRLUNCHJ      -0.111        -0.012         0.022
+
+
+           Correlations
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ PSOLVEPS       1.000
+ PSOLVEPR       0.000         0.000
+ HISPANIC       0.000         0.000         0.000
+ FRLUNCH        0.000         0.000         0.000         0.000
+ CONDITIO       0.380         0.000         0.000         0.000         1.000
+ PSOLVEPR       0.659         0.000         0.000         0.000         0.115
+ HISPANIC       0.568         0.000         0.000         0.000        -0.217
+ FRLUNCHJ      -0.519         0.000         0.000         0.000        -0.157
+
+
+           Correlations
+              PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________
+ PSOLVEPR       1.000
+ HISPANIC       0.333         1.000
+ FRLUNCHJ      -0.435        -0.299         1.000
+
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       10
+
+Loglikelihood
+
+    H0 Value
+
+        Mean                             -2896.483
+        Std Dev                             13.766
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000        -2928.506      -2924.948
+           0.980       0.950        -2924.754      -2924.948
+           0.950       0.900        -2919.126      -2924.948
+           0.900       0.850        -2914.125      -2924.948
+           0.800       0.800        -2908.068      -2918.029
+           0.700       0.700        -2903.702      -2905.011
+           0.500       0.650        -2896.483      -2893.727
+           0.300       0.250        -2889.264      -2890.366
+           0.200       0.200        -2884.898      -2885.350
+           0.100       0.100        -2878.841      -2883.363
+           0.050       0.050        -2873.840      -2876.299
+           0.020       0.000        -2868.213      -2876.299
+           0.010       0.000        -2864.460      -2876.299
+
+    H1 Value
+
+        Mean                             -2896.483
+        Std Dev                             13.766
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000        -2928.506      -2924.948
+           0.980       0.950        -2924.753      -2924.948
+           0.950       0.900        -2919.126      -2924.948
+           0.900       0.850        -2914.125      -2924.948
+           0.800       0.800        -2908.068      -2918.029
+           0.700       0.700        -2903.702      -2905.011
+           0.500       0.650        -2896.483      -2893.727
+           0.300       0.250        -2889.264      -2890.365
+           0.200       0.200        -2884.898      -2885.350
+           0.100       0.100        -2878.841      -2883.363
+           0.050       0.050        -2873.840      -2876.299
+           0.020       0.000        -2868.212      -2876.299
+           0.010       0.000        -2864.460      -2876.299
+
+Information Criteria
+
+    Akaike (AIC)
+
+        Mean                              5812.966
+        Std Dev                             27.531
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000         5748.920       5766.826
+           0.980       1.000         5756.425       5766.826
+           0.950       0.950         5767.680       5766.826
+           0.900       0.900         5777.682       5766.826
+           0.800       0.800         5789.796       5786.726
+           0.700       0.750         5798.529       5799.936
+           0.500       0.350         5812.966       5805.521
+           0.300       0.300         5827.404       5825.535
+           0.200       0.200         5836.136       5831.763
+           0.100       0.150         5848.250       5856.058
+           0.050       0.100         5858.252       5861.733
+           0.020       0.050         5869.507       5861.733
+           0.010       0.000         5877.012       5861.733
+
+    Bayesian (BIC)
+
+        Mean                              5861.862
+        Std Dev                             27.531
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000         5797.816       5815.722
+           0.980       1.000         5805.321       5815.722
+           0.950       0.950         5816.576       5815.722
+           0.900       0.900         5826.578       5815.722
+           0.800       0.800         5838.692       5835.622
+           0.700       0.750         5847.425       5848.832
+           0.500       0.350         5861.862       5854.417
+           0.300       0.300         5876.299       5874.431
+           0.200       0.200         5885.032       5880.659
+           0.100       0.150         5897.146       5904.954
+           0.050       0.100         5907.148       5910.629
+           0.020       0.050         5918.403       5910.629
+           0.010       0.000         5925.908       5910.629
+
+    Sample-Size Adjusted BIC (n* = (n + 2) / 24)
+
+        Mean                              5830.102
+        Std Dev                             27.531
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000         5766.056       5783.962
+           0.980       1.000         5773.561       5783.962
+           0.950       0.950         5784.816       5783.962
+           0.900       0.900         5794.818       5783.962
+           0.800       0.800         5806.931       5803.862
+           0.700       0.750         5815.664       5817.072
+           0.500       0.350         5830.102       5822.657
+           0.300       0.300         5844.539       5842.670
+           0.200       0.200         5853.272       5848.899
+           0.100       0.150         5865.386       5873.194
+           0.050       0.100         5875.388       5878.869
+           0.020       0.050         5886.643       5878.869
+           0.010       0.000         5894.148       5878.869
+
+Chi-Square Test of Model Fit
+
+        Degrees of freedom                       0
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.950            0.000          0.000
+           0.980       0.950            0.000          0.000
+           0.950       0.950            0.000          0.000
+           0.900       0.950            0.000          0.000
+           0.800       0.950            0.000          0.000
+           0.700       0.950            0.000          0.000
+           0.500       0.950            0.000          0.000
+           0.300       0.950            0.000          0.000
+           0.200       0.950            0.000          0.000
+           0.100       0.950            0.000          0.000
+           0.050       0.950            0.000          0.000
+           0.020       0.950            0.000          0.000
+           0.010       0.950            0.000          0.000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations       20
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       1.000
+           0.980       1.000
+           0.950       1.000
+           0.900       1.000
+           0.800       1.000
+           0.700       1.000
+           0.500       1.000
+           0.300       1.000
+           0.200       1.000
+           0.100       1.000
+           0.050       1.000
+           0.020       1.000
+           0.010       1.000
+
+CFI/TLI
+
+    CFI
+
+        Mean                                 1.000
+        Std Dev                              0.000
+        Number of successful computations       20
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       0.000
+           0.980       0.000
+           0.950       0.000
+           0.900       0.000
+           0.800       0.000
+           0.700       0.000
+           0.500       0.000
+           0.300       0.000
+           0.200       0.000
+           0.100       0.000
+           0.050       0.000
+           0.020       0.000
+           0.010       0.000
+
+    TLI
+
+        Mean                                 1.000
+        Std Dev                              0.000
+        Number of successful computations       20
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       0.000
+           0.980       0.000
+           0.950       0.000
+           0.900       0.000
+           0.800       0.000
+           0.700       0.000
+           0.500       0.000
+           0.300       0.000
+           0.200       0.000
+           0.100       0.000
+           0.050       0.000
+           0.020       0.000
+           0.010       0.000
+
+SRMR (Standardized Root Mean Square Residual) for the WITHIN level
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations       20
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       1.000
+           0.980       1.000
+           0.950       1.000
+           0.900       1.000
+           0.800       1.000
+           0.700       1.000
+           0.500       1.000
+           0.300       1.000
+           0.200       1.000
+           0.100       1.000
+           0.050       1.000
+           0.020       1.000
+           0.010       1.000
+
+SRMR (Standardized Root Mean Square Residual) for the BETWEEN level
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations       20
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       1.000
+           0.980       1.000
+           0.950       1.000
+           0.900       1.000
+           0.800       1.000
+           0.700       1.000
+           0.500       1.000
+           0.300       1.000
+           0.200       1.000
+           0.100       1.000
+           0.050       1.000
+           0.020       1.000
+           0.010       1.000
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+Within Level
+
+ PSOLVEPST  ON
+    PSOLVEPRE          0.457      0.032     14.287      0.000      0.197
+    HISPANIC           1.024      0.379      2.701      0.007      0.260
+    FRLUNCH           -0.714      0.469     -1.524      0.128      0.392
+
+ Residual Variances
+    PSOLVEPST         20.539      1.393     14.747      0.000      0.212
+
+Between Level
+
+ PSOLVEPST  ON
+    PSOLVEPREJ         0.629      0.159      3.953      0.000      0.119
+    HISPANICJ          4.980      1.284      3.878      0.000      0.075
+    FRLUNCHJ          -2.618      1.687     -1.552      0.121      0.118
+    CONDITION          2.372      0.660      3.594      0.000      0.107
+
+ Intercepts
+    PSOLVEPST         52.516      0.520    101.066      0.000      0.072
+
+ Residual Variances
+    PSOLVEPST          1.816      0.746      2.436      0.015      0.100
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.122E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+Within Level
+
+ PSOLVEPST  ON
+    PSOLVEPRE          0.419      0.029     14.479      0.000      0.254
+    HISPANIC           0.080      0.029      2.783      0.005      0.252
+    FRLUNCH           -0.052      0.034     -1.534      0.125      0.391
+
+ Residual Variances
+    PSOLVEPST          0.813      0.024     34.000      0.000      0.210
+
+Between Level
+
+ PSOLVEPST  ON
+    PSOLVEPREJ         0.388      0.095      4.064      0.000      0.118
+    HISPANICJ          0.490      0.130      3.757      0.000      0.062
+    FRLUNCHJ          -0.138      0.091     -1.511      0.131      0.124
+    CONDITION          0.421      0.123      3.422      0.001      0.091
+
+ Intercepts
+    PSOLVEPST         18.760      2.927      6.409      0.000      0.026
+
+ Residual Variances
+    PSOLVEPST          0.231      0.091      2.537      0.011      0.088
+
+
+R-SQUARE
+
+Within Level
+
+    Observed                                        Two-Tailed   Rate of
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+    PSOLVEPS           0.187      0.024      7.833      0.000      0.210
+
+Between Level
+
+    Observed                                        Two-Tailed   Rate of
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+    PSOLVEPS           0.769      0.091      8.427      0.000      0.088
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ PSOLVEPS ON
+    PSOLVEPRE        0.375       0.394       0.404       0.457       0.510       0.520       0.539
+    HISPANIC         0.048       0.281       0.400       1.024       1.647       1.767       2.000
+    FRLUNCH         -1.921      -1.633      -1.485      -0.714       0.057       0.204       0.493
+
+ Residual Variances
+    PSOLVEPST       16.951      17.809      18.248      20.539      22.830      23.268      24.126
+
+Between Level
+
+ PSOLVEPS ON
+    PSOLVEPREJ       0.219       0.317       0.367       0.629       0.891       0.941       1.039
+    HISPANICJ        1.673       2.463       2.868       4.980       7.092       7.497       8.287
+    FRLUNCHJ        -6.964      -5.925      -5.393      -2.618       0.158       0.689       1.728
+    CONDITION        0.672       1.078       1.286       2.372       3.457       3.665       4.071
+
+ Intercepts
+    PSOLVEPST       51.177      51.497      51.661      52.516      53.371      53.534      53.854
+
+ Residual Variances
+    PSOLVEPST       -0.104       0.355       0.590       1.816       3.043       3.278       3.737
+
+
+CONFIDENCE INTERVALS OF STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ PSOLVEPS ON
+    PSOLVEPRE        0.344       0.362       0.371       0.419       0.466       0.475       0.493
+    HISPANIC         0.006       0.024       0.033       0.080       0.127       0.136       0.154
+    FRLUNCH         -0.139      -0.118      -0.107      -0.052       0.004       0.014       0.035
+
+ Residual Variances
+    PSOLVEPST        0.751       0.766       0.773       0.813       0.852       0.860       0.874
+
+Between Level
+
+ PSOLVEPS ON
+    PSOLVEPREJ       0.142       0.201       0.231       0.388       0.544       0.575       0.633
+    HISPANICJ        0.154       0.234       0.275       0.490       0.704       0.745       0.825
+    FRLUNCHJ        -0.373      -0.317      -0.288      -0.138       0.012       0.041       0.097
+    CONDITION        0.104       0.180       0.219       0.421       0.624       0.662       0.738
+
+ Intercepts
+    PSOLVEPST       11.221      13.024      13.946      18.760      23.575      24.497      26.300
+
+ Residual Variances
+    PSOLVEPST       -0.004       0.053       0.081       0.231       0.381       0.410       0.466
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           LAMBDA
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+ PSOLVEPS           0             0             0             0
+ PSOLVEPR           0             0             0             0
+ HISPANIC           0             0             0             0
+ FRLUNCH            0             0             0             0
+
+
+           THETA
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+ PSOLVEPS           0
+ PSOLVEPR           0             0
+ HISPANIC           0             0             0
+ FRLUNCH            0             0             0             0
+
+
+           ALPHA
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           BETA
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+ PSOLVEPS           0             1             2             3
+ PSOLVEPR           0             0             0             0
+ HISPANIC           0             0             0             0
+ FRLUNCH            0             0             0             0
+
+
+           PSI
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+ PSOLVEPS           4
+ PSOLVEPR           0             0
+ HISPANIC           0             0             0
+ FRLUNCH            0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+                    0             0             0             0             0
+
+
+           LAMBDA
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+ PSOLVEPS           0             0             0             0             0
+ CONDITIO           0             0             0             0             0
+ PSOLVEPR           0             0             0             0             0
+ HISPANIC           0             0             0             0             0
+ FRLUNCHJ           0             0             0             0             0
+
+
+           THETA
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+ PSOLVEPS           0
+ CONDITIO           0             0
+ PSOLVEPR           0             0             0
+ HISPANIC           0             0             0             0
+ FRLUNCHJ           0             0             0             0             0
+
+
+           ALPHA
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+                    5             0             0             0             0
+
+
+           BETA
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+ PSOLVEPS           0             6             7             8             9
+ CONDITIO           0             0             0             0             0
+ PSOLVEPR           0             0             0             0             0
+ HISPANIC           0             0             0             0             0
+ FRLUNCHJ           0             0             0             0             0
+
+
+           PSI
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+ PSOLVEPS          10
+ CONDITIO           0             0
+ PSOLVEPR           0             0             0
+ HISPANIC           0             0             0             0
+ FRLUNCHJ           0             0             0             0             0
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+ PSOLVEPS       1.000         0.000         0.000         0.000
+ PSOLVEPR       0.000         1.000         0.000         0.000
+ HISPANIC       0.000         0.000         1.000         0.000
+ FRLUNCH        0.000         0.000         0.000         1.000
+
+
+           THETA
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+ PSOLVEPS       0.000
+ PSOLVEPR       0.000         0.000
+ HISPANIC       0.000         0.000         0.000
+ FRLUNCH        0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           BETA
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+ PSOLVEPS       0.000         0.000         0.000         0.000
+ PSOLVEPR       0.000         0.000         0.000         0.000
+ HISPANIC       0.000         0.000         0.000         0.000
+ FRLUNCH        0.000         0.000         0.000         0.000
+
+
+           PSI
+              PSOLVEPS      PSOLVEPR      HISPANIC      FRLUNCH
+              ________      ________      ________      ________
+ PSOLVEPS      17.271
+ PSOLVEPR       0.000        10.592
+ HISPANIC       0.000         0.000         0.076
+ FRLUNCH        0.000         0.000         0.000         0.065
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+ PSOLVEPS       1.000         0.000         0.000         0.000         0.000
+ CONDITIO       0.000         1.000         0.000         0.000         0.000
+ PSOLVEPR       0.000         0.000         1.000         0.000         0.000
+ HISPANIC       0.000         0.000         0.000         1.000         0.000
+ FRLUNCHJ       0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+ PSOLVEPS       0.000
+ CONDITIO       0.000         0.000
+ PSOLVEPR       0.000         0.000         0.000
+ HISPANIC       0.000         0.000         0.000         0.000
+ FRLUNCHJ       0.000         0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+               54.181         0.000         0.000         0.000         0.000
+
+
+           BETA
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+ PSOLVEPS       0.000         0.000         0.000         0.000         0.000
+ CONDITIO       0.000         0.000         0.000         0.000         0.000
+ PSOLVEPR       0.000         0.000         0.000         0.000         0.000
+ HISPANIC       0.000         0.000         0.000         0.000         0.000
+ FRLUNCHJ       0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              PSOLVEPS      CONDITIO      PSOLVEPR      HISPANIC      FRLUNCHJ
+              ________      ________      ________      ________      ________
+ PSOLVEPS      17.271
+ CONDITIO       0.000         0.119
+ PSOLVEPR       0.000         0.000         1.620
+ HISPANIC       0.000         0.000         0.000         0.035
+ FRLUNCHJ       0.000         0.000         0.000         0.000         0.013
+
+
+     Beginning Time:  00:18:45
+        Ending Time:  00:18:46
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen
