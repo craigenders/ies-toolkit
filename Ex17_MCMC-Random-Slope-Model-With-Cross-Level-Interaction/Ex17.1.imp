@@ -14,5 +14,5 @@ SIMPLE:
 month | condition; # estimate simple slopes for month in each experimental group
 month | hispanic; # estimate simple slopes for month in each ethnic group
 SEED: 90291;
-BURN: 5000; # set iteration number for warm up period
-ITERATIONS: 10000; # set iteration number for analysis period
+BURN: 10000; # set iteration number for warm up period
+ITERATIONS: 20000; # set iteration number for analysis period
