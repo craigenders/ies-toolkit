@@ -2,7 +2,7 @@
 ---------------------------------------------------------------------------
 
                                    Blimp
-                                  3.2.12
+                                  3.2.22
 
              Blimp was developed with funding from Institute of
            Education Sciences awards R305D150056 and R305D190002.
@@ -24,15 +24,17 @@ ALGORITHMIC OPTIONS SPECIFIED:
   Imputation method:                 Fully Bayesian model-based
   MCMC algorithm:                    Full conditional Metropolis sampler with
                                        Auto-Derived Conditional Distributions
-  Between-cluster imputation model:  Not applicable, single-level imputation
-  Prior for random effect variances: Not applicable, single-level imputation
-  Prior for residual variances:      Zero sum of squares, df = -2 (PRIOR2)
-  Prior for predictor variances:     Unit sum of squares, df = 2 (XPRIOR1)
+  Default Priors:
+    Multilevel covariance matrices:  Not applicable, single-level imputation
+    Outcome covariance matrices:     Zero matrix, df = -(p + 1) (PRIOR2)
+    Predictor model variances:       Unit sum of squares, df = 2 (XPRIOR1)
   Chain Starting Values:             Random starting values
 
 
   NOTE: The default prior for regression coefficients 
         in categorical models is 'normal( 0.0, 5.0)'
+
+  NOTE: For complete list of priors include 'pinfo' in the options.
 
 
 BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
@@ -41,45 +43,54 @@ BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
         iterations to create twice as many chains.
 
   Comparing iterations across 2 chains     Highest PSR   Parameter #  
-                           26 to 50              1.459            44  
-                           51 to 100             1.086             9  
-                           76 to 150             1.102            14  
-                          101 to 200             1.082             2  
-                          126 to 250             1.036            39  
-                          151 to 300             1.039            45  
-                          176 to 350             1.018            44  
-                          201 to 400             1.030            44  
-                          226 to 450             1.012             5  
-                          251 to 500             1.012            36  
-                          276 to 550             1.010            14  
-                          301 to 600             1.007            14  
-                          326 to 650             1.016            37  
-                          351 to 700             1.020            33  
-                          376 to 750             1.019            33  
-                          401 to 800             1.017            37  
-                          426 to 850             1.011            37  
-                          451 to 900             1.010            33  
-                          476 to 950             1.015            33  
-                          501 to 1000            1.013            33  
+                           26 to 50              1.468            64  
+                           51 to 100             1.107            48  
+                           76 to 150             1.175             4  
+                          101 to 200             1.152            50  
+                          126 to 250             1.036            56  
+                          151 to 300             1.084            71  
+                          176 to 350             1.029             4  
+                          201 to 400             1.023            77  
+                          226 to 450             1.028            82  
+                          251 to 500             1.027            50  
+                          276 to 550             1.016            71  
+                          301 to 600             1.020            13  
+                          326 to 650             1.020            15  
+                          351 to 700             1.022            15  
+                          376 to 750             1.033            74  
+                          401 to 800             1.009            33  
+                          426 to 850             1.007            15  
+                          451 to 900             1.008            59  
+                          476 to 950             1.009            74  
+                          501 to 1000            1.023            74  
 
 
 DATA INFORMATION:
 
   Sample Size:              138
-  Missing Data Rates:
+  Missing Data Info:
 
-                    read9 = 17.39
-                        m = 00.00
-                 behsymp1 = 03.62
-                 lrnprob1 = 02.17
-                    read1 = 06.52
+                      Pattern #:       1     2     3     4     5     6     7     8     9    10
+                          miss % --------------------------------------------------------------
+                 behsymp1 =  3.6       -     -     -     -     -     -     M     -     M     -  
+                 lrnprob1 =  2.2       -     -     -     -     -     -     -     -     -     -  
+                    read1 =  6.5       -     -     -     -     M     -     -     M     -     -  
+                    read2 =  9.4       -     -     -     M     -     -     -     -     -     M  
+                    read9 = 17.4       -     M     -     -     -     M     -     -     -     -  
+                stanread7 = 19.6       -     -     M     -     -     M     M     M     -     M  
+                        m =  0.0       -     -     -     -     -     -     -     -     -     -  
+                                 --------------------------------------------------------------
+                                 %  51.4  12.3  10.9   8.0   4.3   3.6   1.4   1.4   1.4   1.4
 
+  NOTE: Suppressing printing of 4 missing data patterns.
+        These patterns consist of 3.6% of the data.
+        Use keyword 'allpatterns' in options to print all patterns.
 
 
 MODEL INFORMATION:
 
   NUMBER OF PARAMETERS
-    Outcome Models:         18
+    Outcome Models:         33
     Generated Parameters:   5
     Predictor Models:       0
 
@@ -95,6 +106,10 @@ MODEL INFORMATION:
     [3]  behsymp1 ~ Intercept m
     [4]  lrnprob1 ~ Intercept behsymp1 m
     [5]  read1 ~ Intercept lrnprob1 behsymp1 m
+
+   auxiliary.model:
+    [6]  read2 ~ Intercept read9 m read1 lrnprob1 behsymp1
+    [7]  stanread7 ~ Intercept read2 read9 m read1 lrnprob1 behsymp1
 
   GENERATED PARAMETERS
     [1]  cohensd = -.20
@@ -114,33 +129,61 @@ MODEL FIT:
 
   INFORMATION CRITERIA
 
-    Marginal Likelihood
-      DIC2                  4709.341
-      WAIC                  4770.513
-
     Conditional Likelihood
-      DIC2                  4709.341
-      WAIC                  4770.513
+      DIC2                  7117.652
+      WAIC                  7197.894
+
+
+IMPUTED DATA SUMMARIES:
+
+  NOTE: Imputed data summaries are averaged across 10000 data sets.
+
+
+Variables                              Mean     StdDev        25%        50%        75%        Min        Max 
+                                ------------------------------------------------------------------------------
+
+  read9                              88.117     14.739     80.712     88.491     97.047     40.103    123.466 
+  m                                   0.826      0.380      1.000      1.000      1.000      0.000      1.000 
+  behsymp1                           49.482     12.111     40.864     48.143     58.172     17.000     92.000 
+  lrnprob1                           52.289     10.744     45.000     51.000     60.398     30.750     88.000 
+  read1                              86.173     20.504     74.000     85.950     99.322     21.522    153.000 
+  read2                              92.894     20.674     82.288     91.272    107.001     20.000    150.000 
+  stanread7                         260.118     68.247    220.435    260.525    308.904     79.153    404.964 
+
+                                ------------------------------------------------------------------------------
+
 
 
 CORRELATIONS AMONG RESIDUALS:
 
   Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
 
 
-Correlations                         Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+Correlations                       Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
                                 ------------------------------------------------------------------------------
 
-  read9, m                            0.001      0.121     -0.237      0.237      0.000      0.999   8637.331 
-  read9, behsymp1                     0.002      0.123     -0.237      0.242      0.000      0.985   9892.835 
-  read9, lrnprob1                     0.000      0.121     -0.238      0.237      0.000      1.000   9107.066 
-  read9, read1                       -0.001      0.122     -0.241      0.233      0.000      0.992   9845.458 
-  m, behsymp1                         0.003      0.122     -0.235      0.237      0.000      0.991  10089.267 
-  m, lrnprob1                        -0.001      0.123     -0.241      0.237      0.000      0.996  10089.655 
-  m, read1                            0.001      0.123     -0.241      0.241      0.000      0.999   9575.102 
-  behsymp1, lrnprob1                 -0.001      0.123     -0.244      0.238      0.000      0.995   9767.800 
-  behsymp1, read1                     0.000      0.122     -0.230      0.237      0.000      0.997   9648.177 
-  lrnprob1, read1                     0.000      0.122     -0.240      0.239      0.000      0.999   9330.924 
+  read9, m                            0.000      0.124     -0.243      0.238      0.000      1.000   5362.896 
+  read9, behsymp1                     0.002      0.122     -0.239      0.246      0.000      0.987   8877.453 
+  read9, lrnprob1                    -0.001      0.123     -0.240      0.239      0.000      0.995   8532.383 
+  read9, read1                        0.001      0.123     -0.237      0.240      0.000      0.988   9966.628 
+  read9, read2                        0.003      0.124     -0.244      0.241      0.000      0.991   9973.099 
+  read9, stanread7                   -0.001      0.123     -0.238      0.242      0.000      0.996   9456.366 
+  m, behsymp1                        -0.000      0.122     -0.240      0.238      0.000      0.995   9948.744 
+  m, lrnprob1                         0.000      0.123     -0.240      0.237      0.000      0.999  10015.067 
+  m, read1                           -0.001      0.123     -0.243      0.244      0.000      1.000   9893.464 
+  m, read2                            0.002      0.122     -0.241      0.237      0.000      0.993   9756.074 
+  m, stanread7                        0.002      0.126     -0.247      0.243      0.000      0.994   9850.482 
+  behsymp1, lrnprob1                 -0.000      0.122     -0.239      0.239      0.000      1.000  10047.023 
+  behsymp1, read1                     0.000      0.124     -0.238      0.247      0.000      0.996   9851.365 
+  behsymp1, read2                     0.001      0.123     -0.240      0.237      0.000      0.993  10105.482 
+  behsymp1, stanread7                 0.000      0.122     -0.242      0.238      0.000      0.997  10188.929 
+  lrnprob1, read1                     0.003      0.123     -0.236      0.240      0.000      0.985   9937.984 
+  lrnprob1, read2                     0.000      0.123     -0.240      0.240      0.000      0.997   9617.259 
+  lrnprob1, stanread7                -0.003      0.124     -0.241      0.247      0.000      0.993   9688.959 
+  read1, read2                       -0.002      0.124     -0.243      0.244      0.000      0.991  10544.316 
+  read1, stanread7                   -0.002      0.123     -0.239      0.239      0.000      0.994   9768.173 
+  read2, stanread7                    0.002      0.125     -0.240      0.247      0.000      0.987   9706.947 
 
                                 ------------------------------------------------------------------------------
 
@@ -149,32 +192,36 @@ Correlations                         Median     StdDev       2.5%      97.5%    
 OUTCOME MODEL ESTIMATES:
 
   Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
 
   focal.model block:
 
 Outcome Variable:  read9      
 
-Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
                                 ------------------------------------------------------------------------------
 Variances:                      
-  Residual Var.                      91.500     13.377     69.884    122.582        ---        ---   5722.413 
+  Residual Var.                      91.694     13.046     70.522    121.601        ---        ---   5903.081 
 
 Coefficients:                   
-  Intercept                          67.015      6.738     53.747     80.234     98.965      0.000   5080.000 
-  m                                  -2.986      0.162     -3.332     -2.701    341.993      0.000   6563.975 
-  read1                               0.502      0.046      0.407      0.593    116.610      0.000   6501.228 
-  lrnprob1                           -0.223      0.135     -0.491      0.042      2.745      0.098   4306.273 
-  behsymp1                           -0.223      0.112     -0.446     -0.001      3.969      0.046   6046.418 
+  Intercept                          69.026      6.111     57.127     80.988    127.522      0.000   6333.447 
+  m                                  -2.983      0.158     -3.313     -2.694    355.535      0.000   6636.674 
+  read1                               0.503      0.044      0.419      0.590    133.963      0.000   7164.000 
+  lrnprob1                           -0.244      0.122     -0.482     -0.004      4.013      0.045   4863.923 
+  behsymp1                           -0.183      0.105     -0.393      0.021      3.083      0.079   6107.174 
+
+Standard Deviations:            
+  Residual SD                         9.576      0.670      8.398     11.027        ---        ---   5901.585 
 
 Standardized Coefficients:      
-  m                                  -0.076      0.005     -0.087     -0.067    215.646      0.000  40000.000 
-  read1                               0.666      0.045      0.566      0.741    221.614      0.000   5267.920 
-  lrnprob1                           -0.161      0.096     -0.346      0.030      2.790      0.095   4338.083 
-  behsymp1                           -0.182      0.090     -0.354     -0.001      4.079      0.043   6077.904 
+  m                                  -0.076      0.005     -0.087     -0.067    208.040      0.000  40000.000 
+  read1                               0.693      0.040      0.605      0.762    295.885      0.000   6829.250 
+  lrnprob1                           -0.176      0.087     -0.343     -0.003      4.086      0.043   4902.866 
+  behsymp1                           -0.149      0.084     -0.317      0.018      3.135      0.077   6112.053 
 
 Proportion Variance Explained   
-  by Coefficients                     0.591      0.051      0.475      0.679        ---        ---   6169.949 
-  by Residual Variation               0.409      0.051      0.321      0.525        ---        ---   6169.949 
+  by Coefficients                     0.587      0.051      0.476      0.676        ---        ---   6342.070 
+  by Residual Variation               0.413      0.051      0.324      0.524        ---        ---   6342.070 
 
                                 ------------------------------------------------------------------------------
 
@@ -183,16 +230,19 @@ Proportion Variance Explained
 
 Outcome Variable:  m          
 
-Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
                                 ------------------------------------------------------------------------------
 Variances:                      
   Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
 
 Coefficients:                   
-  Intercept                          -0.944      0.125     -1.189     -0.701     56.917      0.000   2773.305 
+  Intercept                           0.938      0.127      0.695      1.192     55.068      0.000   3132.139 
 
 Thresholds:                     
   Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+
+Standard Deviations:            
+  Residual SD                         1.000      0.000      1.000      1.000        ---        ---        nan 
 
 Proportion Variance Explained   
   by Coefficients                     0.000      0.000      0.000      0.000        ---        ---        nan 
@@ -205,21 +255,24 @@ Proportion Variance Explained
 
 Outcome Variable:  behsymp1   
 
-Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
                                 ------------------------------------------------------------------------------
 Variances:                      
-  Residual Var.                     142.640     18.025    113.104    183.703        ---        ---   9490.608 
+  Residual Var.                     141.746     18.080    112.146    182.670        ---        ---   9120.975 
 
 Coefficients:                   
-  Intercept                          48.154      1.125     45.912     50.364   1830.497      0.000   9474.936 
-  m                                   7.689      2.735      2.478     13.107      7.902      0.005   9256.520 
+  Intercept                          55.802      2.478     50.915     60.645    507.078      0.000   9218.028 
+  m                                  -7.673      2.727    -13.009     -2.217      7.877      0.005   9428.326 
+
+Standard Deviations:            
+  Residual SD                        11.906      0.748     10.590     13.516        ---        ---   9094.306 
 
 Standardized Coefficients:      
-  m                                   0.238      0.080      0.077      0.388      8.641      0.003   9222.033 
+  m                                  -0.238      0.080     -0.385     -0.070      8.605      0.003   9495.372 
 
 Proportion Variance Explained   
-  by Coefficients                     0.057      0.038      0.006      0.151        ---        ---   9258.879 
-  by Residual Variation               0.943      0.038      0.849      0.994        ---        ---   9258.879 
+  by Coefficients                     0.057      0.038      0.005      0.148        ---        ---   9584.792 
+  by Residual Variation               0.943      0.038      0.852      0.995        ---        ---   9584.792 
 
                                 ------------------------------------------------------------------------------
 
@@ -227,23 +280,26 @@ Proportion Variance Explained
 
 Outcome Variable:  lrnprob1   
 
-Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
                                 ------------------------------------------------------------------------------
 Variances:                      
-  Residual Var.                      56.154      7.171     44.349     72.363        ---        ---   8665.855 
+  Residual Var.                      57.029      7.346     44.892     73.277        ---        ---   8883.929 
 
 Coefficients:                   
-  Intercept                          22.004      2.761     16.560     27.398     63.670      0.000   9421.774 
-  behsymp1                            0.598      0.055      0.489      0.705    117.037      0.000   9237.827 
-  m                                   4.155      1.760      0.749      7.702      5.605      0.018   9789.462 
+  Intercept                          26.191      3.484     19.365     33.146     56.612      0.000   8765.298 
+  behsymp1                            0.598      0.056      0.488      0.707    115.116      0.000   9353.509 
+  m                                  -4.229      1.784     -7.729     -0.645      5.539      0.019   9550.226 
+
+Standard Deviations:            
+  Residual SD                         7.552      0.480      6.700      8.560        ---        ---   8860.795 
 
 Standardized Coefficients:      
-  behsymp1                            0.671      0.043      0.573      0.745    238.520      0.000   9294.304 
-  m                                   0.146      0.061      0.026      0.264      5.782      0.016   9834.911 
+  behsymp1                            0.667      0.044      0.570      0.741    229.291      0.000   8591.748 
+  m                                  -0.148      0.061     -0.265     -0.022      5.709      0.017   9540.235 
 
 Proportion Variance Explained   
-  by Coefficients                     0.521      0.051      0.411      0.612        ---        ---   8910.104 
-  by Residual Variation               0.479      0.051      0.388      0.589        ---        ---   8910.104 
+  by Coefficients                     0.516      0.052      0.405      0.608        ---        ---   8982.200 
+  by Residual Variation               0.484      0.052      0.392      0.595        ---        ---   8982.200 
 
                                 ------------------------------------------------------------------------------
 
@@ -251,25 +307,97 @@ Proportion Variance Explained
 
 Outcome Variable:  read1      
 
-Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
                                 ------------------------------------------------------------------------------
 Variances:                      
-  Residual Var.                     406.357     52.599    320.539    524.558        ---        ---   8049.075 
+  Residual Var.                     434.792     56.107    343.532    561.969        ---        ---   8359.500 
 
 Coefficients:                   
-  Intercept                          89.455      9.452     70.934    107.864     89.555      0.000   7436.037 
-  lrnprob1                            0.039      0.255     -0.463      0.541      0.021      0.884   6490.292 
-  behsymp1                           -0.091      0.212     -0.505      0.322      0.180      0.671   8197.998 
-  m                                  -0.971      4.980    -10.862      8.704      0.039      0.843   8001.802 
+  Intercept                          87.580     11.648     64.520    109.812     56.357      0.000   7793.475 
+  lrnprob1                           -0.016      0.250     -0.512      0.470      0.004      0.947   8650.106 
+  behsymp1                           -0.061      0.216     -0.484      0.371      0.082      0.774   9085.869 
+  m                                   3.218      4.953     -6.444     12.988      0.427      0.513   8835.694 
+
+Standard Deviations:            
+  Residual SD                        20.852      1.326     18.535     23.706        ---        ---   8346.404 
 
 Standardized Coefficients:      
-  lrnprob1                            0.021      0.132     -0.238      0.279      0.022      0.881   6446.032 
-  behsymp1                           -0.054      0.125     -0.293      0.190      0.183      0.669   8130.273 
-  m                                  -0.018      0.091     -0.199      0.157      0.041      0.840   7993.288 
+  lrnprob1                           -0.008      0.125     -0.255      0.237      0.004      0.948   8622.063 
+  behsymp1                           -0.036      0.122     -0.270      0.207      0.083      0.773   9076.134 
+  m                                   0.058      0.088     -0.116      0.228      0.434      0.510   8873.709 
 
 Proportion Variance Explained   
-  by Coefficients                     0.020      0.020      0.002      0.076        ---        ---   9613.828 
-  by Residual Variation               0.980      0.020      0.924      0.998        ---        ---   9613.828 
+  by Coefficients                     0.023      0.021      0.002      0.081        ---        ---   9299.570 
+  by Residual Variation               0.977      0.021      0.919      0.998        ---        ---   9299.570 
+
+                                ------------------------------------------------------------------------------
+
+
+  auxiliary.model block:
+
+Outcome Variable:  read2      
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                      42.205      6.529     31.774     57.627        ---        ---   4764.835 
+
+Coefficients:                   
+  Intercept                         -20.951      6.856    -34.649     -7.705      9.391      0.002   5368.349 
+  read9                               0.675      0.068      0.538      0.808     97.203      0.000   5785.659 
+  m                                   2.138      2.343     -2.393      6.818      0.844      0.358   2487.917 
+  read1                               0.551      0.046      0.459      0.641    142.183      0.000   6489.115 
+  lrnprob1                           -0.291      0.088     -0.462     -0.115     10.791      0.001   5406.542 
+  behsymp1                            0.412      0.081      0.254      0.572     26.110      0.000   4404.156 
+
+Standard Deviations:            
+  Residual SD                         6.497      0.493      5.637      7.591        ---        ---   4756.622 
+
+Standardized Coefficients:      
+  read9                               0.479      0.047      0.385      0.567    105.546      0.000   5839.649 
+  m                                   0.039      0.043     -0.044      0.125      0.845      0.358   2483.998 
+  read1                               0.544      0.043      0.458      0.627    157.042      0.000   5992.307 
+  lrnprob1                           -0.151      0.045     -0.238     -0.059     10.889      0.001   5396.813 
+  behsymp1                            0.241      0.047      0.149      0.331     26.629      0.000   4184.376 
+
+Proportion Variance Explained   
+  by Coefficients                     0.902      0.015      0.867      0.926        ---        ---   4837.043 
+  by Residual Variation               0.098      0.015      0.074      0.133        ---        ---   4837.043 
+
+                                ------------------------------------------------------------------------------
+
+
+
+Outcome Variable:  stanread7  
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  Residual Var.                    2398.744    358.234   1838.582   3259.800        ---        ---   5336.773 
+
+Coefficients:                   
+  Intercept                          16.527     56.817    -97.529    126.810      0.081      0.776   4438.832 
+  read2                               1.852      0.952     -0.106      3.620      3.695      0.055   2991.410 
+  read9                               1.618      0.873     -0.040      3.367      3.469      0.063   2996.004 
+  m                                   1.786     14.240    -26.290     29.891      0.017      0.896   4668.105 
+  read1                              -0.696      0.638     -1.919      0.600      1.169      0.280   3752.294 
+  lrnprob1                            0.461      0.722     -0.975      1.860      0.408      0.523   5382.493 
+  behsymp1                           -0.707      0.698     -2.124      0.641      1.054      0.305   4674.243 
+
+Standard Deviations:            
+  Residual SD                        48.977      3.581     42.879     57.095        ---        ---   5335.291 
+
+Standardized Coefficients:      
+  read2                               0.548      0.278     -0.032      1.055      3.758      0.053   2901.962 
+  read9                               0.340      0.179     -0.008      0.688      3.593      0.058   3124.311 
+  m                                   0.010      0.077     -0.141      0.161      0.018      0.894   4688.938 
+  read1                              -0.205      0.185     -0.553      0.175      1.184      0.277   3667.574 
+  lrnprob1                            0.071      0.110     -0.147      0.284      0.417      0.518   5267.727 
+  behsymp1                           -0.122      0.120     -0.363      0.110      1.068      0.301   4577.826 
+
+Proportion Variance Explained   
+  by Coefficients                     0.509      0.060      0.378      0.614        ---        ---   4684.837 
+  by Residual Variation               0.491      0.060      0.386      0.622        ---        ---   4684.837 
 
                                 ------------------------------------------------------------------------------
 
@@ -278,16 +406,17 @@ Proportion Variance Explained
 GENERATED PARAMETERS:
 
   Summaries based on 10000 iterations using 2 chains.
+  NOTE: Estimate column based on posterior median.
 
 
-Parameters                           Median     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
                                 ------------------------------------------------------------------------------
 
   cohensd                            -0.200      0.000     -0.200     -0.200        inf      0.000      2.001 
-  beta0diff                          -2.986      0.162     -3.332     -2.701    342.001      0.000   6558.584 
-  pmis                                0.173      0.032      0.117      0.242     29.838      0.000   2768.704 
-  pcom                                0.827      0.032      0.758      0.883    665.706      0.000   2768.704 
-  beta0                              66.491      6.743     53.208     79.723     97.278      0.000   5085.842 
+  beta0diff                          -2.983      0.158     -3.313     -2.694    355.489      0.000   6638.348 
+  pmis                                0.826      0.032      0.757      0.883    646.515      0.000   3155.285 
+  pcom                                0.174      0.032      0.117      0.243     29.305      0.000   3155.285 
+  beta0                              66.565      6.143     54.605     78.557    117.332      0.000   6364.816 
 
                                 ------------------------------------------------------------------------------
 

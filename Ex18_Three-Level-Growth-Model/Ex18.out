@@ -1,0 +1,830 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+08/16/2025   1:24 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Three-Level Regression with a Cross-Level Interaction;
+  DATA:
+  file = ./imps/implist.dat;
+  ! read in imputation data;
+  type = imputation;
+  VARIABLE:
+  names = school student wave condition teachexp eslpct hispanic male frlunch
+       lowach stanmath month month7 probsolve efficacy;
+  usevariables = probsolve month7 male frlunch teachexp condition;
+  ! define second level grouping variable;
+  cluster = school student;
+  ! define first level vairables;
+  within = month7;
+  ! define second level and third level variables;
+  between = (student) male frlunch (school) teachexp condition;
+  DEFINE:
+  ! center covariates at their grandmeans;
+  center male frlunch teachexp (grandmean);
+  ANALYSIS:
+  ! specify a three level multilevel model;
+  type = threelevel random;
+  MODEL:
+  ! first level model;
+  %within%
+  ! create second level latent variable for random slope;
+  ranslope | probsolve on month7;
+  ! second level model;
+  %between student%
+  probsolve on male frlunch;
+  probsolve with ranslope;
+  ! third level model;
+  %between school%
+  ! estimate random slope;
+  [ranslope] (beta1);
+  probsolve on teachexp condition;
+  ! cross level interaction;
+  ranslope on condition (beta6);
+  ranslope with probsolve;
+  MODEL CONSTRAINT:
+  ! compute simple slopes of month7 in each experimental group;
+  new(slp_cond0 slp_cond1);
+  slp_cond0 = beta1;
+  slp_cond1 = beta1 + beta6;
+  OUTPUT:
+  ! output for confidence intervals;
+  cinterval;
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Three-Level Regression with a Cross-Level Interaction;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Average number of observations                                6874
+
+Number of replications
+    Requested                                                   20
+    Completed                                                   20
+
+Number of dependent variables                                    1
+Number of independent variables                                  5
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   PROBSOLVE
+
+Observed independent variables
+   MONTH7      MALE        FRLUNCH     TEACHEXP    CONDITIO
+
+Continuous latent variables
+   RANSLOPE
+
+Variables with special functions
+
+  Cluster variables     SCHOOL    STUDENT
+
+  Within variables
+   MONTH7
+
+  Level 2 between variables
+   MALE        FRLUNCH
+
+  Level 3 between variables
+   TEACHEXP    CONDITIO
+
+  Centering (GRANDMEAN)
+   MALE        FRLUNCH     TEACHEXP
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-02
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  Multiple data files from
+    ./imps/implist.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA FOR THE FIRST DATA SET
+
+     Number of STUDENT clusters                982
+     Number of SCHOOL clusters                  29
+
+     Average cluster size for STUDENT level        7.000
+
+     Estimated Intraclass Correlations for the Y Variables for STUDENT level
+
+                Intraclass
+     Variable  Correlation
+
+     PROBSOLV     0.338
+
+     Average cluster size for SCHOOL level      237.034
+
+     Estimated Intraclass Correlations for the Y Variables for SCHOOL level
+
+                Intraclass
+     Variable  Correlation
+
+     PROBSOLV     0.125
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+NOTE:  These are average results over 20 data sets.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              PROBSOLV      MONTH7        MALE          FRLUNCH       TEACHEXP
+              ________      ________      ________      ________      ________
+                0.000        -3.000         0.000         0.000         0.000
+
+
+           Means
+              CONDITIO
+              ________
+                0.000
+
+
+           Covariances
+              PROBSOLV      MONTH7        MALE          FRLUNCH       TEACHEXP
+              ________      ________      ________      ________      ________
+ PROBSOLV      14.924
+ MONTH7         2.609         4.000
+ MALE           0.000         0.000         0.000
+ FRLUNCH        0.000         0.000         0.000         0.000
+ TEACHEXP       0.000         0.000         0.000         0.000         0.000
+ CONDITIO       0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              CONDITIO
+              ________
+ CONDITIO       0.000
+
+
+           Correlations
+              PROBSOLV      MONTH7        MALE          FRLUNCH       TEACHEXP
+              ________      ________      ________      ________      ________
+ PROBSOLV       1.000
+ MONTH7         0.338         1.000
+ MALE         999.000       999.000       999.000
+ FRLUNCH      999.000       999.000       999.000       999.000
+ TEACHEXP     999.000       999.000       999.000       999.000       999.000
+ CONDITIO     999.000       999.000       999.000       999.000       999.000
+
+
+           Correlations
+              CONDITIO
+              ________
+ CONDITIO     999.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN STUDENT
+
+
+           Means
+              PROBSOLV      MONTH7        MALE          FRLUNCH       TEACHEXP
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           Means
+              CONDITIO
+              ________
+                0.000
+
+
+           Covariances
+              PROBSOLV      MONTH7        MALE          FRLUNCH       TEACHEXP
+              ________      ________      ________      ________      ________
+ PROBSOLV       9.505
+ MONTH7         0.000         0.000
+ MALE           0.085         0.000         0.244
+ FRLUNCH       -0.054         0.000        -0.012         0.158
+ TEACHEXP       0.000         0.000         0.000         0.000         0.000
+ CONDITIO       0.000         0.000         0.000         0.000         0.000
+
+
+           Covariances
+              CONDITIO
+              ________
+ CONDITIO       0.000
+
+
+           Correlations
+              PROBSOLV      MONTH7        MALE          FRLUNCH       TEACHEXP
+              ________      ________      ________      ________      ________
+ PROBSOLV       1.000
+ MONTH7         0.000         0.000
+ MALE           0.055         0.000         1.000
+ FRLUNCH       -0.044         0.000        -0.059         1.000
+ TEACHEXP     999.000         0.000       999.000       999.000       999.000
+ CONDITIO     999.000         0.000       999.000       999.000       999.000
+
+
+           Correlations
+              CONDITIO
+              ________
+ CONDITIO     999.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN SCHOOL
+
+
+           Means
+              PROBSOLV      MONTH7        MALE          FRLUNCH       TEACHEXP
+              ________      ________      ________      ________      ________
+               51.878         0.000         0.000         0.000         0.000
+
+
+           Means
+              CONDITIO
+              ________
+                0.552
+
+
+           Covariances
+              PROBSOLV      MONTH7        MALE          FRLUNCH       TEACHEXP
+              ________      ________      ________      ________      ________
+ PROBSOLV       3.518
+ MONTH7         0.000         0.000
+ MALE           0.000         0.000         0.000
+ FRLUNCH        0.000         0.000         0.000         0.000
+ TEACHEXP       1.556         0.000         0.000         0.000        17.900
+ CONDITIO       0.167         0.000         0.000         0.000         0.080
+
+
+           Covariances
+              CONDITIO
+              ________
+ CONDITIO       0.247
+
+
+           Correlations
+              PROBSOLV      MONTH7        MALE          FRLUNCH       TEACHEXP
+              ________      ________      ________      ________      ________
+ PROBSOLV       1.000
+ MONTH7         0.000         0.000
+ MALE         999.000         0.000       999.000
+ FRLUNCH      999.000         0.000       999.000       999.000
+ TEACHEXP       0.196         0.000       999.000       999.000         1.000
+ CONDITIO       0.179         0.000       999.000       999.000         0.038
+
+
+           Correlations
+              CONDITIO
+              ________
+ CONDITIO       1.000
+
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       14
+
+Loglikelihood
+
+    H0 Value
+
+        Mean                            -19452.411
+        Std Dev                             18.076
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000       -19494.461     -19487.379
+           0.980       1.000       -19489.534     -19487.379
+           0.950       0.950       -19482.144     -19487.379
+           0.900       0.900       -19475.577     -19487.379
+           0.800       0.800       -19467.624     -19472.604
+           0.700       0.800       -19461.890     -19459.116
+           0.500       0.450       -19452.411     -19456.251
+           0.300       0.200       -19442.932     -19444.068
+           0.200       0.150       -19437.198     -19443.015
+           0.100       0.100       -19429.245     -19434.273
+           0.050       0.050       -19422.678     -19426.207
+           0.020       0.050       -19415.288     -19426.207
+           0.010       0.050       -19410.361     -19426.207
+
+Information Criteria
+
+    Akaike (AIC)
+
+        Mean                             38932.822
+        Std Dev                             36.152
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.950        38848.721      38836.256
+           0.980       0.950        38858.576      38836.256
+           0.950       0.950        38873.355      38836.256
+           0.900       0.900        38886.489      38836.256
+           0.800       0.850        38902.396      38896.546
+           0.700       0.800        38913.864      38916.106
+           0.500       0.550        38932.822      38936.563
+           0.300       0.200        38951.780      38945.157
+           0.200       0.200        38963.248      38950.562
+           0.100       0.100        38979.155      38973.209
+           0.050       0.050        38992.289      38985.812
+           0.020       0.000        39007.068      38985.812
+           0.010       0.000        39016.923      38985.812
+
+    Bayesian (BIC)
+
+        Mean                             39028.519
+        Std Dev                             36.152
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.950        38944.418      38931.953
+           0.980       0.950        38954.273      38931.953
+           0.950       0.950        38969.052      38931.953
+           0.900       0.900        38982.186      38931.953
+           0.800       0.850        38998.093      38992.243
+           0.700       0.800        39009.561      39011.803
+           0.500       0.550        39028.519      39032.260
+           0.300       0.200        39047.477      39040.854
+           0.200       0.200        39058.945      39046.259
+           0.100       0.100        39074.852      39068.906
+           0.050       0.050        39087.986      39081.509
+           0.020       0.000        39102.765      39081.509
+           0.010       0.000        39112.620      39081.509
+
+    Sample-Size Adjusted BIC (n* = (n + 2) / 24)
+
+        Mean                             38984.030
+        Std Dev                             36.152
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       0.950        38899.929      38887.464
+           0.980       0.950        38909.785      38887.464
+           0.950       0.950        38924.564      38887.464
+           0.900       0.900        38937.698      38887.464
+           0.800       0.850        38953.605      38947.754
+           0.700       0.800        38965.072      38967.314
+           0.500       0.550        38984.030      38987.772
+           0.300       0.200        39002.988      38996.366
+           0.200       0.200        39014.456      39001.771
+           0.100       0.100        39030.363      39024.417
+           0.050       0.050        39043.497      39037.020
+           0.020       0.000        39058.276      39037.020
+           0.010       0.000        39068.131      39037.020
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+Within Level
+
+ Residual Variances
+    PROBSOLVE         12.563      0.812     15.467      0.000      0.013
+
+Between STUDENT Level
+
+ PROBSOLVE  ON
+    MALE               0.336      0.258      1.301      0.193      0.017
+    FRLUNCH           -0.304      0.308     -0.986      0.324      0.084
+
+ PROBSOLV WITH
+    RANSLOPE           0.300      0.144      2.084      0.037      0.101
+
+ Variances
+    RANSLOPE           0.042      0.028      1.464      0.143      0.143
+
+ Residual Variances
+    PROBSOLVE         10.970      0.827     13.272      0.000      0.098
+
+Between SCHOOL Level
+
+ RANSLOPE   ON
+    CONDITION          0.301      0.113      2.663      0.008      0.058
+
+ PROBSOLVE  ON
+    TEACHEXP           0.014      0.073      0.191      0.848      0.033
+    CONDITION          1.558      0.949      1.642      0.101      0.015
+
+ RANSLOPE WITH
+    PROBSOLVE          0.490      0.180      2.717      0.007      0.052
+
+ Intercepts
+    PROBSOLVE         52.855      0.735     71.869      0.000      0.020
+    RANSLOPE           0.449      0.080      5.588      0.000      0.083
+
+ Residual Variances
+    PROBSOLVE          5.696      1.905      2.989      0.003      0.026
+    RANSLOPE           0.070      0.021      3.336      0.001      0.063
+
+New/Additional Parameters
+    SLP_COND           0.449      0.080      5.588      0.000      0.083
+    SLP_COND           0.749      0.079      9.545      0.000      0.017
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.190E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ Residual Variances
+    PROBSOLVE       10.471      10.971      11.227      12.563      13.899      14.155      14.655
+
+Between STUDENT Level
+
+ PROBSOLV ON
+    MALE            -0.329      -0.170      -0.089       0.336       0.762       0.843       1.002
+    FRLUNCH         -1.097      -0.907      -0.810      -0.304       0.203       0.300       0.489
+
+ PROBSOLV WITH
+    RANSLOPE        -0.071       0.018       0.063       0.300       0.536       0.581       0.670
+
+ Variances
+    RANSLOPE        -0.032      -0.014      -0.005       0.042       0.088       0.097       0.115
+
+ Residual Variances
+    PROBSOLVE        8.841       9.350       9.610      10.970      12.329      12.590      13.099
+
+Between SCHOOL Level
+
+ RANSLOPE ON
+    CONDITION        0.010       0.079       0.115       0.301       0.486       0.522       0.591
+
+ PROBSOLV ON
+    TEACHEXP        -0.174      -0.129      -0.106       0.014       0.134       0.157       0.202
+    CONDITION       -0.886      -0.302      -0.003       1.558       3.118       3.417       4.001
+
+ RANSLOPE WITH
+    PROBSOLVE        0.026       0.137       0.193       0.490       0.787       0.843       0.954
+
+ Intercepts
+    PROBSOLVE       50.961      51.414      51.646      52.855      54.065      54.297      54.750
+    RANSLOPE         0.242       0.291       0.317       0.449       0.581       0.606       0.656
+
+ Residual Variances
+    PROBSOLVE        0.788       1.961       2.561       5.696       8.830       9.430      10.603
+    RANSLOPE         0.016       0.029       0.036       0.070       0.105       0.111       0.124
+
+New/Additional Parameters
+    SLP_COND         0.242       0.291       0.317       0.449       0.581       0.606       0.656
+    SLP_COND         0.547       0.596       0.620       0.749       0.879       0.903       0.952
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              PROBSOLV      MONTH7
+              ________      ________
+                    0             0
+
+
+           LAMBDA
+              PROBSOLV      MONTH7
+              ________      ________
+ PROBSOLV           0             0
+ MONTH7             0             0
+
+
+           THETA
+              PROBSOLV      MONTH7
+              ________      ________
+ PROBSOLV           0
+ MONTH7             0             0
+
+
+           ALPHA
+              PROBSOLV      MONTH7
+              ________      ________
+                    0             0
+
+
+           BETA
+              PROBSOLV      MONTH7
+              ________      ________
+ PROBSOLV           0             0
+ MONTH7             0             0
+
+
+           PSI
+              PROBSOLV      MONTH7
+              ________      ________
+ PROBSOLV           1
+ MONTH7             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN STUDENT
+
+
+           NU
+              PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________
+                    0             0             0
+
+
+           LAMBDA
+              RANSLOPE      PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________      ________
+ PROBSOLV           0             0             0             0
+ MALE               0             0             0             0
+ FRLUNCH            0             0             0             0
+
+
+           THETA
+              PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________
+ PROBSOLV           0
+ MALE               0             0
+ FRLUNCH            0             0             0
+
+
+           ALPHA
+              RANSLOPE      PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           BETA
+              RANSLOPE      PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________      ________
+ RANSLOPE           0             0             0             0
+ PROBSOLV           0             0             2             3
+ MALE               0             0             0             0
+ FRLUNCH            0             0             0             0
+
+
+           PSI
+              RANSLOPE      PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________      ________
+ RANSLOPE           4
+ PROBSOLV           5             6
+ MALE               0             0             0
+ FRLUNCH            0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN SCHOOL
+
+
+           NU
+              PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________
+                    0             0             0
+
+
+           LAMBDA
+              RANSLOPE      PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________      ________
+ PROBSOLV           0             0             0             0
+ TEACHEXP           0             0             0             0
+ CONDITIO           0             0             0             0
+
+
+           THETA
+              PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________
+ PROBSOLV           0
+ TEACHEXP           0             0
+ CONDITIO           0             0             0
+
+
+           ALPHA
+              RANSLOPE      PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________      ________
+                    7             8             0             0
+
+
+           BETA
+              RANSLOPE      PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________      ________
+ RANSLOPE           0             0             0             9
+ PROBSOLV           0             0            10            11
+ TEACHEXP           0             0             0             0
+ CONDITIO           0             0             0             0
+
+
+           PSI
+              RANSLOPE      PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________      ________
+ RANSLOPE          12
+ PROBSOLV          13            14
+ TEACHEXP           0             0             0
+ CONDITIO           0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              SLP_COND
+              ________
+                   15            16
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              PROBSOLV      MONTH7
+              ________      ________
+                0.000         0.000
+
+
+           LAMBDA
+              PROBSOLV      MONTH7
+              ________      ________
+ PROBSOLV       1.000         0.000
+ MONTH7         0.000         1.000
+
+
+           THETA
+              PROBSOLV      MONTH7
+              ________      ________
+ PROBSOLV       0.000
+ MONTH7         0.000         0.000
+
+
+           ALPHA
+              PROBSOLV      MONTH7
+              ________      ________
+                0.000         0.000
+
+
+           BETA
+              PROBSOLV      MONTH7
+              ________      ________
+ PROBSOLV       0.000         0.000
+ MONTH7         0.000         0.000
+
+
+           PSI
+              PROBSOLV      MONTH7
+              ________      ________
+ PROBSOLV      14.143
+ MONTH7         0.000         2.000
+
+
+     STARTING VALUES FOR BETWEEN STUDENT
+
+
+           NU
+              PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           LAMBDA
+              RANSLOPE      PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________      ________
+ PROBSOLV       0.000         1.000         0.000         0.000
+ MALE           0.000         0.000         1.000         0.000
+ FRLUNCH        0.000         0.000         0.000         1.000
+
+
+           THETA
+              PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________
+ PROBSOLV       0.000
+ MALE           0.000         0.000
+ FRLUNCH        0.000         0.000         0.000
+
+
+           ALPHA
+              RANSLOPE      PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           BETA
+              RANSLOPE      PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________      ________
+ RANSLOPE       0.000         0.000         0.000         0.000
+ PROBSOLV       0.000         0.000         0.000         0.000
+ MALE           0.000         0.000         0.000         0.000
+ FRLUNCH        0.000         0.000         0.000         0.000
+
+
+           PSI
+              RANSLOPE      PROBSOLV      MALE          FRLUNCH
+              ________      ________      ________      ________
+ RANSLOPE       1.000
+ PROBSOLV       0.000        14.143
+ MALE           0.000         0.000         0.122
+ FRLUNCH        0.000         0.000         0.000         0.079
+
+
+     STARTING VALUES FOR BETWEEN SCHOOL
+
+
+           NU
+              PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________
+                0.000         0.000         0.000
+
+
+           LAMBDA
+              RANSLOPE      PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________      ________
+ PROBSOLV       0.000         1.000         0.000         0.000
+ TEACHEXP       0.000         0.000         1.000         0.000
+ CONDITIO       0.000         0.000         0.000         1.000
+
+
+           THETA
+              PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________
+ PROBSOLV       0.000
+ TEACHEXP       0.000         0.000
+ CONDITIO       0.000         0.000         0.000
+
+
+           ALPHA
+              RANSLOPE      PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________      ________
+                0.000        51.968         0.000         0.000
+
+
+           BETA
+              RANSLOPE      PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________      ________
+ RANSLOPE       0.000         0.000         0.000         0.000
+ PROBSOLV       0.000         0.000         0.000         0.000
+ TEACHEXP       0.000         0.000         0.000         0.000
+ CONDITIO       0.000         0.000         0.000         0.000
+
+
+           PSI
+              RANSLOPE      PROBSOLV      TEACHEXP      CONDITIO
+              ________      ________      ________      ________
+ RANSLOPE       1.000
+ PROBSOLV       0.000        14.143
+ TEACHEXP       0.000         0.000         9.338
+ CONDITIO       0.000         0.000         0.000         0.119
+
+
+     STARTING VALUES FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              SLP_COND
+              ________
+                0.500         0.500
+
+
+     Beginning Time:  01:24:16
+        Ending Time:  01:24:37
+       Elapsed Time:  00:00:21
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen

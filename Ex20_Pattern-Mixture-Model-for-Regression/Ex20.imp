@@ -1,11 +1,11 @@
 # mcmc regression w mnar pattern mixture model
 DATA: behaviorachievement.dat;
 VARIABLES: id male hispanic riskgrp atrisk behsymp1 lrnprob1 
-   read1 read2 read3 read9 read9grp stanread7 
-   math1 math2 math3 math9 math9grp stanmath7;
+   read1 read2 read3 read9 readgrp9 stanread7 
+   math1 math2 math3 math9 mathgrp9 stanmath7;
 MISSING: 999;
 TRANSFORM:
-m = ismissing(read9); # create binary missing data indicator variable
+m = 1 - ismissing(read9); # create binary missing data indicator variable
 ORDINAL: m;
 MODEL:  
 focal.model:
@@ -14,8 +14,8 @@ missingness.model:
 m ~ 1@missmean;
 predictor.model:
 read1 lrnprob1 behsymp1 ~ m;
-# auxiliary.model:
-# stanread7 read2  ~ read9 m read1 lrnprob1 behsymp1;
+auxiliary.model:
+stanread7 read2  ~ read9 m read1 lrnprob1 behsymp1;
 PARAMETERS:
 # set beta0diff equal to -.20 residual std. dev. units
 cohensd = -.20;
