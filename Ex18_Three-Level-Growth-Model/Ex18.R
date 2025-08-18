@@ -50,6 +50,7 @@ mymodel <- rblimp(
   seed = 90291,
   burn = 20000,
   iter = 50000,
+  options = 'disable_dic disable_corrs',
   nimps = 20,
   chains = 20)
 output(mymodel)
