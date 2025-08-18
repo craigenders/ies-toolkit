@@ -2,7 +2,7 @@
 clear
 
 // read stacked data
-infile imp school student wave condition teachexp eslpct ethnic male frlunch lowach stanmath month0 month7 probsolve efficacy using "~/desktop/imps0.dat"
+infile imp school student wave condition teachexp eslpct hispanic male frlunch lowach stanmath month month7 probsolve efficacy using "~/desktop/imps0.dat"
 
 // create unique row id within each data set
 generate rownum = student*100 + wave
