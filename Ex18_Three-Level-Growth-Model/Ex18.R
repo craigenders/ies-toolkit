@@ -30,7 +30,8 @@ mymodel <- rblimp(
   simple = 'month7 | condition',
   seed = 90291,
   burn = 20000,
-  iter = 50000)
+  iter = 50000,
+  options = 'disable_dic disable_corrs')
 output(mymodel)
 simple_plot(probsolve ~ month7 | condition, mymodel)
 
