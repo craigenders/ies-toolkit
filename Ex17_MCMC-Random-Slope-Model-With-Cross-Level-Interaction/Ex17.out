@@ -1,0 +1,612 @@
+Mplus VERSION 8.11 (Mac)
+MUTHEN & MUTHEN
+08/15/2025   6:36 PM
+
+INPUT INSTRUCTIONS
+
+  TITLE: Two-Level Moderated Regression With Random Slopes;
+  DATA:
+  file = ./imps/implist.dat;
+  ! read in imputation data;
+  type = imputation;
+  VARIABLE:
+  names = school student wave condition teachexp eslpct hispanic male frlunch
+       lowach stanmath month month7 probsolve efficacy;
+  usevariables = probsolve month hispanic frlunch condition;
+  ! define second level grouping variable;
+  cluster = student;
+  ! define first level variables;
+  within = month;
+  ! define second level variables;
+  between = hispanic frlunch condition;
+  DEFINE:
+  ! center covariates at their grandmean;
+  center frlunch (grandmean);
+  ANALYSIS:
+  ! speficy a two level multilevel model;
+  type = twolevel random;
+  MODEL:
+  ! first level model;
+  %within%
+  ! create second level latent variable for random slope;
+  ranslope | probsolve on month;
+  ! second level model;
+  %between%
+  ! estimate the random slope coefficient;
+  [ranslope] (beta1);
+  probsolve on hispanic frlunch condition;
+  ! cross level interaction;
+  ranslope on hispanic condition (beta5-beta6);
+  ranslope with probsolve;
+  MODEL CONSTRAINT:
+  ! compute simple slopes of month7 in each experimental group;
+  new(slp_c0h0 slp_hisp1 slp_cond1);
+  slp_c0h0 = beta1;
+  slp_hisp1 = beta1 + beta5;
+  slp_cond1 = beta1 + beta6;
+  OUTPUT:
+  ! output for confidence intervals;
+  cinterval;
+
+
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+Two-Level Moderated Regression With Random Slopes;
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Average number of observations                                6874
+
+Number of replications
+    Requested                                                   20
+    Completed                                                   20
+
+Number of dependent variables                                    1
+Number of independent variables                                  4
+Number of continuous latent variables                            1
+
+Observed dependent variables
+
+  Continuous
+   PROBSOLVE
+
+Observed independent variables
+   MONTH       HISPANIC    FRLUNCH     CONDITIO
+
+Continuous latent variables
+   RANSLOPE
+
+Variables with special functions
+
+  Cluster variable      STUDENT
+
+  Within variables
+   MONTH
+
+  Between variables
+   HISPANIC    FRLUNCH     CONDITIO
+
+  Centering (GRANDMEAN)
+   FRLUNCH
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                   100
+Convergence criterion                                    0.100D-05
+Maximum number of EM iterations                                500
+Convergence criteria for the EM algorithm
+  Loglikelihood change                                   0.100D-02
+  Relative loglikelihood change                          0.100D-05
+  Derivative                                             0.100D-03
+Minimum variance                                         0.100D-03
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+
+Input data file(s)
+  Multiple data files from
+    ./imps/implist.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA FOR THE FIRST DATA SET
+
+     Number of clusters                        982
+
+     Average cluster size        7.000
+
+     Estimated Intraclass Correlations for the Y Variables
+
+                Intraclass              Intraclass
+     Variable  Correlation   Variable  Correlation
+
+     PROBSOLV     0.475
+
+
+
+SAMPLE STATISTICS
+
+NOTE:  The sample statistics for within and between refer to the
+       maximum-likelihood estimated within and between covariance
+       matrices, respectively.
+
+NOTE:  These are average results over 20 data sets.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR WITHIN
+
+
+           Means
+              PROBSOLV      MONTH         HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+                0.000         3.000         0.000         0.000         0.000
+
+
+           Covariances
+              PROBSOLV      MONTH         HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ PROBSOLV      14.908
+ MONTH          2.580         4.000
+ HISPANIC       0.000         0.000         0.000
+ FRLUNCH        0.000         0.000         0.000         0.000
+ CONDITIO       0.000         0.000         0.000         0.000         0.000
+
+
+           Correlations
+              PROBSOLV      MONTH         HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ PROBSOLV       1.000
+ MONTH          0.334         1.000
+ HISPANIC       0.000         0.000         0.000
+ FRLUNCH        0.000         0.000         0.000         0.000
+ CONDITIO       0.000         0.000         0.000         0.000         0.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BETWEEN
+
+
+           Means
+              PROBSOLV      MONTH         HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+               51.961         0.000         0.670         0.000         0.613
+
+
+           Covariances
+              PROBSOLV      MONTH         HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ PROBSOLV      13.452
+ MONTH          0.000         0.000
+ HISPANIC       0.436         0.000         0.221
+ FRLUNCH       -0.173         0.000        -0.002         0.158
+ CONDITIO       0.144         0.000        -0.018        -0.016         0.237
+
+
+           Correlations
+              PROBSOLV      MONTH         HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ PROBSOLV       1.000
+ MONTH          0.000         0.000
+ HISPANIC       0.253         0.000         1.000
+ FRLUNCH       -0.118         0.000        -0.012         1.000
+ CONDITIO       0.081         0.000        -0.080        -0.082         1.000
+
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       11
+
+Loglikelihood
+
+    H0 Value
+
+        Mean                            -19560.772
+        Std Dev                             21.054
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000       -19609.751     -19591.866
+           0.980       1.000       -19604.011     -19591.866
+           0.950       1.000       -19595.404     -19591.866
+           0.900       0.950       -19587.755     -19591.866
+           0.800       0.650       -19578.491     -19585.447
+           0.700       0.650       -19571.813     -19580.635
+           0.500       0.450       -19560.772     -19564.056
+           0.300       0.300       -19549.731     -19551.260
+           0.200       0.250       -19543.052     -19539.873
+           0.100       0.100       -19533.789     -19536.868
+           0.050       0.100       -19526.139     -19526.058
+           0.020       0.050       -19517.532     -19526.058
+           0.010       0.000       -19511.793     -19526.058
+
+Information Criteria
+
+    Akaike (AIC)
+
+        Mean                             39143.544
+        Std Dev                             42.109
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000        39045.586      39056.829
+           0.980       0.950        39057.065      39056.829
+           0.950       0.900        39074.279      39056.829
+           0.900       0.900        39089.577      39056.829
+           0.800       0.750        39108.105      39095.735
+           0.700       0.700        39121.462      39118.819
+           0.500       0.550        39143.544      39148.902
+           0.300       0.350        39165.625      39182.162
+           0.200       0.350        39178.982      39184.166
+           0.100       0.050        39197.510      39192.894
+           0.050       0.000        39212.808      39192.923
+           0.020       0.000        39230.022      39192.923
+           0.010       0.000        39241.501      39192.923
+
+    Bayesian (BIC)
+
+        Mean                             39218.734
+        Std Dev                             42.109
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000        39120.777      39132.019
+           0.980       0.950        39132.255      39132.019
+           0.950       0.900        39149.469      39132.019
+           0.900       0.900        39164.768      39132.019
+           0.800       0.750        39183.295      39170.926
+           0.700       0.700        39196.652      39194.009
+           0.500       0.550        39218.734      39224.092
+           0.300       0.350        39240.816      39257.353
+           0.200       0.350        39254.173      39259.357
+           0.100       0.050        39272.701      39268.085
+           0.050       0.000        39287.999      39268.113
+           0.020       0.000        39305.213      39268.113
+           0.010       0.000        39316.692      39268.113
+
+    Sample-Size Adjusted BIC (n* = (n + 2) / 24)
+
+        Mean                             39183.779
+        Std Dev                             42.109
+        Number of successful computations       20
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000        39085.821      39097.064
+           0.980       0.950        39097.300      39097.064
+           0.950       0.900        39114.514      39097.064
+           0.900       0.900        39129.812      39097.064
+           0.800       0.750        39148.340      39135.971
+           0.700       0.700        39161.697      39159.054
+           0.500       0.550        39183.779      39189.137
+           0.300       0.350        39205.861      39222.397
+           0.200       0.350        39219.218      39224.401
+           0.100       0.050        39237.745      39233.129
+           0.050       0.000        39253.043      39233.158
+           0.020       0.000        39270.258      39233.158
+           0.010       0.000        39281.736      39233.158
+
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+Within Level
+
+ Residual Variances
+    PROBSOLVE         12.561      0.353     35.534      0.000      0.091
+
+Between Level
+
+ RANSLOPE   ON
+    HISPANIC           0.220      0.055      3.971      0.000      0.175
+    CONDITION          0.374      0.052      7.166      0.000      0.155
+
+ PROBSOLVE  ON
+    HISPANIC           1.365      0.293      4.656      0.000      0.088
+    FRLUNCH           -0.923      0.304     -3.033      0.002      0.086
+    CONDITION         -0.417      0.276     -1.513      0.130      0.047
+
+ RANSLOPE WITH
+    PROBSOLVE          0.057      0.124      0.454      0.650      0.265
+
+ Intercepts
+    PROBSOLVE         49.367      0.304    162.404      0.000      0.112
+    RANSLOPE           0.269      0.059      4.559      0.000      0.258
+
+ Residual Variances
+    PROBSOLVE         11.104      0.803     13.833      0.000      0.083
+    RANSLOPE           0.105      0.033      3.193      0.001      0.294
+
+New/Additional Parameters
+    SLP_C0H0           0.269      0.059      4.559      0.000      0.258
+    SLP_HISP           0.489      0.043     11.287      0.000      0.201
+    SLP_COND           0.643      0.047     13.575      0.000      0.131
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.210E-04
+       (ratio of smallest to largest eigenvalue)
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Within Level
+
+ Residual Variances
+    PROBSOLVE       11.650      11.868      11.979      12.561      13.142      13.253      13.471
+
+Between Level
+
+ RANSLOPE ON
+    HISPANIC         0.077       0.111       0.129       0.220       0.311       0.328       0.362
+    CONDITION        0.239       0.272       0.288       0.374       0.460       0.476       0.508
+
+ PROBSOLV ON
+    HISPANIC         0.610       0.790       0.883       1.365       1.847       1.940       2.120
+    FRLUNCH         -1.707      -1.520      -1.424      -0.923      -0.422      -0.327      -0.139
+    CONDITION       -1.128      -0.958      -0.871      -0.417       0.036       0.123       0.293
+
+ RANSLOPE WITH
+    PROBSOLVE       -0.264      -0.187      -0.148       0.057       0.261       0.301       0.377
+
+ Intercepts
+    PROBSOLVE       48.584      48.771      48.867      49.367      49.867      49.963      50.150
+    RANSLOPE         0.117       0.153       0.172       0.269       0.366       0.384       0.421
+
+ Residual Variances
+    PROBSOLVE        9.036       9.531       9.784      11.104      12.425      12.677      13.172
+    RANSLOPE         0.020       0.041       0.051       0.105       0.159       0.170       0.190
+
+New/Additional Parameters
+    SLP_C0H0         0.117       0.153       0.172       0.269       0.366       0.384       0.421
+    SLP_HISP         0.377       0.404       0.417       0.489       0.560       0.573       0.600
+    SLP_COND         0.521       0.550       0.565       0.643       0.720       0.735       0.764
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR WITHIN
+
+
+           NU
+              PROBSOLV      MONTH
+              ________      ________
+                    0             0
+
+
+           LAMBDA
+              PROBSOLV      MONTH
+              ________      ________
+ PROBSOLV           0             0
+ MONTH              0             0
+
+
+           THETA
+              PROBSOLV      MONTH
+              ________      ________
+ PROBSOLV           0
+ MONTH              0             0
+
+
+           ALPHA
+              PROBSOLV      MONTH
+              ________      ________
+                    0             0
+
+
+           BETA
+              PROBSOLV      MONTH
+              ________      ________
+ PROBSOLV           0             0
+ MONTH              0             0
+
+
+           PSI
+              PROBSOLV      MONTH
+              ________      ________
+ PROBSOLV           1
+ MONTH              0             0
+
+
+     PARAMETER SPECIFICATION FOR BETWEEN
+
+
+           NU
+              PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________
+                    0             0             0             0
+
+
+           LAMBDA
+              RANSLOPE      PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ PROBSOLV           0             0             0             0             0
+ HISPANIC           0             0             0             0             0
+ FRLUNCH            0             0             0             0             0
+ CONDITIO           0             0             0             0             0
+
+
+           THETA
+              PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________
+ PROBSOLV           0
+ HISPANIC           0             0
+ FRLUNCH            0             0             0
+ CONDITIO           0             0             0             0
+
+
+           ALPHA
+              RANSLOPE      PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+                    2             3             0             0             0
+
+
+           BETA
+              RANSLOPE      PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ RANSLOPE           0             0             4             0             5
+ PROBSOLV           0             0             6             7             8
+ HISPANIC           0             0             0             0             0
+ FRLUNCH            0             0             0             0             0
+ CONDITIO           0             0             0             0             0
+
+
+           PSI
+              RANSLOPE      PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ RANSLOPE           9
+ PROBSOLV          10            11
+ HISPANIC           0             0             0
+ FRLUNCH            0             0             0             0
+ CONDITIO           0             0             0             0             0
+
+
+     PARAMETER SPECIFICATION FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              SLP_C0H0      SLP_HISP      SLP_COND
+              ________      ________      ________
+                   12            13            14
+
+
+     STARTING VALUES FOR WITHIN
+
+
+           NU
+              PROBSOLV      MONTH
+              ________      ________
+                0.000         0.000
+
+
+           LAMBDA
+              PROBSOLV      MONTH
+              ________      ________
+ PROBSOLV       1.000         0.000
+ MONTH          0.000         1.000
+
+
+           THETA
+              PROBSOLV      MONTH
+              ________      ________
+ PROBSOLV       0.000
+ MONTH          0.000         0.000
+
+
+           ALPHA
+              PROBSOLV      MONTH
+              ________      ________
+                0.000         0.000
+
+
+           BETA
+              PROBSOLV      MONTH
+              ________      ________
+ PROBSOLV       0.000         0.000
+ MONTH          0.000         0.000
+
+
+           PSI
+              PROBSOLV      MONTH
+              ________      ________
+ PROBSOLV      14.137
+ MONTH          0.000         2.000
+
+
+     STARTING VALUES FOR BETWEEN
+
+
+           NU
+              PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              RANSLOPE      PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ PROBSOLV       0.000         1.000         0.000         0.000         0.000
+ HISPANIC       0.000         0.000         1.000         0.000         0.000
+ FRLUNCH        0.000         0.000         0.000         1.000         0.000
+ CONDITIO       0.000         0.000         0.000         0.000         1.000
+
+
+           THETA
+              PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________
+ PROBSOLV       0.000
+ HISPANIC       0.000         0.000
+ FRLUNCH        0.000         0.000         0.000
+ CONDITIO       0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              RANSLOPE      PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+                0.000        51.926         0.000         0.000         0.000
+
+
+           BETA
+              RANSLOPE      PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ RANSLOPE       0.000         0.000         0.000         0.000         0.000
+ PROBSOLV       0.000         0.000         0.000         0.000         0.000
+ HISPANIC       0.000         0.000         0.000         0.000         0.000
+ FRLUNCH        0.000         0.000         0.000         0.000         0.000
+ CONDITIO       0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              RANSLOPE      PROBSOLV      HISPANIC      FRLUNCH       CONDITIO
+              ________      ________      ________      ________      ________
+ RANSLOPE       1.000
+ PROBSOLV       0.000        14.137
+ HISPANIC       0.000         0.000         0.111
+ FRLUNCH        0.000         0.000         0.000         0.079
+ CONDITIO       0.000         0.000         0.000         0.000         0.119
+
+
+     STARTING VALUES FOR THE ADDITIONAL PARAMETERS
+
+
+           NEW/ADDITIONAL PARAMETERS
+              SLP_C0H0      SLP_HISP      SLP_COND
+              ________      ________      ________
+                0.500         0.500         0.500
+
+
+     Beginning Time:  18:36:28
+        Ending Time:  18:36:32
+       Elapsed Time:  00:00:04
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2024 Muthen & Muthen

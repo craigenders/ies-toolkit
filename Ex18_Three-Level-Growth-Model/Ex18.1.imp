@@ -1,7 +1,7 @@
 # mcmc 3-level mlm
 DATA: problemsolving3level.dat;
-VARIABLES: school student wave condition teachexp eslpct ethnic male frlunch 
-     lowach stanmath month0 month7 probsolve efficacy;
+VARIABLES: school student wave condition teachexp eslpct hispanic male frlunch 
+     lowach stanmath month month7 probsolve efficacy;
 CLUSTERID:  school student; # second and third level grouping variables
 ORDINAL: male frlunch condition;
 MISSING: 999;

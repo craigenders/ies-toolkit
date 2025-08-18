@@ -42,27 +42,27 @@ BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
   NOTE: Split chain PSR is being used. This splits each chain's
         iterations to create twice as many chains.
 
-  Comparing iterations across 2 chains     Highest PSR   Parameter #  
-                          251 to 500             1.124            33  
-                          501 to 1000            1.198            14  
-                          751 to 1500            1.168            14  
-                         1001 to 2000            1.063            14  
-                         1251 to 2500            1.169            14  
-                         1501 to 3000            1.080            14  
-                         1751 to 3500            1.039            13  
-                         2001 to 4000            1.036            13  
-                         2251 to 4500            1.051            14  
-                         2501 to 5000            1.022            13  
-                         2751 to 5500            1.022            14  
-                         3001 to 6000            1.017            14  
-                         3251 to 6500            1.013            22  
-                         3501 to 7000            1.011            14  
-                         3751 to 7500            1.017            14  
-                         4001 to 8000            1.014            22  
-                         4251 to 8500            1.012            22  
-                         4501 to 9000            1.015            13  
-                         4751 to 9500            1.008            17  
-                         5001 to 10000           1.010            14  
+  Comparing iterations across 20 chains    Highest PSR   Parameter #  
+                          251 to 500             1.360            14  
+                          501 to 1000            1.340            14  
+                          751 to 1500            1.170            14  
+                         1001 to 2000            1.089            14  
+                         1251 to 2500            1.073            14  
+                         1501 to 3000            1.072            14  
+                         1751 to 3500            1.049            14  
+                         2001 to 4000            1.039            13  
+                         2251 to 4500            1.046            14  
+                         2501 to 5000            1.036            14  
+                         2751 to 5500            1.031            14  
+                         3001 to 6000            1.038            14  
+                         3251 to 6500            1.043            14  
+                         3501 to 7000            1.050            14  
+                         3751 to 7500            1.044            14  
+                         4001 to 8000            1.029            14  
+                         4251 to 8500            1.025            14  
+                         4501 to 9000            1.033            14  
+                         4751 to 9500            1.029            14  
+                         5001 to 10000           1.033            14  
 
 
 METROPOLIS-HASTINGS ACCEPTANCE RATES:
@@ -72,9 +72,9 @@ METROPOLIS-HASTINGS ACCEPTANCE RATES:
     Variable                            Type    Probability   Target Value 
     hispanic                      imputation          0.501          0.500 
     frlunch                       imputation          0.495          0.500 
-    frlunch                        parameter          0.499          0.500 
+    frlunch                        parameter          0.502          0.500 
 
-  NOTE: Suppressing printing of 1 chains.
+  NOTE: Suppressing printing of 19 chains.
         Use keyword 'tuneinfo' in options to override.
 
 
@@ -132,12 +132,12 @@ MODEL FIT:
   INFORMATION CRITERIA
 
     Marginal Likelihood
-      DIC2                  39392.252
-      WAIC                  39698.058
+      DIC2                  39391.595
+      WAIC                  39698.133
 
     Conditional Likelihood
-      DIC2                  37575.737
-      WAIC                  38280.998
+      DIC2                  37583.248
+      WAIC                  38283.594
 
 
 IMPUTED DATA SUMMARIES:
@@ -148,7 +148,7 @@ IMPUTED DATA SUMMARIES:
 Variables                              Mean     StdDev        25%        50%        75%        Min        Max 
                                 ------------------------------------------------------------------------------
 
-  probsolve                          51.963      5.326     48.262     52.000     55.018     35.354     69.795 
+  probsolve                          51.963      5.325     48.267     52.000     55.019     35.362     69.779 
   hispanic                            0.669      0.471      0.000      1.000      1.000      0.000      1.000 
   frlunch                             0.803      0.398      1.000      1.000      1.000      0.000      1.000 
   condition                           0.613      0.487      0.000      1.000      1.000      0.000      1.000 
@@ -166,7 +166,7 @@ CORRELATIONS AMONG RESIDUALS:
 
 OUTCOME MODEL ESTIMATES:
 
-  Summaries based on 20000 iterations using 2 chains.
+  Summaries based on 20000 iterations using 20 chains.
   NOTE: Estimate column based on posterior median.
 
 
@@ -178,39 +178,39 @@ Grand Mean Centered: frlunch
 Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
                                 ------------------------------------------------------------------------------
 Variances:                      
-  L2 : Var(Intercept)                11.289      0.810      9.782     12.950        ---        ---   1382.218 
-  L2 : Cov(month,Intercept)           0.039      0.118     -0.213      0.247        ---        ---    338.722 
-  L2 : Var(month)                     0.108      0.030      0.056      0.175        ---        ---    183.745 
-  Residual Var.                      12.567      0.274     12.043     13.119        ---        ---   1549.938 
+  L2 : Var(Intercept)                11.229      0.802      9.770     12.888        ---        ---   1316.110 
+  L2 : Cov(month,Intercept)           0.057      0.119     -0.192      0.274        ---        ---    341.950 
+  L2 : Var(month)                     0.103      0.030      0.046      0.164        ---        ---    226.425 
+  Residual Var.                      12.592      0.276     12.056     13.141        ---        ---   1386.901 
 
 Coefficients:                   
-  Intercept                          49.364      0.306     48.770     49.974  26003.056      0.000   1802.836 
-  month                               0.274      0.060      0.159      0.392     21.261      0.000   6927.856 
-  hispanic                            1.359      0.300      0.766      1.945     20.531      0.000   1575.087 
-  frlunch                            -0.954      0.314     -1.566     -0.344      9.195      0.002   1278.934 
-  condition                          -0.420      0.280     -0.966      0.135      2.251      0.134   1712.019 
-  month*condition                     0.367      0.053      0.262      0.470     47.320      0.000   8135.002 
-  month*hispanic                      0.222      0.058      0.108      0.335     14.861      0.000   6372.419 
+  Intercept                          49.368      0.310     48.773     49.990  25411.416      0.000   1684.000 
+  month                               0.273      0.059      0.159      0.390     21.547      0.000   7738.616 
+  hispanic                            1.369      0.303      0.770      1.962     20.314      0.000   1561.559 
+  frlunch                            -0.956      0.317     -1.571     -0.328      9.047      0.003   1260.934 
+  condition                          -0.421      0.278     -0.971      0.119      2.329      0.127   1737.528 
+  month*condition                     0.368      0.054      0.262      0.473     47.114      0.000   8948.285 
+  month*hispanic                      0.222      0.057      0.109      0.333     15.169      0.000   6670.792 
 
 Standard Deviations:            
-  L2 : SD(Intercept)                  3.360      0.120      3.128      3.599        ---        ---   1362.964 
-  L2 : Cor(month,Intercept)           0.035      0.112     -0.159      0.271        ---        ---    284.706 
-  L2 : SD(month)                      0.329      0.045      0.237      0.418        ---        ---    178.797 
-  Residual SD                         3.545      0.039      3.470      3.622        ---        ---   1550.176 
+  L2 : SD(Intercept)                  3.351      0.119      3.126      3.590        ---        ---   1301.705 
+  L2 : Cor(month,Intercept)           0.053      0.123     -0.148      0.340        ---        ---    256.568 
+  L2 : SD(month)                      0.321      0.048      0.213      0.405        ---        ---    205.737 
+  Residual SD                         3.549      0.039      3.472      3.625        ---        ---   1390.962 
 
 Standardized Coefficients:      
-  month                               0.103      0.022      0.060      0.147     21.165      0.000   6594.495 
-  hispanic                            0.120      0.026      0.068      0.171     21.025      0.000   1596.832 
-  frlunch                            -0.071      0.023     -0.116     -0.026      9.279      0.002   1281.246 
-  condition                          -0.038      0.026     -0.088      0.012      2.249      0.134   1712.357 
-  month*condition                     0.147      0.021      0.105      0.189     47.391      0.000   8432.508 
-  month*hispanic                      0.090      0.023      0.044      0.136     14.927      0.000   6528.861 
+  month                               0.102      0.022      0.060      0.146     21.469      0.000   7546.497 
+  hispanic                            0.121      0.026      0.068      0.172     20.858      0.000   1590.866 
+  frlunch                            -0.071      0.023     -0.117     -0.025      9.137      0.003   1258.384 
+  condition                          -0.038      0.025     -0.089      0.011      2.327      0.127   1725.704 
+  month*condition                     0.148      0.021      0.105      0.190     47.199      0.000   8994.380 
+  month*hispanic                      0.090      0.023      0.044      0.135     15.220      0.000   6827.341 
 
 Proportion Variance Explained   
-  by Coefficients                     0.106      0.010      0.088      0.127        ---        ---   1591.477 
-  by Level-2 Random Intercepts        0.437      0.015      0.409      0.467        ---        ---   5856.196 
-  by Level-2 Random Slopes            0.015      0.004      0.008      0.024        ---        ---    183.785 
-  by Level-1 Residual Variation       0.440      0.013      0.415      0.466        ---        ---   2544.204 
+  by Coefficients                     0.106      0.010      0.088      0.127        ---        ---   1435.098 
+  by Level-2 Random Intercepts        0.437      0.015      0.408      0.467        ---        ---   5543.590 
+  by Level-2 Random Slopes            0.014      0.004      0.006      0.023        ---        ---    227.795 
+  by Level-1 Residual Variation       0.441      0.013      0.415      0.468        ---        ---   1561.202 
 
                                 ------------------------------------------------------------------------------
 
@@ -219,20 +219,20 @@ Proportion Variance Explained
 Conditional Effects                Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
                                 ------------------------------------------------------------------------------
   month | condition @ 0                                                                                       
-    Intercept                        49.364      0.306     48.770     49.974  26003.056      0.000   1802.836 
-    Slope                             0.274      0.060      0.159      0.392     21.261      0.000   6927.856 
+    Intercept                        49.368      0.310     48.773     49.990  25411.416      0.000   1684.000 
+    Slope                             0.273      0.059      0.159      0.390     21.547      0.000   7738.616 
                                                                                                               
   month | condition @ 1                                                                                       
-    Intercept                        48.945      0.263     48.434     49.463  34749.384      0.000   1572.191 
-    Slope                             0.641      0.048      0.547      0.737    175.765      0.000   7697.318 
+    Intercept                        48.944      0.259     48.437     49.458  35646.090      0.000   1661.400 
+    Slope                             0.642      0.049      0.547      0.736    174.058      0.000   7821.251 
                                                                                                               
   month | hispanic @ 0                                                                                        
-    Intercept                        49.364      0.306     48.770     49.974  26003.056      0.000   1802.836 
-    Slope                             0.274      0.060      0.159      0.392     21.261      0.000   6927.856 
+    Intercept                        49.368      0.310     48.773     49.990  25411.416      0.000   1684.000 
+    Slope                             0.273      0.059      0.159      0.390     21.547      0.000   7738.616 
                                                                                                               
   month | hispanic @ 1                                                                                        
-    Intercept                        50.724      0.235     50.269     51.191  46749.578      0.000   1747.997 
-    Slope                             0.497      0.045      0.409      0.586    121.749      0.000   8389.335 
+    Intercept                        50.735      0.234     50.276     51.192  46832.401      0.000   1952.006 
+    Slope                             0.495      0.045      0.406      0.583    120.334      0.000   8987.644 
                                                                                                               
                                 ------------------------------------------------------------------------------
 
@@ -244,7 +244,7 @@ Conditional Effects                Estimate     StdDev       2.5%      97.5%    
 
 PREDICTOR MODEL ESTIMATES:
 
-  Summaries based on 20000 iterations using 2 chains.
+  Summaries based on 20000 iterations using 20 chains.
   NOTE: Estimate column based on posterior median.
 
 
@@ -254,11 +254,11 @@ Missing predictor:  hispanic
 Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
                                 ------------------------------------------------------------------------------
 
-Grand Mean                            0.441      0.044      0.356      0.527    102.173      0.000   5788.638 
+Grand Mean                            0.442      0.043      0.357      0.526    105.053      0.000   5683.889 
 
 Level 2:                                                                                                      
-  condition                          -0.220      0.091     -0.399     -0.042      5.795      0.016   5081.719 
-  frlunch                            -0.042      0.060     -0.161      0.076      0.488      0.485   2987.666 
+  condition                          -0.217      0.092     -0.397     -0.039      5.615      0.018   4817.179 
+  frlunch                            -0.040      0.059     -0.155      0.076      0.449      0.503   3235.224 
   Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
 Thresholds:                                                                                                   
   Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
@@ -272,15 +272,33 @@ Missing predictor:  frlunch
 Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
                                 ------------------------------------------------------------------------------
 
-Grand Mean                            0.859      0.048      0.767      0.955    320.598      0.000   1733.676 
+Grand Mean                            0.859      0.049      0.761      0.955    300.810      0.000   1563.428 
 
 Level 2:                                                                                                      
-  condition                          -0.254      0.099     -0.445     -0.059      6.549      0.010   5089.260 
-  hispanic                           -0.042      0.060     -0.159      0.075      0.492      0.483   2769.813 
+  condition                          -0.255      0.100     -0.449     -0.061      6.562      0.010   4649.903 
+  hispanic                           -0.039      0.059     -0.155      0.075      0.445      0.505   2689.591 
   Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
 Thresholds:                                                                                                   
   Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
                                                                                                               
                                 ------------------------------------------------------------------------------
 
+
+
+VARIABLE ORDER IN IMPUTED DATA:
+
+  separate = './imps/imp*.dat'
+
+     school student wave condition teachexp eslpct hispanic male frlunch lowach
+     stanmath month month7 probsolve efficacy
+
+   stacked = './imps/imps.dat'
+
+     imp# school student wave condition teachexp eslpct hispanic male frlunch lowach
+     stanmath month month7 probsolve efficacy
+
+  stacked0 = './imps/imps0.dat'
+
+     imp# school student wave condition teachexp eslpct hispanic male frlunch lowach
+     stanmath month month7 probsolve efficacy
 

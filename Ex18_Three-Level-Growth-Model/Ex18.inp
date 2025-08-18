@@ -4,8 +4,8 @@ file = ./imps/implist.dat;
 ! read in imputation data;
 type = imputation;
 VARIABLE:  
-names = school student wave condition teachexp eslpct ethnic male frlunch 
-     lowach stanmath month0 month7 probsolve efficacy;
+names = school student wave condition teachexp eslpct hispanic male frlunch 
+     lowach stanmath month month7 probsolve efficacy;
 usevariables = probsolve month7 male frlunch teachexp condition;
 ! define second level grouping variable;
 cluster = school student;

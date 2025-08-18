@@ -2,18 +2,17 @@
 # mcmc 3-level mlm
 ##################################################
 
-library(fdir)
 library(rblimp)
 library(rockchalk)
 library(lme4)
 library(mitml)
 
 ##################################################
-# set working directory and load data
+# load data from github
 ##################################################
 
-set()
-load('problemsolving3level.rda')
+data_url <- "https://raw.githubusercontent.com/craigenders/ies-toolkit/main/Data/problemsolving3level.rda"
+load(gzcon(url(data_url, open = "rb")))
 
 ##################################################
 # fit model with mcmc (ex18.1.imp)

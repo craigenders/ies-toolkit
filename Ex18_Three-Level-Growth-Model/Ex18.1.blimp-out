@@ -30,3 +30,31 @@ ALGORITHMIC OPTIONS SPECIFIED:
     Predictor model variances:       Unit sum of squares, df = 2 (XPRIOR1)
   Chain Starting Values:             Random starting values
 
+<<<<<<< HEAD
+=======
+
+
+ITERATION HISTORY:
+
+  Chain 1 burn-in started on Aug 16 00:40:10 2025
+  Chain 2 burn-in started on Aug 16 00:40:10 2025
+  Chain 2 burn-in iteration 5000 completed on Aug 16 00:40:16 2025
+  Chain 1 burn-in iteration 5000 completed on Aug 16 00:40:16 2025
+  Chain 1 burn-in iteration 10000 completed on Aug 16 00:40:23 2025
+  Chain 2 burn-in iteration 10000 completed on Aug 16 00:40:23 2025
+  Chain 1 burn-in iteration 15000 completed on Aug 16 00:40:29 2025
+  Chain 2 burn-in iteration 15000 completed on Aug 16 00:40:31 2025
+  Chain 1 burn-in iteration 20000 completed on Aug 16 00:40:38 2025
+  Chain 1 completed burn-in on Aug 16 00:40:38 2025
+  Chain 2 burn-in iteration 20000 completed on Aug 16 00:40:39 2025
+  Chain 2 completed burn-in on Aug 16 00:40:39 2025
+  Chain 1 completed iteration 6250 on Aug 16 00:43:01 2025
+  Chain 2 completed iteration 6250 on Aug 16 00:43:04 2025
+  Chain 1 completed iteration 12500 on Aug 16 00:44:53 2025
+  Chain 2 completed iteration 12500 on Aug 16 00:44:56 2025
+  Chain 1 completed iteration 18750 on Aug 16 00:46:44 2025
+  Chain 2 completed iteration 18750 on Aug 16 00:46:47 2025
+
+
+Blimp stopped by user.
+>>>>>>> f926bb20fadaa2c8c81ddf29f9d4f78bcee1cd4a

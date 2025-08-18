@@ -1,0 +1,324 @@
+
+---------------------------------------------------------------------------
+
+                                   Blimp
+                                  3.2.22
+
+             Blimp was developed with funding from Institute of
+           Education Sciences awards R305D150056 and R305D190002.
+
+            Craig K. Enders, P.I. Email: cenders@psych.ucla.edu
+           Brian T. Keller, Co-P.I. Email: btkeller@missouri.edu
+                 Han Du, Co-P.I. Email: hdu@psych.ucla.edu
+                 Roy Levy, Co-P.I. Email: roy.levy@asu.edu
+
+              Programming and Blimp Studio by Brian T. Keller
+
+                   There is no expressed license given.
+
+---------------------------------------------------------------------------
+
+
+ALGORITHMIC OPTIONS SPECIFIED:
+
+  Imputation method:                 Fully Bayesian model-based
+  MCMC algorithm:                    Full conditional Metropolis sampler with
+                                       Auto-Derived Conditional Distributions
+  Default Priors:
+    Multilevel covariance matrices:  Zero matrix, df = -(p + 1) (PRIOR2)
+    Outcome covariance matrices:     Zero matrix, df = -(p + 1) (PRIOR2)
+    Predictor model variances:       Unit sum of squares, df = 2 (XPRIOR1)
+  Chain Starting Values:             Random starting values
+
+
+  NOTE: The default prior for regression coefficients 
+        in categorical models is 'normal( 0.0, 5.0)'
+
+  NOTE: For complete list of priors include 'pinfo' in the options.
+
+  NOTE: The following variables have been renamed
+        to be 9 characters or less.
+
+           efficacypre -> efficacyp
+           efficacypst -> efficacy1
+
+
+BURN-IN POTENTIAL SCALE REDUCTION (PSR) OUTPUT:
+
+  NOTE: Split chain PSR is being used. This splits each chain's
+        iterations to create twice as many chains.
+
+  Comparing iterations across 20 chains    Highest PSR   Parameter #  
+                          126 to 250             1.355            41  
+                          251 to 500             1.211            41  
+                          376 to 750             1.095            23  
+                          501 to 1000            1.116            23  
+                          626 to 1250            1.079            23  
+                          751 to 1500            1.059            23  
+                          876 to 1750            1.045            41  
+                         1001 to 2000            1.038            41  
+                         1126 to 2250            1.028            23  
+                         1251 to 2500            1.021            41  
+                         1376 to 2750            1.021            41  
+                         1501 to 3000            1.024            41  
+                         1626 to 3250            1.021            23  
+                         1751 to 3500            1.015            23  
+                         1876 to 3750            1.018            41  
+                         2001 to 4000            1.020            41  
+                         2126 to 4250            1.017            41  
+                         2251 to 4500            1.019            41  
+                         2376 to 4750            1.018            41  
+                         2501 to 5000            1.019            41  
+
+
+METROPOLIS-HASTINGS ACCEPTANCE RATES:
+
+  Chain 1:
+
+    Variable                            Type    Probability   Target Value 
+    hispanic                      imputation          0.508          0.500 
+    hispanic                      latent imp          0.497          0.500 
+    hispanic                       parameter          0.480          0.500 
+    frlunch                       imputation          0.507          0.500 
+    frlunch                       latent imp          0.509          0.500 
+    frlunch                        parameter          0.507          0.500 
+    psolvepre                     latent imp          0.494          0.500 
+    psolvepre                      parameter          0.538          0.500 
+
+  NOTE: Suppressing printing of 19 chains.
+        Use keyword 'tuneinfo' in options to override.
+
+
+DATA INFORMATION:
+
+  Level-2 identifier:       school
+  Sample Size:              982
+  Level-2 Clusters:         29
+  Missing Data Info:
+
+                      Pattern #:       1     2     3     4     5     6     7     8
+                          miss % --------------------------------------------------
+                psolvepst = 20.5       -     M     -     -     M     M     -     M  
+                condition =  0.0       -     -     -     -     -     -     -     -  
+                 hispanic =  9.0       -     -     M     -     M     -     M     M  
+                  frlunch =  4.7       -     -     -     M     -     M     M     M  
+                psolvepre =  0.0       -     -     -     -     -     -     -     -  
+                                 --------------------------------------------------
+                                 %  68.5  18.2   7.2   3.5   1.3   0.8   0.3   0.1
+
+
+MODEL INFORMATION:
+
+  NUMBER OF PARAMETERS
+    Outcome Models:         10
+    Predictor Models:       22
+
+  PREDICTORS
+    Fixed variables:        condition
+    Complete continuous:    psolvepre
+    Incomplete ordinal:     hispanic frlunch
+
+  CENTERED PREDICTORS
+    Group Mean Centered:    hispanic frlunch psolvepre
+
+  LATENT CLUSTER MEANS
+    Grand Mean Centered:    hispanic frlunch psolvepre
+
+  MODELS
+    [1]  psolvepst ~ Intercept psolvepre hispanic frlunch psolvepre.mean[school] 
+                 hispanic.mean[school] frlunch.mean[school] 
+                 condition
+
+
+WARNING MESSAGES:
+
+  WARNING: Removing the following variables from FIXED 
+           in order to estimate their latent means.
+             psolvepre
+  
+
+
+MODEL FIT:
+
+
+  INFORMATION CRITERIA
+
+    Marginal Likelihood
+      DIC2                  5871.223
+      WAIC                  5951.662
+
+    Conditional Likelihood
+      DIC2                  5831.662
+      WAIC                  5919.784
+
+
+IMPUTED DATA SUMMARIES:
+
+  NOTE: Imputed data summaries are averaged across 10000 data sets.
+
+
+Variables                              Mean     StdDev        25%        50%        75%        Min        Max 
+                                ------------------------------------------------------------------------------
+
+  psolvepst                          54.132      5.804     50.842     54.255     58.256     36.533     70.185 
+  hispanic                            0.666      0.472      0.000      1.000      1.000      0.000      1.000 
+  frlunch                             0.803      0.398      1.000      1.000      1.000      0.000      1.000 
+  psolvepre                          49.910      4.945     47.000     50.000     53.000     37.000     66.000 
+  condition                           0.552      0.506      0.000      1.000      1.000      0.000      1.000 
+
+                                ------------------------------------------------------------------------------
+
+
+
+CORRELATIONS AMONG RESIDUALS:
+
+  No residual correlations.
+
+
+
+OUTCOME MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 20 chains.
+  NOTE: Estimate column based on posterior median.
+
+
+Outcome Variable:  psolvepst  
+
+Grand Mean Centered: frlunch.mean[school] hispanic.mean[school]
+                     psolvepre.mean[school]
+Group Mean Centered: frlunch hispanic psolvepre
+
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+Variances:                      
+  L2 : Var(Intercept)                 2.418      1.179      1.067      5.526        ---        ---   1828.096 
+  Residual Var.                      20.616      1.077     18.648     22.850        ---        ---   5458.805 
+
+Coefficients:                   
+  Intercept                          52.439      0.738     50.978     53.881   5045.464      0.000    524.627 
+  psolvepre                           0.455      0.036      0.386      0.527    158.129      0.000   5178.476 
+  hispanic                            0.958      0.433      0.100      1.794      4.896      0.027   4716.763 
+  frlunch                            -0.763      0.459     -1.670      0.135      2.780      0.095   5011.840 
+  psolvepre.mean[school]              0.733      0.314      0.108      1.343      5.422      0.020    645.248 
+  hispanic.mean[school]               5.206      1.667      1.985      8.437      9.753      0.002    770.854 
+  frlunch.mean[school]               -1.846      3.456     -8.882      4.928      0.285      0.593    506.366 
+  condition                           2.435      0.774      0.846      3.897      9.805      0.002    912.292 
+
+Standard Deviations:            
+  L2 : SD(Intercept)                  1.555      0.338      1.033      2.351        ---        ---   1715.425 
+  Residual SD                         4.540      0.118      4.318      4.780        ---        ---   5463.221 
+
+Standardized Coefficients:      
+  psolvepre                           0.360      0.028      0.305      0.415    166.199      0.000   3090.628 
+  hispanic                            0.065      0.029      0.007      0.122      4.892      0.027   4475.604 
+  frlunch                            -0.048      0.029     -0.104      0.008      2.777      0.096   4946.107 
+  psolvepre.mean[school]              0.203      0.083      0.030      0.355      5.798      0.016    667.604 
+  hispanic.mean[school]               0.221      0.068      0.083      0.348     10.422      0.001    764.028 
+  frlunch.mean[school]               -0.047      0.084     -0.216      0.121      0.298      0.585    515.401 
+  condition                           0.202      0.062      0.070      0.314     10.443      0.001    909.853 
+
+Proportion Variance Explained   
+  by Coefficients                     0.333      0.040      0.252      0.411        ---        ---    945.246 
+  by Level-2 Random Intercepts        0.070      0.030      0.032      0.145        ---        ---   1665.377 
+  by Level-1 Residual Variation       0.594      0.041      0.505      0.667        ---        ---   1196.765 
+
+                                ------------------------------------------------------------------------------
+
+
+
+
+PREDICTOR MODEL ESTIMATES:
+
+  Summaries based on 10000 iterations using 20 chains.
+  NOTE: Estimate column based on posterior median.
+
+
+
+Missing predictor:  hispanic   
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            0.465      0.196      0.072      0.874      5.615      0.018    308.750 
+
+Level 1:                                                                                                      
+  frlunch                             0.103      0.069     -0.034      0.237      2.235      0.135    918.054 
+  psolvepre                           0.013      0.011     -0.008      0.034      1.395      0.238   1800.896 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+
+Level 2:                                                                                                      
+  condition                          -0.456      0.351     -1.164      0.243      1.705      0.192   2568.736 
+  frlunch                            -0.325      0.459     -1.213      0.591      0.484      0.487   1072.188 
+  psolvepre                           0.166      0.158     -0.142      0.480      1.132      0.287   1329.507 
+  Residual Var.                       0.615      0.233      0.323      1.220        ---        ---   1345.118 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Missing predictor:  frlunch    
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                            1.004      0.130      0.750      1.271     59.655      0.000    585.709 
+
+Level 1:                                                                                                      
+  hispanic                            0.102      0.070     -0.033      0.241      2.208      0.137    775.152 
+  psolvepre                           0.002      0.011     -0.019      0.023      0.028      0.866   1939.490 
+  Residual Var.                       1.000      0.000      1.000      1.000        ---        ---        nan 
+
+Level 2:                                                                                                      
+  condition                          -0.156      0.243     -0.636      0.327      0.407      0.524   1476.728 
+  hispanic                           -0.118      0.170     -0.449      0.217      0.475      0.491   1029.782 
+  psolvepre                          -0.160      0.091     -0.349      0.014      3.117      0.077   1119.708 
+  Residual Var.                       0.243      0.101      0.123      0.503        ---        ---   1090.820 
+Thresholds:                                                                                                   
+  Tau 1                               0.000      0.000      0.000      0.000        ---        ---        nan 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+Complete predictor: psolvepre  
+
+Parameters                         Estimate     StdDev       2.5%      97.5%      ChiSq     PValue      N_Eff 
+                                ------------------------------------------------------------------------------
+
+Grand Mean                           49.853      0.364     49.073     50.523  18753.861      0.000    315.838 
+
+Level 1:                                                                                                      
+  hispanic                            0.277      0.231     -0.177      0.729      1.437      0.231   2589.730 
+  frlunch                             0.044      0.236     -0.419      0.505      0.031      0.861   3056.178 
+  Residual Var.                      21.706      1.006     19.871     23.815        ---        ---   7439.507 
+
+Level 2:                                                                                                      
+  condition                           0.266      0.670     -1.044      1.580      0.168      0.682   1923.429 
+  hispanic                            0.468      0.432     -0.391      1.308      1.168      0.280   1406.580 
+  frlunch                            -1.291      0.681     -2.654      0.053      3.602      0.058   1536.169 
+  Residual Var.                       1.712      0.729      0.788      3.617        ---        ---   1412.499 
+                                                                                                              
+                                ------------------------------------------------------------------------------
+
+
+
+VARIABLE ORDER IN IMPUTED DATA:
+
+  separate = './imps/imp*.dat'
+
+     school student condition teachexp eslpct hispanic male frlunch lowach stanmath
+     efficacyp efficacy1 psolvepre psolvepst
+
+   stacked = './imps/imps.dat'
+
+     imp# school student condition teachexp eslpct hispanic male frlunch lowach stanmath
+     efficacyp efficacy1 psolvepre psolvepst
+
+  stacked0 = './imps/imps0.dat'
+
+     imp# school student condition teachexp eslpct hispanic male frlunch lowach stanmath
+     efficacyp efficacy1 psolvepre psolvepst
+
