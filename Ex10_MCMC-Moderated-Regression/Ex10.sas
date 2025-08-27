@@ -16,7 +16,7 @@ set imps;
 lrnprob1_cgm = lrnprob1 - lrnprob1_mean;
 read1_cgm = read1 - read1_mean;
 atrisk_cgm = atrisk - atrisk_mean;
-read1_by_lrnprob1 = lrnprob1_cgm*read1_cgm
+read1_by_lrnprob1 = lrnprob1_cgm*read1_cgm;
 run;
 
 /* running regression */
