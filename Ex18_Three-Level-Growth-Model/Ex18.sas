@@ -2,7 +2,7 @@
 data imps;
 infile '/folders/myfolders/imps.dat' delimiter = " ";
 input _imputation_ school student wave condition teachexp eslpct ethnic male frlunch 
-     lowach stanmath month0 month7 probsolve efficacy;
+     lowach stanmath month month7 probsolve efficacy;
 month_by_condition = month7*condition;
 run;
 
