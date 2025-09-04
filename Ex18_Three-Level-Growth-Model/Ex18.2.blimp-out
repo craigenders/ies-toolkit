@@ -132,20 +132,6 @@ WARNING MESSAGES:
   
 
 
-MODEL FIT:
-
-
-  INFORMATION CRITERIA
-
-    Marginal Likelihood
-      DIC2                  42986.876
-      WAIC                  44648.844
-
-    Conditional Likelihood
-      DIC2                  37566.561
-      WAIC                  38267.574
-
-
 IMPUTED DATA SUMMARIES:
 
   NOTE: Imputed data summaries are averaged across 50000 data sets.
@@ -162,12 +148,6 @@ Variables                              Mean     StdDev        25%        50%    
   month7                             -3.000      2.000     -5.000     -3.000     -1.000     -6.000      0.000 
 
                                 ------------------------------------------------------------------------------
-
-
-
-CORRELATIONS AMONG RESIDUALS:
-
-  No residual correlations.
 
 
 

@@ -15,6 +15,7 @@ month7 | condition; # estimate simple slopes for month7 in each experimental gro
 SEED: 90291;
 BURN: 20000; # set iteration number for warm up period
 ITERATIONS: 50000; # set iteration number for analysis period
+OPTIONS: disable_dic disable_corrs;
 NIMPS: 20; # set number of imputed data sets
 CHAINS: 20; # set number of MCMC chains
 SAVE: 
