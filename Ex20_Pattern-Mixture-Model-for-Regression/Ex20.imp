@@ -5,7 +5,7 @@ VARIABLES: id male hispanic riskgrp atrisk behsymp1 lrnprob1
    math1 math2 math3 math9 mathgrp9 stanmath7;
 MISSING: 999;
 TRANSFORM:
-m = 1 - ismissing(read9); # create binary missing data indicator variable
+m = ismissing(read9); # create binary missing data indicator variable
 ORDINAL: m;
 MODEL:  
 focal.model:
