@@ -18,7 +18,7 @@ load(gzcon(url(data_url, open = "rb")))
 
 mymodel <- rblimp(
   data = behaviorachievement,
-  transform = 'm = 1 - ismissing(read9)',
+  transform = 'm = ismissing(read9)',
   ordinal = 'm',
   model = '  
    focal.model:
